@@ -26,10 +26,14 @@ Ultimo aggiornamento: 2026-11-11
 | D-013 | 2026-11-11 | Lingue: **italiano e inglese**, con sistema di localizzazione fin dall'inizio. | Scelta del responsabile; i testi/frasi non vanno mai scritti "a mano" nel codice. | ✅ attiva |
 | D-014 | 2026-11-11 | Application ID Android: **`com.aptecstudio.elidesfamily`**. | Scelta del responsabile. | ✅ attiva |
 
+| D-015 | 2026-11-11 | Voce TTS **pre-generata** come file audio inclusi nell'app (`assets/audio/voice/<lingua>/`). | Stessa voce su ogni telefono, qualità controllata, sempre offline. | ✅ attiva |
+| D-016 | 2026-11-11 | Palette **pastello vivace** (vedi §3). | Toni caldi e saturi ma morbidi, adatti all'età. | ✅ attiva |
+| D-017 | 2026-11-11 | Font **Fredoka** (licenza SIL OFL 1.1), incluso negli asset. | Tondo e giocoso; licenza compatibile; incluso per funzionare offline. | ✅ attiva |
+| D-018 | 2026-11-11 | AGENTS.md aggiornato (con autorizzazione del responsabile): le domande si fanno **sempre con sondaggi interattivi**. | Richiesta del responsabile. | ✅ attiva |
+
 ### Decisioni ancora aperte
 
-- **Modalità TTS**: frasi generate dal dispositivo a runtime (`flutter_tts`) o pre-generate come file audio inclusi nell'app?
-- **Palette colori e font** definitivi.
+- *(nessuna per la Fase 1)*
 
 ---
 
@@ -65,7 +69,27 @@ Ultimo aggiornamento: 2026-11-11
 - **Errore**: mai punitivo — l'oggetto torna morbidamente al suo posto, il personaggio incoraggia.
 - **Audio**: musica di sottofondo leggera e a volume basso, effetti brevi e gentili, voci chiare.
 
-*(Palette esatta, font e set di effetti verranno fissati qui quando decisi.)*
+### Palette "pastello vivace" (D-016)
+
+| Nome | Hex | Uso principale |
+|------|-----|----------------|
+| `skyBlue` | `#8FD3F4` | cielo, sfondi aperti |
+| `butterYellow` | `#FFE08A` | luce, stelle, evidenziazioni |
+| `meadowGreen` | `#9BDB7C` | prati, conferme |
+| `peachPink` | `#FFB5A7` | dettagli caldi, guance |
+| `lavender` | `#C7B8F5` | elementi magici, area hub |
+| `honey` | `#E8B060` | Rio e Mamma, legno |
+| `cream` | `#FFF6E5` | sfondi interni, Elide e Papà (bianco caldo) |
+| `cocoa` | `#5A3E36` | contorni morbidi e testo (al posto del nero) |
+
+- Niente nero puro: i contorni usano `cocoa`.
+- Per il minigioco Colori si usano colori **puri e ben distinti** (rosso, giallo, blu, verde, arancione, viola), definiti a parte nel minigioco.
+
+### Font (D-017)
+
+- **Fredoka** (SIL OFL 1.1), file in `assets/fonts/`.
+
+*(Il set di effetti sonori verrà fissato qui quando deciso.)*
 
 ---
 

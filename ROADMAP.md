@@ -12,7 +12,7 @@ Ultimo aggiornamento: 2026-11-11
 | Fase | Descrizione | Stato |
 |------|-------------|-------|
 | 0 | Fondamenta del repository e documentazione | 🟢 completata |
-| 1 | Decisioni tecniche e di design | 🟡 in corso |
+| 1 | Decisioni tecniche e di design | 🟢 completata |
 | 2 | Setup del progetto Flutter e test in tempo reale | ⚪ da iniziare |
 | 3 | Motore comune (audio, animazioni, navigazione) | ⚪ da iniziare |
 | 4 | Personaggi | ⚪ da iniziare |
@@ -23,7 +23,7 @@ Ultimo aggiornamento: 2026-11-11
 | 9 | Rifinitura, test con la bambina, accessibilità | ⚪ da iniziare |
 | 10 | Build APK e pubblicazione | ⚪ da iniziare |
 
-**Prossimo passo:** chiudere le ultime decisioni della Fase 1 (modalità TTS, palette e font), poi Fase 2.
+**Prossimo passo:** Fase 2 — creare il progetto Flutter e preparare il test in tempo reale sul dispositivo.
 
 ---
 
@@ -36,7 +36,7 @@ Ultimo aggiornamento: 2026-11-11
 - [x] `README.md` pubblico
 - [x] `LICENSE` GPL-3.0
 
-## Fase 1 — Decisioni tecniche e di design
+## Fase 1 — Decisioni tecniche e di design ✅
 
 - [x] Motore: Flutter + Flame (D-008)
 - [x] Tecnica di animazione dei personaggi: Rive (D-007)
@@ -46,8 +46,8 @@ Ultimo aggiornamento: 2026-11-11
 - [x] Voce: sintetizzata TTS (D-012)
 - [x] Lingue: italiano e inglese (D-013)
 - [x] Application ID Android: `com.aptecstudio.elidesfamily` (D-014)
-- [ ] Modalità TTS: runtime sul dispositivo o file audio pre-generati
-- [ ] Palette colori e font definitivi
+- [x] Modalità TTS: file audio pre-generati (D-015)
+- [x] Palette pastello vivace (D-016) e font Fredoka (D-017)
 
 ## Fase 2 — Setup Flutter e test in tempo reale
 
@@ -126,3 +126,4 @@ Ultimo aggiornamento: 2026-11-11
 | 2026-11-11 | Avvio | Creati AGENTS.md, MEMORY.md, ROADMAP.md, README.md, LICENSE |
 | 2026-11-11 | Decisioni | Scelti Rive, Flutter + Flame, orientamento orizzontale, primo minigioco Colori |
 | 2026-11-11 | Decisioni | Colori su due livelli, voce TTS, italiano + inglese, app ID com.aptecstudio.elidesfamily |
+| 2026-11-11 | Decisioni | TTS pre-generato, palette pastello vivace, font Fredoka, regola sondaggi in AGENTS.md. Fase 1 chiusa |

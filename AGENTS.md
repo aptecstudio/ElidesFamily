@@ -50,7 +50,7 @@ Gli **unici file di stato** che gli agenti aggiornano autonomamente sono:
 - **Commit piccoli e descrittivi**, in italiano, con prefisso convenzionale:
   `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`, `assets:`.
   Esempio: `feat: aggiunto minigioco "Forme e colori" con Elide e Rio`.
-- **In caso di dubbio, chiedere**: le scelte di gusto, di contenuto o che riguardano l'esperienza del bambino si sottopongono al responsabile umano (preferibilmente con domande a scelta multipla) invece di decidere da soli.
+- **In caso di dubbio, chiedere**: le scelte di gusto, di contenuto o che riguardano l'esperienza del bambino si sottopongono al responsabile umano **sempre tramite sondaggi interattivi** (domande a scelta multipla), invece di decidere da soli.
 - A fine sessione: aggiornare `ROADMAP.md` e, se serve, `MEMORY.md`, poi fare commit.
 
 ---
