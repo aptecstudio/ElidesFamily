@@ -21,12 +21,15 @@ Ultimo aggiornamento: 2026-11-11
 | D-008 | 2026-11-11 | Motore: **Flutter** per hub, navigazione e area genitori; **Flame** per i minigiochi. | Flutter è ideale per scene e transizioni, Flame per game loop, movimento e trascinamenti. | ✅ attiva |
 | D-009 | 2026-11-11 | Orientamento **solo orizzontale**, schermo intero immersivo. | Più spazio per le scene, tipico dei giochi per bambini. | ✅ attiva |
 | D-010 | 2026-11-11 | Primo minigioco (prototipo): **Colori**. | Scelta del responsabile. | ✅ attiva |
+| D-011 | 2026-11-11 | Minigioco Colori con **due livelli**: 1) ordinare gli oggetti trascinandoli nel cesto del colore giusto; 2) dipingere un disegno toccando un colore e poi una zona. | Scelta del responsabile: copre riconoscimento dei colori e motricità fine. | ✅ attiva |
+| D-012 | 2026-11-11 | Istruzioni vocali con **voce sintetizzata (TTS)**. | Scelta del responsabile: più veloce da produrre e da tradurre. | ✅ attiva |
+| D-013 | 2026-11-11 | Lingue: **italiano e inglese**, con sistema di localizzazione fin dall'inizio. | Scelta del responsabile; i testi/frasi non vanno mai scritti "a mano" nel codice. | ✅ attiva |
+| D-014 | 2026-11-11 | Application ID Android: **`com.aptecstudio.elidesfamily`**. | Scelta del responsabile. | ✅ attiva |
 
 ### Decisioni ancora aperte
 
-- **Voce e lingua**: istruzioni vocali registrate (es. voce di papà/mamma) o sintetizzate? Solo italiano o anche altre lingue?
-- **Meccanica del minigioco Colori**: ordinare oggetti per colore, dipingere, o entrambe?
-- **Application ID** Android (es. `it.aptecstudio.elidesfamily`).
+- **Modalità TTS**: frasi generate dal dispositivo a runtime (`flutter_tts`) o pre-generate come file audio inclusi nell'app?
+- **Palette colori e font** definitivi.
 
 ---
 

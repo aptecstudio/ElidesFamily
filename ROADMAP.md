@@ -23,7 +23,7 @@ Ultimo aggiornamento: 2026-11-11
 | 9 | Rifinitura, test con la bambina, accessibilità | ⚪ da iniziare |
 | 10 | Build APK e pubblicazione | ⚪ da iniziare |
 
-**Prossimo passo:** chiudere le ultime decisioni della Fase 1 (meccanica Colori, voce/lingua, application ID), poi Fase 2.
+**Prossimo passo:** chiudere le ultime decisioni della Fase 1 (modalità TTS, palette e font), poi Fase 2.
 
 ---
 
@@ -42,9 +42,11 @@ Ultimo aggiornamento: 2026-11-11
 - [x] Tecnica di animazione dei personaggi: Rive (D-007)
 - [x] Orientamento schermo: solo orizzontale (D-009)
 - [x] Primo minigioco: Colori (D-010)
-- [ ] Meccanica del minigioco Colori
-- [ ] Lingua/e e tipo di voce per le istruzioni
-- [ ] Application ID Android
+- [x] Meccanica del minigioco Colori: ordinare + dipingere (D-011)
+- [x] Voce: sintetizzata TTS (D-012)
+- [x] Lingue: italiano e inglese (D-013)
+- [x] Application ID Android: `com.aptecstudio.elidesfamily` (D-014)
+- [ ] Modalità TTS: runtime sul dispositivo o file audio pre-generati
 - [ ] Palette colori e font definitivi
 
 ## Fase 2 — Setup Flutter e test in tempo reale
@@ -123,3 +125,4 @@ Ultimo aggiornamento: 2026-11-11
 |------|----------|-------|
 | 2026-11-11 | Avvio | Creati AGENTS.md, MEMORY.md, ROADMAP.md, README.md, LICENSE |
 | 2026-11-11 | Decisioni | Scelti Rive, Flutter + Flame, orientamento orizzontale, primo minigioco Colori |
+| 2026-11-11 | Decisioni | Colori su due livelli, voce TTS, italiano + inglese, app ID com.aptecstudio.elidesfamily |
