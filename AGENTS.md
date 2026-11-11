@@ -57,7 +57,7 @@ Gli **unici file di stato** che gli agenti aggiornano autonomamente sono:
 
 ## 5. Principi del progetto (non negoziabili)
 
-1. **Pensato per bambini dai 3 anni**: interazioni semplici (tocco, trascinamento), nessuna lettura richiesta, istruzioni vocali o visive, nessun modo di "perdere" in modo frustrante.
+1. **Pensato per bambini dai 3 anni**: interazioni semplici (tocco e trascinamento; su Android TV telecomando, con i giochi riadattati a questo uso), nessuna lettura richiesta, istruzioni vocali o visive, nessun modo di "perdere" in modo frustrante.
 2. **Aspetto da gioco, non da app**: niente AppBar, menu a tendina, liste o pulsanti in stile Material. Ogni schermata è una scena illustrata, colorata e animata.
 3. **Suoni e animazioni gradevoli** ad ogni interazione: ogni tocco deve dare una risposta visiva e sonora.
 4. **Sicurezza e privacy**: nessuna pubblicità, nessun acquisto in-app, nessun tracciamento, nessun collegamento esterno raggiungibile dal bambino. Eventuali impostazioni per adulti stanno dietro un "parental gate".

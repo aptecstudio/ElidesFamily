@@ -107,6 +107,7 @@ Ultimo aggiornamento: 2026-11-11
 
 - [ ] Scelta del minigioco
 - [ ] Meccanica, grafica, suoni, festa finale
+- [ ] Variante per telecomando (Android TV) di entrambi i livelli del gioco Colori
 - [ ] Test sul dispositivo con la bambina e raccolta osservazioni
 
 ## Fase 7 — Altri minigiochi
@@ -146,11 +147,11 @@ Ultimo aggiornamento: 2026-11-11
 
 Un solo APK per tutti e tre i tipi di dispositivo (D-024). I task operativi sono distribuiti nelle fasi 2, 3, 9 e 10; qui il riepilogo.
 
-- [ ] Decidere come si gioca con il telecomando (Android TV)
+- [x] Deciso come si gioca con il telecomando: "seleziona e sposta", giochi riadattati (D-025)
 - [ ] Manifest e banner per Android TV (Fase 2)
 - [ ] Layout adattivo per telefono, tablet e TV (Fase 3)
 - [ ] Input unico tocco + telecomando con focus visibile (Fase 3)
-- [ ] Ogni minigioco progettato anche per il telecomando (Fasi 6–7)
+- [ ] Ogni minigioco riadattato al telecomando con una variante dedicata (Fasi 6–7)
 - [ ] Interfaccia leggibile "da divano" su TV: elementi più grandi e area sicura ai bordi (Fase 5)
 - [ ] Test su dispositivi reali (Fase 9)
 
@@ -165,4 +166,4 @@ Un solo APK per tutti e tre i tipi di dispositivo (D-024). I task operativi sono
 | 2026-11-11 | Decisioni | Colori su due livelli, voce TTS, italiano + inglese, app ID com.aptecstudio.elidesfamily |
 | 2026-11-11 | Decisioni | TTS pre-generato, palette pastello vivace, font Fredoka, regola sondaggi in AGENTS.md. Fase 1 chiusa |
 | 2026-11-11 | Scheletro | Progetto Flutter preparato a mano (senza SDK): struttura, avvio, hub provvisorio, localizzazioni, test |
-| 2026-11-11 | Dispositivi | Aggiunto in roadmap il supporto a smartphone, tablet e Android TV |
+| 2026-11-11 | Dispositivi | Aggiunto in roadmap il supporto a smartphone, tablet e Android TV; giochi riadattati al telecomando (D-025), AGENTS.md aggiornato |

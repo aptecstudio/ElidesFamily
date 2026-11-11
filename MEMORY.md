@@ -39,9 +39,19 @@ Ultimo aggiornamento: 2026-11-11
 
 | D-024 | 2026-11-11 | Dispositivi supportati: **smartphone, tablet e Android TV**, con **un solo APK**. | Richiesta del responsabile. Un APK unico semplifica build e distribuzione; il gioco si adatta a schermo e tipo di input. | ✅ attiva |
 
+| D-025 | 2026-11-11 | Su Android TV i minigiochi sono **riadattati al telecomando**, non solo "portati": modalità **seleziona e sposta** (frecce per scegliere l'oggetto, OK per prenderlo, frecce per portarlo, OK per lasciarlo). | Richiesta del responsabile: il telecomando è un input diverso e ogni gioco deve risultare naturale anche così. | ✅ attiva |
+| D-026 | 2026-11-11 | AGENTS.md, principio 1, aggiornato con autorizzazione del responsabile: include il telecomando su Android TV. | Coerenza con D-024 e D-025. | ✅ attiva |
+
+### Regole per i minigiochi su Android TV (D-025)
+
+- Ogni minigioco ha una **variante per telecomando** progettata insieme a quella touch: meccanica, distanze e ritmo si possono semplificare.
+- L'elemento selezionato è sempre evidente (alone colorato e piccolo rimbalzo) e accompagnato da un suono.
+- Gli oggetti "presi" seguono le frecce a scatti morbidi fra posizioni prestabilite, non a pixel.
+- Nessuna azione richiede tasti diversi da frecce, OK e Indietro.
+
 ### Decisioni ancora aperte
 
-- **Android TV**: come si gioca con il telecomando (D-pad + OK) nei minigiochi pensati per il trascinamento?
+- *(nessuna)*
 
 ---
 
