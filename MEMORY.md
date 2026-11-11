@@ -42,7 +42,7 @@ Ultimo aggiornamento: 2026-11-11
 | D-025 | 2026-11-11 | Su Android TV i minigiochi sono **riadattati al telecomando**, non solo "portati": modalità **seleziona e sposta** (frecce per scegliere l'oggetto, OK per prenderlo, frecce per portarlo, OK per lasciarlo). | Richiesta del responsabile: il telecomando è un input diverso e ogni gioco deve risultare naturale anche così. | ✅ attiva |
 | D-026 | 2026-11-11 | AGENTS.md, principio 1, aggiornato con autorizzazione del responsabile: include il telecomando su Android TV. | Coerenza con D-024 e D-025. | ✅ attiva |
 
-| D-027 | 2026-11-11 | Skill di progetto **`kids-character-gen`** in `.claude/skills/kids-character-gen/SKILL.md` per generare i personaggi (scheda narrativa + JSON), senza citare giochi esterni. | Richiesta del responsabile: i personaggi si generano sempre con le stesse regole di stile; repository pubblico. | ✅ attiva |
+| ~~D-027~~ | 2026-11-11 | ~~Skill di progetto `kids-character-gen` per generare i personaggi.~~ **Annullata** il 2026-11-11: la skill è stata rimossa; per la grafica per bambini si procederà in un altro modo. | Richiesta del responsabile. | ❌ superata |
 
 | D-028 | 2026-11-11 | Nessun personaggio ha una "materia" fissa: gli argomenti educativi sono **misti**. Nei minigiochi con **un solo personaggio** c'è sempre **Elide**; in quelli con più personaggi gli altri **si alternano** accanto a lei. **Elide è sempre la protagonista.** | Richiesta del responsabile. | ✅ attiva |
 | D-029 | 2026-11-11 | Il design dei personaggi (bozze 1-4) **non è ancora approvato**: resta lontano dall'idea del responsabile e verrà ripreso più avanti. | Richiesta del responsabile. | ⏸️ in sospeso |
