@@ -42,6 +42,8 @@ Ultimo aggiornamento: 2026-11-11
 | D-025 | 2026-11-11 | Su Android TV i minigiochi sono **riadattati al telecomando**, non solo "portati": modalità **seleziona e sposta** (frecce per scegliere l'oggetto, OK per prenderlo, frecce per portarlo, OK per lasciarlo). | Richiesta del responsabile: il telecomando è un input diverso e ogni gioco deve risultare naturale anche così. | ✅ attiva |
 | D-026 | 2026-11-11 | AGENTS.md, principio 1, aggiornato con autorizzazione del responsabile: include il telecomando su Android TV. | Coerenza con D-024 e D-025. | ✅ attiva |
 
+| D-027 | 2026-11-11 | Skill di progetto **`kids-character-gen`** in `.claude/skills/kids-character-gen/SKILL.md` per generare i personaggi (scheda narrativa + JSON), senza citare giochi esterni. | Richiesta del responsabile: i personaggi si generano sempre con le stesse regole di stile; repository pubblico. | ✅ attiva |
+
 ### Regole per i minigiochi su Android TV (D-025)
 
 - Ogni minigioco ha una **variante per telecomando** progettata insieme a quella touch: meccanica, distanze e ritmo si possono semplificare.
