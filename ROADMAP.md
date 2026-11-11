@@ -12,7 +12,7 @@ Ultimo aggiornamento: 2026-11-11
 | Fase | Descrizione | Stato |
 |------|-------------|-------|
 | 0 | Fondamenta del repository e documentazione | 🟢 completata |
-| 1 | Decisioni tecniche e di design | ⚪ da iniziare |
+| 1 | Decisioni tecniche e di design | 🟡 in corso |
 | 2 | Setup del progetto Flutter e test in tempo reale | ⚪ da iniziare |
 | 3 | Motore comune (audio, animazioni, navigazione) | ⚪ da iniziare |
 | 4 | Personaggi | ⚪ da iniziare |
@@ -23,7 +23,7 @@ Ultimo aggiornamento: 2026-11-11
 | 9 | Rifinitura, test con la bambina, accessibilità | ⚪ da iniziare |
 | 10 | Build APK e pubblicazione | ⚪ da iniziare |
 
-**Prossimo passo:** Fase 1 — chiudere le decisioni aperte elencate in `MEMORY.md`.
+**Prossimo passo:** chiudere le ultime decisioni della Fase 1 (meccanica Colori, voce/lingua, application ID), poi Fase 2.
 
 ---
 
@@ -38,13 +38,14 @@ Ultimo aggiornamento: 2026-11-11
 
 ## Fase 1 — Decisioni tecniche e di design
 
-- [ ] Motore: Flutter puro vs Flame
-- [ ] Tecnica di animazione dei personaggi (Rive / Lottie / SVG / sprite)
-- [ ] Orientamento schermo
+- [x] Motore: Flutter + Flame (D-008)
+- [x] Tecnica di animazione dei personaggi: Rive (D-007)
+- [x] Orientamento schermo: solo orizzontale (D-009)
+- [x] Primo minigioco: Colori (D-010)
+- [ ] Meccanica del minigioco Colori
 - [ ] Lingua/e e tipo di voce per le istruzioni
 - [ ] Application ID Android
 - [ ] Palette colori e font definitivi
-- [ ] Elenco e ordine dei primi minigiochi
 
 ## Fase 2 — Setup Flutter e test in tempo reale
 
@@ -121,3 +122,4 @@ Ultimo aggiornamento: 2026-11-11
 | Data | Sessione | Fatto |
 |------|----------|-------|
 | 2026-11-11 | Avvio | Creati AGENTS.md, MEMORY.md, ROADMAP.md, README.md, LICENSE |
+| 2026-11-11 | Decisioni | Scelti Rive, Flutter + Flame, orientamento orizzontale, primo minigioco Colori |

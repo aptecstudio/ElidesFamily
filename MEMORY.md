@@ -17,14 +17,15 @@ Ultimo aggiornamento: 2026-11-11
 | D-004 | 2026-11-11 | Un solo branch: **`main`**. | Progetto hobbistico, flusso semplice. | ✅ attiva |
 | D-005 | 2026-11-11 | Struttura: **hub centrale + minigiochi indipendenti**. | Ogni minigioco si sviluppa e si testa da solo; se ne possono aggiungere nel tempo senza toccare gli altri. | ✅ attiva |
 | D-006 | 2026-11-11 | Interfaccia **non in stile app**: niente widget Material visibili (AppBar, Card, ListTile, pulsanti standard). | L'esperienza deve essere quella di un gioco illustrato, non di un'applicazione. | ✅ attiva |
+| D-007 | 2026-11-11 | Personaggi animati con **Rive** (state machine: idle, felice, incoraggia, parla). | Vettoriale e leggero, stati multipli guidati dal codice, adatto a reazioni al tocco. | ✅ attiva |
+| D-008 | 2026-11-11 | Motore: **Flutter** per hub, navigazione e area genitori; **Flame** per i minigiochi. | Flutter è ideale per scene e transizioni, Flame per game loop, movimento e trascinamenti. | ✅ attiva |
+| D-009 | 2026-11-11 | Orientamento **solo orizzontale**, schermo intero immersivo. | Più spazio per le scene, tipico dei giochi per bambini. | ✅ attiva |
+| D-010 | 2026-11-11 | Primo minigioco (prototipo): **Colori**. | Scelta del responsabile. | ✅ attiva |
 
 ### Decisioni ancora aperte
 
-- **Motore di gioco**: Flutter "puro" (widget + animazioni) oppure motore **Flame** per i minigiochi più dinamici?
-- **Tecnica dei personaggi**: illustrazioni vettoriali (SVG), animazioni **Rive**, animazioni **Lottie** o sprite PNG?
 - **Voce e lingua**: istruzioni vocali registrate (es. voce di papà/mamma) o sintetizzate? Solo italiano o anche altre lingue?
-- **Orientamento schermo**: solo orizzontale (consigliato per i giochi) o anche verticale?
-- **Primi minigiochi** da realizzare e loro ordine.
+- **Meccanica del minigioco Colori**: ordinare oggetti per colore, dipingere, o entrambe?
 - **Application ID** Android (es. `it.aptecstudio.elidesfamily`).
 
 ---
