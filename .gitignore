@@ -1,0 +1,50 @@
+# Misc
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ / Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code: si può versionare, ma per ora no
+.vscode/
+
+# Flutter / Dart / Pub
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Localizzazioni generate da `flutter gen-l10n`
+lib/l10n/app_localizations*.dart
+
+# Simboli e mappe di offuscamento
+app.*.symbols
+app.*.map.json
+
+# Android Studio: esportazioni release
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Firma: mai nel repository
+*.jks
+*.keystore
+key.properties

@@ -13,7 +13,7 @@ Ultimo aggiornamento: 2026-11-11
 |------|-------------|-------|
 | 0 | Fondamenta del repository e documentazione | 🟢 completata |
 | 1 | Decisioni tecniche e di design | 🟢 completata |
-| 2 | Setup del progetto Flutter e test in tempo reale | ⚪ da iniziare |
+| 2 | Setup del progetto Flutter e test in tempo reale | 🟡 in corso |
 | 3 | Motore comune (audio, animazioni, navigazione) | ⚪ da iniziare |
 | 4 | Personaggi | ⚪ da iniziare |
 | 5 | Hub principale | ⚪ da iniziare |
@@ -23,7 +23,7 @@ Ultimo aggiornamento: 2026-11-11
 | 9 | Rifinitura, test con la bambina, accessibilità | ⚪ da iniziare |
 | 10 | Build APK e pubblicazione | ⚪ da iniziare |
 
-**Prossimo passo:** Fase 2 — creare il progetto Flutter e preparare il test in tempo reale sul dispositivo.
+**Prossimo passo:** Fase 2, parte sul PC del responsabile — generare `android/`, primo `flutter run` sul telefono.
 
 ---
 
@@ -51,11 +51,28 @@ Ultimo aggiornamento: 2026-11-11
 
 ## Fase 2 — Setup Flutter e test in tempo reale
 
-- [ ] `flutter create` con application ID e nome definitivi
-- [ ] Configurazione Android (minSdk, orientamento, schermo intero immersivo, icona provvisoria)
-- [ ] `analysis_options.yaml` con `flutter_lints`
-- [ ] Struttura delle cartelle come in `MEMORY.md`
-- [ ] Guida al test in tempo reale: `flutter run` su dispositivo via USB / debug wireless + hot reload
+**Preparato senza SDK (2026-11-11):**
+
+- [x] `pubspec.yaml` (Flame, flame_audio, Rive, shared_preferences, localizzazioni)
+- [x] `analysis_options.yaml` con `flutter_lints`
+- [x] `l10n.yaml` + `app_it.arb` / `app_en.arb`
+- [x] Struttura delle cartelle come in `MEMORY.md`
+- [x] Avvio solo orizzontale e schermo intero immersivo (`main.dart`)
+- [x] `WidgetsApp`, palette, transizione tra scene, `BouncyTap`
+- [x] Hub provvisorio disegnato in codice + segnaposto del minigioco Colori
+- [x] Test di avvio (`test/widget_test.dart`)
+
+**Da fare sul PC del responsabile (con l'SDK Flutter):**
+
+- [ ] Generare la piattaforma Android senza toccare i file esistenti:
+      `flutter create --platforms android --org com.aptecstudio --project-name elides_family .`
+- [ ] Impostare `applicationId` e `namespace` a `com.aptecstudio.elidesfamily` (D-014) in `android/app/build.gradle.kts` e spostare `MainActivity.kt` nel package corrispondente
+- [ ] `AndroidManifest.xml`: etichetta "Elide's Family", `android:screenOrientation="sensorLandscape"` sull'activity
+- [ ] Verificare `minSdk` richiesto da Rive / Flame
+- [ ] Copiare il font Fredoka (SIL OFL) in `assets/fonts/` con il file `OFL.txt` e attivarlo in `pubspec.yaml` e in `elides_family_app.dart`
+- [ ] `flutter pub get` e correzione di eventuali versioni dei pacchetti
+- [ ] `flutter analyze` e `flutter test` senza errori
+- [ ] Test in tempo reale: `flutter run` sul telefono (USB o debug wireless) + hot reload
 - [ ] Prima build APK di prova (`flutter build apk --debug`)
 
 ## Fase 3 — Motore comune
@@ -127,3 +144,4 @@ Ultimo aggiornamento: 2026-11-11
 | 2026-11-11 | Decisioni | Scelti Rive, Flutter + Flame, orientamento orizzontale, primo minigioco Colori |
 | 2026-11-11 | Decisioni | Colori su due livelli, voce TTS, italiano + inglese, app ID com.aptecstudio.elidesfamily |
 | 2026-11-11 | Decisioni | TTS pre-generato, palette pastello vivace, font Fredoka, regola sondaggi in AGENTS.md. Fase 1 chiusa |
+| 2026-11-11 | Scheletro | Progetto Flutter preparato a mano (senza SDK): struttura, avvio, hub provvisorio, localizzazioni, test |

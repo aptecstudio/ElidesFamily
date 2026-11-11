@@ -31,9 +31,15 @@ Ultimo aggiornamento: 2026-11-11
 | D-017 | 2026-11-11 | Font **Fredoka** (licenza SIL OFL 1.1), incluso negli asset. | Tondo e giocoso; licenza compatibile; incluso per funzionare offline. | ✅ attiva |
 | D-018 | 2026-11-11 | AGENTS.md aggiornato (con autorizzazione del responsabile): le domande si fanno **sempre con sondaggi interattivi**. | Richiesta del responsabile. | ✅ attiva |
 
+| D-019 | 2026-11-11 | Radice dell'app con **`WidgetsApp`** (non `MaterialApp`), `uses-material-design: false`. | Nessun aspetto "da app" (D-006): temi, transizioni e controlli sono tutti nostri. | ✅ attiva |
+| D-020 | 2026-11-11 | Ogni elemento toccabile passa dal widget comune **`BouncyTap`** (`lib/core/`). | Feedback al tocco uguale ovunque (schiacciamento + rimbalzo, poi suono). | ✅ attiva |
+| D-021 | 2026-11-11 | Le icone dell'interfaccia sono **disegnate** (CustomPainter o asset), mai scritte. | I bambini di 3 anni non leggono. | ✅ attiva |
+| D-022 | 2026-11-11 | Localizzazione con **`flutter gen-l10n`**: ARB in `lib/l10n/` (`app_it.arb` è il modello); i file generati non si versionano. | Italiano + inglese (D-013) senza testi scritti nel codice. | ✅ attiva |
+| D-023 | 2026-11-11 | Cartella `android/` generata con `flutter create` **sul PC del responsabile**, poi adattata. | L'ambiente di sviluppo AI non ha l'SDK Flutter: generarla con lo strumento ufficiale evita versioni Gradle/AGP sbagliate. | ✅ attiva |
+
 ### Decisioni ancora aperte
 
-- *(nessuna per la Fase 1)*
+- *(nessuna)*
 
 ---
 
@@ -97,22 +103,34 @@ Ultimo aggiornamento: 2026-11-11
 
 ```
 lib/
-├── main.dart                 # avvio app
-├── app/                      # configurazione, routing, tema di gioco
-├── core/                     # audio, animazioni comuni, utilità, salvataggi locali
-├── characters/               # widget/animazioni di Elide, Rio, Papà, Mamma
-├── hub/                      # schermata principale (scelta dei minigiochi)
-├── parental_gate/            # area adulti protetta
+├── main.dart                     # avvio: solo orizzontale, schermo intero immersivo
+├── app/
+│   ├── elides_family_app.dart    # WidgetsApp, localizzazioni, stile testo
+│   ├── game_colors.dart          # palette (D-016)
+│   └── game_route.dart           # transizione tra scene
+├── core/
+│   └── bouncy_tap.dart           # feedback al tocco comune (D-020)
+├── characters/                   # Elide, Rio, Papà, Mamma (Rive)
+├── hub/
+│   └── hub_scene.dart            # scena principale (provvisoria)
+├── parental_gate/                # area adulti protetta
+├── l10n/                         # app_it.arb, app_en.arb (+ file generati, non versionati)
 └── minigames/
-    └── <nome_minigioco>/     # ogni minigioco è un modulo autonomo
+    └── colors/
+        └── colors_game_scene.dart  # segnaposto del minigioco Colori
 assets/
 ├── images/
-├── animations/
-├── audio/{music,sfx,voice}/
-└── fonts/
+├── animations/                   # file .riv
+├── audio/
+│   ├── music/
+│   ├── sfx/
+│   └── voice/{it,en}/            # voci TTS pre-generate (D-015)
+└── fonts/                        # Fredoka (D-017)
+test/
+└── widget_test.dart
 ```
 
-*(Da confermare/aggiornare quando il progetto Flutter viene inizializzato.)*
+Le cartelle vuote contengono un `.gitkeep`, da togliere quando ricevono il primo file.
 
 ---
 
@@ -122,7 +140,9 @@ assets/
 - **Dart**: stile ufficiale (`dart format`), regole di `flutter_lints`.
 - **Naming**: file `snake_case.dart`, classi `PascalCase`, variabili/metodi `camelCase`, costanti `lowerCamelCase`.
 - **Asset**: `snake_case`, con prefisso di categoria (es. `char_elide_idle.riv`, `sfx_pop.ogg`, `bg_kitchen.png`).
-- **Minigiochi**: cartella `lib/minigames/<nome>/`, classe d'ingresso `<Nome>Game`.
+- **Minigiochi**: cartella `lib/minigames/<nome>/`; scena Flutter d'ingresso `<Nome>GameScene`, gioco Flame `<Nome>Game`.
+- **Testi e voci**: chiavi ARB in `camelCase` (es. `gameColorsName`); il file voce corrispondente si chiama `voice_<chiave_in_snake_case>` nella cartella della lingua (es. `assets/audio/voice/it/voice_game_colors_name.ogg`).
+- **Colori**: solo dalle costanti di `GameColors`, mai valori esadecimali sparsi (eccezione: i colori "da imparare" definiti dentro il minigioco Colori).
 - **Commit**: prefisso convenzionale in italiano (vedi `AGENTS.md`).
 
 ---
