@@ -37,9 +37,11 @@ Ultimo aggiornamento: 2026-11-11
 | D-022 | 2026-11-11 | Localizzazione con **`flutter gen-l10n`**: ARB in `lib/l10n/` (`app_it.arb` è il modello); i file generati non si versionano. | Italiano + inglese (D-013) senza testi scritti nel codice. | ✅ attiva |
 | D-023 | 2026-11-11 | Cartella `android/` generata con `flutter create` **sul PC del responsabile**, poi adattata. | L'ambiente di sviluppo AI non ha l'SDK Flutter: generarla con lo strumento ufficiale evita versioni Gradle/AGP sbagliate. | ✅ attiva |
 
+| D-024 | 2026-11-11 | Dispositivi supportati: **smartphone, tablet e Android TV**, con **un solo APK**. | Richiesta del responsabile. Un APK unico semplifica build e distribuzione; il gioco si adatta a schermo e tipo di input. | ✅ attiva |
+
 ### Decisioni ancora aperte
 
-- *(nessuna)*
+- **Android TV**: come si gioca con il telecomando (D-pad + OK) nei minigiochi pensati per il trascinamento?
 
 ---
 

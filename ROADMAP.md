@@ -22,6 +22,7 @@ Ultimo aggiornamento: 2026-11-11
 | 8 | Area genitori e impostazioni | ⚪ da iniziare |
 | 9 | Rifinitura, test con la bambina, accessibilità | ⚪ da iniziare |
 | 10 | Build APK e pubblicazione | ⚪ da iniziare |
+| ↔ | Trasversale: smartphone, tablet e Android TV | ⚪ da iniziare |
 
 **Prossimo passo:** Fase 2, parte sul PC del responsabile — generare `android/`, primo `flutter run` sul telefono.
 
@@ -74,6 +75,8 @@ Ultimo aggiornamento: 2026-11-11
 - [ ] `flutter analyze` e `flutter test` senza errori
 - [ ] Test in tempo reale: `flutter run` sul telefono (USB o debug wireless) + hot reload
 - [ ] Prima build APK di prova (`flutter build apk --debug`)
+- [ ] Manifest pronto per Android TV: `android.hardware.touchscreen` e `android.software.leanback` con `required="false"`, intent `LEANBACK_LAUNCHER`, banner TV provvisorio (320×180)
+- [ ] Emulatori di prova: smartphone, tablet 10", Android TV 1080p
 
 ## Fase 3 — Motore comune
 
@@ -83,6 +86,9 @@ Ultimo aggiornamento: 2026-11-11
 - [ ] Transizioni tra scene in stile gioco
 - [ ] Salvataggio locale dei progressi (offline)
 - [ ] Blocco di uscite accidentali (tasto indietro gestito)
+- [ ] Layout adattivo: scene che si adattano a proporzioni e dimensioni diverse (telefono, tablet, TV) senza deformarsi
+- [ ] Livello di input unico: tocco/trascinamento **e** telecomando (D-pad + OK), così ogni minigioco funziona con entrambi
+- [ ] Focus visibile e "giocoso" per la navigazione con telecomando (alone/rimbalzo sull'elemento selezionato)
 
 ## Fase 4 — Personaggi
 
@@ -127,12 +133,26 @@ Ultimo aggiornamento: 2026-11-11
 - [ ] Test con la bambina e iterazione
 - [ ] Prestazioni su dispositivi economici
 - [ ] Revisione accessibilità (aree di tocco, contrasti, audio)
+- [ ] Test su smartphone, tablet e Android TV reali
 
 ## Fase 10 — Build e pubblicazione
 
 - [ ] Icona e splash definitivi
 - [ ] Build APK release firmata
 - [ ] Release su GitHub con APK allegato
+- [ ] Icona adattiva (telefono/tablet) e banner definitivo per Android TV
+
+## ↔ Trasversale — Smartphone, tablet e Android TV
+
+Un solo APK per tutti e tre i tipi di dispositivo (D-024). I task operativi sono distribuiti nelle fasi 2, 3, 9 e 10; qui il riepilogo.
+
+- [ ] Decidere come si gioca con il telecomando (Android TV)
+- [ ] Manifest e banner per Android TV (Fase 2)
+- [ ] Layout adattivo per telefono, tablet e TV (Fase 3)
+- [ ] Input unico tocco + telecomando con focus visibile (Fase 3)
+- [ ] Ogni minigioco progettato anche per il telecomando (Fasi 6–7)
+- [ ] Interfaccia leggibile "da divano" su TV: elementi più grandi e area sicura ai bordi (Fase 5)
+- [ ] Test su dispositivi reali (Fase 9)
 
 ---
 
@@ -145,3 +165,4 @@ Ultimo aggiornamento: 2026-11-11
 | 2026-11-11 | Decisioni | Colori su due livelli, voce TTS, italiano + inglese, app ID com.aptecstudio.elidesfamily |
 | 2026-11-11 | Decisioni | TTS pre-generato, palette pastello vivace, font Fredoka, regola sondaggi in AGENTS.md. Fase 1 chiusa |
 | 2026-11-11 | Scheletro | Progetto Flutter preparato a mano (senza SDK): struttura, avvio, hub provvisorio, localizzazioni, test |
+| 2026-11-11 | Dispositivi | Aggiunto in roadmap il supporto a smartphone, tablet e Android TV |
