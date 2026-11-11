@@ -93,7 +93,7 @@ Ultimo aggiornamento: 2026-11-11
 ## Fase 4 — Personaggi
 
 - [x] Skill `kids-character-gen` per generare i personaggi (D-027)
-- [~] Bozze di design: Elide, Rio, Papà, Mamma (bozza 3 in revisione)
+- [~] Bozze di design: Elide, Rio, Papà, Mamma (bozze 1-4 non approvate, da riprendere più avanti — D-029)
 - [ ] Approvazione del design da parte del responsabile
 - [ ] Asset finali e stati animati (idle, felice, incoraggia, parla)
 - [ ] Widget riutilizzabile per ogni personaggio
@@ -168,4 +168,4 @@ Un solo APK per tutti e tre i tipi di dispositivo (D-024). I task operativi sono
 | 2026-11-11 | Decisioni | TTS pre-generato, palette pastello vivace, font Fredoka, regola sondaggi in AGENTS.md. Fase 1 chiusa |
 | 2026-11-11 | Scheletro | Progetto Flutter preparato a mano (senza SDK): struttura, avvio, hub provvisorio, localizzazioni, test |
 | 2026-11-11 | Dispositivi | Aggiunto in roadmap il supporto a smartphone, tablet e Android TV; giochi riadattati al telecomando (D-025), AGENTS.md aggiornato |
-| 2026-11-11 | Personaggi | Bozze 1-3 dei personaggi; creata la skill kids-character-gen |
+| 2026-11-11 | Personaggi | Bozze 1-4 dei personaggi (in sospeso); creata la skill kids-character-gen; Elide sempre protagonista, argomenti misti |

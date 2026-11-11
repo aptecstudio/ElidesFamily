@@ -44,6 +44,9 @@ Ultimo aggiornamento: 2026-11-11
 
 | D-027 | 2026-11-11 | Skill di progetto **`kids-character-gen`** in `.claude/skills/kids-character-gen/SKILL.md` per generare i personaggi (scheda narrativa + JSON), senza citare giochi esterni. | Richiesta del responsabile: i personaggi si generano sempre con le stesse regole di stile; repository pubblico. | ✅ attiva |
 
+| D-028 | 2026-11-11 | Nessun personaggio ha una "materia" fissa: gli argomenti educativi sono **misti**. Nei minigiochi con **un solo personaggio** c'è sempre **Elide**; in quelli con più personaggi gli altri **si alternano** accanto a lei. **Elide è sempre la protagonista.** | Richiesta del responsabile. | ✅ attiva |
+| D-029 | 2026-11-11 | Il design dei personaggi (bozze 1-4) **non è ancora approvato**: resta lontano dall'idea del responsabile e verrà ripreso più avanti. | Richiesta del responsabile. | ⏸️ in sospeso |
+
 ### Regole per i minigiochi su Android TV (D-025)
 
 - Ogni minigioco ha una **variante per telecomando** progettata insieme a quella touch: meccanica, distanze e ritmo si possono semplificare.
@@ -74,6 +77,8 @@ Ultimo aggiornamento: 2026-11-11
 | **Mamma** | La mamma | **Gatta color miele** con **macchie bianche** |
 
 - Non tutti i personaggi compaiono in ogni minigioco: si scelgono in base al contesto.
+- **Elide è sempre presente**: è l'unica nei minigiochi a un personaggio; negli altri la affiancano Rio, Papà e Mamma a rotazione (D-028).
+- Nessun personaggio è legato a un argomento educativo specifico (D-028).
 - Proporzioni "baby": testa grande, corpo piccolo e tondo, occhi grandi e lucidi, contorni morbidi, nessun angolo vivo.
 - Ogni personaggio ha un set minimo di stati animati: **idle** (respiro/battito ciglia), **felice/festeggia**, **incoraggia**, **parla**.
 
