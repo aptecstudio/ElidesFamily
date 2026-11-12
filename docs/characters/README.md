@@ -57,7 +57,7 @@ La disapprovazione è sempre dolce e buffa, mai punitiva o spaventosa: serve a d
 |-------------|-------|--------|
 | Elide | Bozza approvata provvisoriamente | [elide.md](elide/elide.md) |
 | Rio | Bozza approvata provvisoriamente | [rio.md](rio/rio.md) |
-| Papà | Da fare | — |
+| Papà | Bozza approvata provvisoriamente | [papa.md](papa/papa.md) |
 | Mamma | Da fare | — |
 
-Le immagini delle bozze sono generate da `tools/character-drafts/` (`elide.py`, `rio.py`) (SVG creato da script Python, convertito in PNG con `rsvg-convert`).
+Le immagini delle bozze sono generate da `tools/character-drafts/` (`elide.py`, `rio.py`, `papa.py`) (SVG creato da script Python, convertito in PNG con `rsvg-convert`).
