@@ -24,7 +24,9 @@ Ultimo aggiornamento: 2026-11-12
 | 10 | Build APK e pubblicazione | ⚪ da iniziare |
 | ↔ | Trasversale: smartphone, tablet e Android TV | ⚪ da iniziare |
 
-**Prossimo passo:** Fase 2, parte sul PC del responsabile — generare `android/`, primo `flutter run` sul telefono.
+**Prossimo passo (prossima sessione):** creazione di Rio, poi Papà e Mamma (Fase 4); scelta della grafica dei menù (Fase 5). In parallelo, sul PC del responsabile, completare la Fase 2.
+
+**Passo precedente:** Fase 2, parte sul PC del responsabile — generare `android/`, primo `flutter run` sul telefono.
 
 ---
 
@@ -96,9 +98,10 @@ Ultimo aggiornamento: 2026-11-12
 - [x] Metodo delle bozze: script → SVG → PNG (`tools/character-drafts/`, D-032)
 - [x] Pipeline di animazione: Rive con ossa e mesh deformabili (D-031)
 - [x] Bozza di Elide e 6 pose (approvata provvisoriamente, da ottimizzare)
-- [ ] Bozza di Rio e pose
-- [ ] Bozza di Papà e pose
-- [ ] Bozza di Mamma e pose
+- [ ] **Creazione di Rio**: scheda, modello, almeno 4 pose ed espressioni (stessa costruzione di Elide)
+- [ ] **Creazione di Papà**: scheda, modello, almeno 4 pose ed espressioni
+- [ ] **Creazione di Mamma**: scheda, modello, almeno 4 pose ed espressioni
+- [ ] Tavola di gruppo: i quattro personaggi insieme, per verificare coerenza e altezze
 - [ ] Ottimizzazione finale delle bozze
 - [ ] Approvazione del design da parte del responsabile
 - [ ] Illustrazioni finali a livelli (testa, occhi, bocche, arti, vestiti) pronte per Rive
@@ -117,6 +120,19 @@ Ultimo aggiornamento: 2026-11-12
 - [ ] Widget riutilizzabile per ogni personaggio
 
 ## Fase 5 — Hub principale
+
+**Scelta della grafica dei menù di gioco** (con sondaggi al responsabile):
+
+- [ ] Impostazione dell'hub: scena illustrata con Elide animata e riquadri dei minigiochi
+- [ ] Stile dei riquadri: cornici, illustrazioni, nome del gioco, segnale di novità
+- [ ] Pulsanti per gli adulti (genitori, lingue, impostazioni) e loro posizione
+- [ ] Schermata di caricamento animata con un personaggio
+- [ ] Pulsanti nei minigiochi: torna ai giochi, uscita protetta da trascinamento
+- [ ] Barra degli oggetti nei minigiochi (vassoio da cui trascinare)
+- [ ] Transizioni tra menù e minigiochi
+- [ ] Variante per Android TV con focus del telecomando
+- [ ] Tavola di design dei menù approvata e salvata in `docs/`
+
 
 - [ ] Scena di casa illustrata con i personaggi
 - [ ] Accesso ai minigiochi tramite oggetti/porte toccabili
@@ -189,3 +205,4 @@ Un solo APK per tutti e tre i tipi di dispositivo (D-024). I task operativi sono
 | 2026-11-11 | Personaggi | Bozze 1-4 dei personaggi (in sospeso); skill kids-character-gen creata e poi annullata; Elide sempre protagonista, argomenti misti |
 | 2026-11-12 | Personaggi | Nuova direzione artistica dal video di riferimento; bozza di Elide e 6 pose approvate provvisoriamente; pipeline Rive con mesh deformabili |
 | 2026-11-12 | Animazioni | Definita la suite completa di animazioni per tutti i personaggi (D-033) |
+| 2026-11-12 | Pianificazione | Inseriti in roadmap la creazione di Rio, Papà e Mamma e la scelta della grafica dei menù; fine sessione |
