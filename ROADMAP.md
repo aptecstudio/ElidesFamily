@@ -71,10 +71,11 @@ Last update: 2026-11-12
       `flutter create --platforms android --org com.aptecstudio --project-name elides_family .`
 - [ ] Set `applicationId` and `namespace` to `com.aptecstudio.elidesfamily` (D-014) in `android/app/build.gradle.kts` and move `MainActivity.kt` to the matching package
 - [ ] `AndroidManifest.xml`: label "Elide's Family", `android:screenOrientation="sensorLandscape"` on the activity
-- [ ] Check the `minSdk` required by Flame
+- [ ] Check the `minSdk` required by Flame (Flutter's default is 24)
 - [ ] Copy the Fredoka font (SIL OFL) into `assets/fonts/` with the `OFL.txt` file and enable it in `pubspec.yaml` and `elides_family_app.dart`
-- [ ] `flutter pub get` and fix any package versions
-- [ ] `flutter analyze` and `flutter test` with no errors
+- [x] Flutter SDK, JDK 17 and Android SDK (platform 36, build-tools 36.0.0) installed on the owner's PC (D-044)
+- [x] `flutter pub get` (versions resolved, `pubspec.lock` committed)
+- [x] `flutter analyze` and `flutter test` with no errors
 - [ ] Live test: `flutter run` on the phone (USB or wireless debugging) + hot reload
 - [ ] First test APK build (`flutter build apk --debug`)
 - [ ] Manifest ready for Android TV: `android.hardware.touchscreen` and `android.software.leanback` with `required="false"`, `LEANBACK_LAUNCHER` intent, temporary TV banner (320×180)
@@ -216,3 +217,4 @@ A single APK for all three device types (D-024). The operational tasks are sprea
 | 2026-11-12 | Optimization | Animation by code instead of Rive (D-039); shared `parts.py` with new hands and sleeves following the arm, applied to Elide (D-041) |
 | 2026-11-12 | Conventions | AGENTS.md: English code and docs, Italian chat, English commits, per-language style (D-040); whole project translated, files renamed (D-043), ARB template in English (D-042), PEP 8 with ruff |
 | 2026-11-12 | Optimization | Rio, Dad and Mom ported to `parts.py` (new hands, sleeves following the arm); all models, pose sheets and the group sheet regenerated |
+| 2026-11-12 | Setup | Flutter 3.50 (snap), JDK 17 and Android SDK installed on the owner's PC; `pub get`, `analyze` and `test` pass (D-044) |
