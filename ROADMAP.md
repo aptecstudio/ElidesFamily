@@ -24,9 +24,9 @@ Last update: 2026-11-12
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** design approval of the updated drafts by the owner (Phase 4); choose the menu graphics (Phase 5); complete Phase 2 now that the Flutter SDK is installed on the owner's PC.
+**Next step (next session):** once the owner has freed disk space (at least 2 GB), finish the first debug build, install it on the owner's phone and check the landscape start, then `flutter run` with hot reload (Phase 2); design approval of the updated drafts (Phase 4); menu graphics (Phase 5).
 
-**Previous step:** hands and sleeves of all four characters optimized with the shared `parts.py` (D-041) and every draft image regenerated; project translated to English (D-040).
+**Previous step:** Android platform generated and configured (app ID, landscape, Android TV manifest and banner); the first build stopped because the disk was full.
 
 ---
 
@@ -218,3 +218,4 @@ A single APK for all three device types (D-024). The operational tasks are sprea
 | 2026-11-12 | Conventions | AGENTS.md: English code and docs, Italian chat, English commits, per-language style (D-040); whole project translated, files renamed (D-043), ARB template in English (D-042), PEP 8 with ruff |
 | 2026-11-12 | Optimization | Rio, Dad and Mom ported to `parts.py` (new hands, sleeves following the arm); all models, pose sheets and the group sheet regenerated |
 | 2026-11-12 | Setup | Flutter 3.50 (snap), JDK 17 and Android SDK installed on the owner's PC; `pub get`, `analyze` and `test` pass (D-044) |
+| 2026-11-12 | Setup | Android platform generated and configured; first debug build stopped with a full disk, to be resumed after freeing space. End of session |
