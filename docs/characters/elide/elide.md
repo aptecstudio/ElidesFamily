@@ -15,7 +15,7 @@
 | **Orecchie e coda** | Orecchie a punta con interno rosa; coda arricciata. |
 | **Arti** | Braccia paffute con gomito, manine con pollice e tre ditine e cuscinetto rosa; gambe piene, piedi con le dita. |
 | **Abbigliamento** | Vestitino turchese a maniche corte: colletto e polsini bianchi, due bottoncini, cucitura in vita, taschino con zampetta rosa ricamata, orlo smerlato bianco. A piedi nudi. |
-| **Accessorio** | Grande fiocco rosso fragola sull'orecchio sinistro, con nodo e due codine. |
+| **Accessorio** | Grande fiocco rosso fragola sull'orecchio destro di Elide (a sinistra di chi guarda), con nodo e due codine. |
 | **Riconoscibile da** | Fiocco rosso, ciuffo di lato, occhi azzurri, coda arricciata. |
 
 ## Palette

@@ -20,6 +20,7 @@ Ogni scheda in questa cartella rispetta queste regole: cambia l'identità del pe
 - Musetto grande e chiaro nella parte bassa del viso, nasino in cima, sorriso semplice.
 - Braccia e gambe paffute, più spesse alla radice; manine con pollice e tre ditine, piedi con le dita.
 - Piccoli (Elide, Rio) e adulti (Papà, Mamma) hanno la stessa testa: cambia il corpo.
+- Destra e sinistra si intendono sempre **dal punto di vista del personaggio**.
 
 ## Occhi
 
@@ -55,8 +56,8 @@ La disapprovazione è sempre dolce e buffa, mai punitiva o spaventosa: serve a d
 | Personaggio | Stato | Scheda |
 |-------------|-------|--------|
 | Elide | Bozza approvata provvisoriamente | [elide.md](elide/elide.md) |
-| Rio | Da fare | — |
+| Rio | Bozza approvata provvisoriamente | [rio.md](rio/rio.md) |
 | Papà | Da fare | — |
 | Mamma | Da fare | — |
 
-Le immagini delle bozze sono generate da `tools/character-drafts/` (SVG creato da script Python, convertito in PNG con `rsvg-convert`).
+Le immagini delle bozze sono generate da `tools/character-drafts/` (`elide.py`, `rio.py`) (SVG creato da script Python, convertito in PNG con `rsvg-convert`).
