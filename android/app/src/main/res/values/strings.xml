@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Launcher name; the in-game texts live in the Flutter ARB files. -->
+    <string name="app_name">Elide\'s Family</string>
+</resources>

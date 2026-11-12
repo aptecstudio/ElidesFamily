@@ -67,10 +67,10 @@ Last update: 2026-11-12
 
 **To do on the owner's PC (with the Flutter SDK):**
 
-- [ ] Generate the Android platform without touching the existing files:
+- [x] Generate the Android platform without touching the existing files:
       `flutter create --platforms android --org com.aptecstudio --project-name elides_family .`
-- [ ] Set `applicationId` and `namespace` to `com.aptecstudio.elidesfamily` (D-014) in `android/app/build.gradle.kts` and move `MainActivity.kt` to the matching package
-- [ ] `AndroidManifest.xml`: label "Elide's Family", `android:screenOrientation="sensorLandscape"` on the activity
+- [x] Set `applicationId` and `namespace` to `com.aptecstudio.elidesfamily` (D-014) in `android/app/build.gradle.kts` and move `MainActivity.kt` to the matching package
+- [x] `AndroidManifest.xml`: label "Elide's Family", `android:screenOrientation="sensorLandscape"` on the activity
 - [ ] Check the `minSdk` required by Flame (Flutter's default is 24)
 - [ ] Copy the Fredoka font (SIL OFL) into `assets/fonts/` with the `OFL.txt` file and enable it in `pubspec.yaml` and `elides_family_app.dart`
 - [x] Flutter SDK, JDK 17 and Android SDK (platform 36, build-tools 36.0.0) installed on the owner's PC (D-044)
@@ -78,8 +78,8 @@ Last update: 2026-11-12
 - [x] `flutter analyze` and `flutter test` with no errors
 - [ ] Live test: `flutter run` on the phone (USB or wireless debugging) + hot reload
 - [ ] First test APK build (`flutter build apk --debug`)
-- [ ] Manifest ready for Android TV: `android.hardware.touchscreen` and `android.software.leanback` with `required="false"`, `LEANBACK_LAUNCHER` intent, temporary TV banner (320×180)
-- [ ] Test emulators: smartphone, 10" tablet, Android TV 1080p
+- [x] Manifest ready for Android TV: `android.hardware.touchscreen` and `android.software.leanback` with `required="false"`, `LEANBACK_LAUNCHER` intent, temporary TV banner (320×180, `tools/character-drafts/tv_banner.py`)
+- [ ] Test emulators: smartphone, 10" tablet, Android TV 1080p (postponed: not enough disk space)
 
 ## Phase 3 — Shared engine
 
