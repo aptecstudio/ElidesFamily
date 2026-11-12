@@ -21,6 +21,7 @@ Ogni scheda in questa cartella rispetta queste regole: cambia l'identità del pe
 - Braccia e gambe paffute, più spesse alla radice; manine con pollice e tre ditine, piedi con le dita.
 - Piccoli (Elide, Rio) e adulti (Papà, Mamma) hanno la stessa testa: cambia il corpo.
 - Destra e sinistra si intendono sempre **dal punto di vista del personaggio**.
+- In scena i piccoli (Elide, Rio) si disegnano all'**85%** degli adulti, così Mamma e Papà si riconoscono subito come grandi.
 
 ## Occhi
 
@@ -58,6 +59,12 @@ La disapprovazione è sempre dolce e buffa, mai punitiva o spaventosa: serve a d
 | Elide | Bozza approvata provvisoriamente | [elide.md](elide/elide.md) |
 | Rio | Bozza approvata provvisoriamente | [rio.md](rio/rio.md) |
 | Papà | Bozza approvata provvisoriamente | [papa.md](papa/papa.md) |
-| Mamma | Da fare | — |
+| Mamma | Bozza approvata provvisoriamente | [mamma.md](mamma/mamma.md) |
 
-Le immagini delle bozze sono generate da `tools/character-drafts/` (`elide.py`, `rio.py`, `papa.py`) (SVG creato da script Python, convertito in PNG con `rsvg-convert`).
+Le immagini delle bozze sono generate da `tools/character-drafts/` (`elide.py`, `rio.py`, `papa.py`, `mamma.py`) (SVG creato da script Python, convertito in PNG con `rsvg-convert`).
+
+## Tavola di gruppo
+
+![La famiglia al completo](gruppo.png)
+
+Mamma · Papà · Elide · Rio, sullo stesso piano e con i piccoli all'85%. Generata da `tools/character-drafts/gruppo.py`.

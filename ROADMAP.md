@@ -24,9 +24,9 @@ Ultimo aggiornamento: 2026-11-12
 | 10 | Build APK e pubblicazione | ⚪ da iniziare |
 | ↔ | Trasversale: smartphone, tablet e Android TV | ⚪ da iniziare |
 
-**Prossimo passo (prossima sessione):** creazione di Mamma, poi tavola di gruppo (Fase 4); scelta della grafica dei menù (Fase 5). In parallelo, sul PC del responsabile, completare la Fase 2.
+**Prossimo passo (prossima sessione):** ottimizzazione finale delle bozze e approvazione del design (Fase 4); scelta della grafica dei menù (Fase 5). In parallelo, sul PC del responsabile, completare la Fase 2.
 
-**Passo precedente:** bozze di Rio e Papà con 6 pose approvate provvisoriamente (Fase 4).
+**Passo precedente:** bozze di Rio, Papà e Mamma approvate provvisoriamente e tavola di gruppo (Fase 4).
 
 ---
 
@@ -100,8 +100,8 @@ Ultimo aggiornamento: 2026-11-12
 - [x] Bozza di Elide e 6 pose (approvata provvisoriamente, da ottimizzare)
 - [x] **Creazione di Rio**: scheda, modello, 6 pose ed espressioni (approvata provvisoriamente, D-034)
 - [x] **Creazione di Papà**: scheda, modello, 6 pose ed espressioni (approvata provvisoriamente, D-036)
-- [ ] **Creazione di Mamma**: scheda, modello, almeno 4 pose ed espressioni
-- [ ] Tavola di gruppo: i quattro personaggi insieme, per verificare coerenza e altezze
+- [x] **Creazione di Mamma**: scheda, modello, 6 pose ed espressioni (approvata provvisoriamente, D-037)
+- [x] Tavola di gruppo: i quattro personaggi insieme, piccoli all'85% (D-038)
 - [ ] Ottimizzazione finale delle bozze
 - [ ] Approvazione del design da parte del responsabile
 - [ ] Illustrazioni finali a livelli (testa, occhi, bocche, arti, vestiti) pronte per Rive
@@ -208,3 +208,4 @@ Un solo APK per tutti e tre i tipi di dispositivo (D-024). I task operativi sono
 | 2026-11-12 | Pianificazione | Inseriti in roadmap la creazione di Rio, Papà e Mamma e la scelta della grafica dei menù; fine sessione |
 | 2026-11-12 | Personaggi | Creato Rio (scheda, modello, 6 pose) con `tools/character-drafts/rio.py`; destra/sinistra dal punto di vista del personaggio (D-035) |
 | 2026-11-12 | Personaggi | Creato Papà (scheda, modello, 6 pose) con `tools/character-drafts/papa.py`: più basso, in carne, felpa con cappuccio |
+| 2026-11-12 | Personaggi | Creata Mamma (scheda, modello, 6 pose) con `tools/character-drafts/mamma.py`; tavola di gruppo con i piccoli all'85% (D-038) |
