@@ -3,7 +3,7 @@
 > Registro delle **scelte** (con motivazione), dei **tratti stilistici** grafici e sonori, della **struttura del codice** e delle **convenzioni**.
 > Le decisioni superate non si cancellano: si marcano con ~~barrato~~ e si rimanda a quella nuova.
 
-Ultimo aggiornamento: 2026-11-11
+Ultimo aggiornamento: 2026-11-12
 
 ---
 
@@ -17,7 +17,7 @@ Ultimo aggiornamento: 2026-11-11
 | D-004 | 2026-11-11 | Un solo branch: **`main`**. | Progetto hobbistico, flusso semplice. | ✅ attiva |
 | D-005 | 2026-11-11 | Struttura: **hub centrale + minigiochi indipendenti**. | Ogni minigioco si sviluppa e si testa da solo; se ne possono aggiungere nel tempo senza toccare gli altri. | ✅ attiva |
 | D-006 | 2026-11-11 | Interfaccia **non in stile app**: niente widget Material visibili (AppBar, Card, ListTile, pulsanti standard). | L'esperienza deve essere quella di un gioco illustrato, non di un'applicazione. | ✅ attiva |
-| D-007 | 2026-11-11 | Personaggi animati con **Rive** (state machine: idle, felice, incoraggia, parla). | Vettoriale e leggero, stati multipli guidati dal codice, adatto a reazioni al tocco. | ✅ attiva |
+| D-007 | 2026-11-11 | Personaggi animati con **Rive** (state machine: idle, felice, incoraggia, parla). Precisata da D-031. | Vettoriale e leggero, stati multipli guidati dal codice, adatto a reazioni al tocco. | ✅ attiva |
 | D-008 | 2026-11-11 | Motore: **Flutter** per hub, navigazione e area genitori; **Flame** per i minigiochi. | Flutter è ideale per scene e transizioni, Flame per game loop, movimento e trascinamenti. | ✅ attiva |
 | D-009 | 2026-11-11 | Orientamento **solo orizzontale**, schermo intero immersivo. | Più spazio per le scene, tipico dei giochi per bambini. | ✅ attiva |
 | D-010 | 2026-11-11 | Primo minigioco (prototipo): **Colori**. | Scelta del responsabile. | ✅ attiva |
@@ -45,7 +45,10 @@ Ultimo aggiornamento: 2026-11-11
 | ~~D-027~~ | 2026-11-11 | ~~Skill di progetto `kids-character-gen` per generare i personaggi.~~ **Annullata** il 2026-11-11: la skill è stata rimossa; per la grafica per bambini si procederà in un altro modo. | Richiesta del responsabile. | ❌ superata |
 
 | D-028 | 2026-11-11 | Nessun personaggio ha una "materia" fissa: gli argomenti educativi sono **misti**. Nei minigiochi con **un solo personaggio** c'è sempre **Elide**; in quelli con più personaggi gli altri **si alternano** accanto a lei. **Elide è sempre la protagonista.** | Richiesta del responsabile. | ✅ attiva |
-| D-029 | 2026-11-11 | Il design dei personaggi (bozze 1-4) **non è ancora approvato**: resta lontano dall'idea del responsabile e verrà ripreso più avanti. | Richiesta del responsabile. | ⏸️ in sospeso |
+| ~~D-029~~ | 2026-11-11 | ~~Design dei personaggi (bozze 1-4) non approvato, da riprendere più avanti.~~ Superata da D-030. | Richiesta del responsabile. | ❌ superata |
+| D-030 | 2026-11-12 | Nuova direzione artistica dei personaggi ricavata dal video di riferimento: contorni colorati in tono, testa metà dell'altezza, occhi rotondi distanziati, musetto grande e chiaro, arti paffuti, mani con pollice e piedi con le dita. Regole in `docs/characters/README.md`. **Elide** (bozza, occhi azzurri, fiocco rosso, vestito turchese) e le sue 6 pose sono **approvate provvisoriamente** e da ottimizzare più avanti. | Richiesta del responsabile: le bozze sono la base di lavoro e restano il riferimento. | ✅ attiva |
+| D-031 | 2026-11-12 | Pipeline dei personaggi animati: **illustrazione finale a livelli → Rive con ossa e mesh deformabili** (pesi sui vertici), state machine per pose ed espressioni, runtime `rive` in Flutter. Arti e viso si deformano in modo continuo: nessuna giuntura visibile tra le parti. Spine scartato. | Richiesta del responsabile: animazioni fluide, senza che si capisca che il corpo è fatto a pezzi. Le mesh deformabili di Rive piegano braccia e gambe come un unico pezzo; le espressioni passano da uno stato all'altro con transizioni interpolate. Il runtime Rive è MIT, compatibile con GPL-3.0; quello di Spine ha una licenza proprietaria. | ✅ attiva |
+| D-032 | 2026-11-12 | Le bozze dei personaggi si generano con script Python → SVG → PNG (`tools/character-drafts/`), così tutte le pose condividono la stessa costruzione. | Coerenza garantita tra pose e personaggi; facile da ritoccare. | ✅ attiva |
 
 ### Regole per i minigiochi su Android TV (D-025)
 
@@ -79,6 +82,7 @@ Ultimo aggiornamento: 2026-11-11
 - Non tutti i personaggi compaiono in ogni minigioco: si scelgono in base al contesto.
 - **Elide è sempre presente**: è l'unica nei minigiochi a un personaggio; negli altri la affiancano Rio, Papà e Mamma a rotazione (D-028).
 - Nessun personaggio è legato a un argomento educativo specifico (D-028).
+- Direzione artistica e schede: `docs/characters/` (D-030). Stati di ogni personaggio: a riposo, ciao, evviva, curioso, sorpreso, bravo.
 - Proporzioni "baby": testa grande, corpo piccolo e tondo, occhi grandi e lucidi, contorni morbidi, nessun angolo vivo.
 - Ogni personaggio ha un set minimo di stati animati: **idle** (respiro/battito ciglia), **felice/festeggia**, **incoraggia**, **parla**.
 

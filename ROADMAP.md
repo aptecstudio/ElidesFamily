@@ -3,7 +3,7 @@
 > Legenda: `- [x]` fatto · `- [~]` in corso · `- [ ]` da fare
 > Le fasi danno lo **stato globale**, i task lo **stato parziale**.
 
-Ultimo aggiornamento: 2026-11-11
+Ultimo aggiornamento: 2026-11-12
 
 ---
 
@@ -92,10 +92,17 @@ Ultimo aggiornamento: 2026-11-11
 
 ## Fase 4 — Personaggi
 
-- [ ] Definire il nuovo metodo per creare la grafica dei personaggi (la skill `kids-character-gen` è stata annullata, D-027)
-- [~] Bozze di design: Elide, Rio, Papà, Mamma (bozze 1-4 non approvate, da riprendere più avanti — D-029)
+- [x] Direzione artistica comune dei personaggi (`docs/characters/README.md`, D-030)
+- [x] Metodo delle bozze: script → SVG → PNG (`tools/character-drafts/`, D-032)
+- [x] Pipeline di animazione: Rive con ossa e mesh deformabili (D-031)
+- [x] Bozza di Elide e 6 pose (approvata provvisoriamente, da ottimizzare)
+- [ ] Bozza di Rio e pose
+- [ ] Bozza di Papà e pose
+- [ ] Bozza di Mamma e pose
+- [ ] Ottimizzazione finale delle bozze
 - [ ] Approvazione del design da parte del responsabile
-- [ ] Asset finali e stati animati (idle, felice, incoraggia, parla)
+- [ ] Illustrazioni finali a livelli (testa, occhi, bocche, arti, vestiti) pronte per Rive
+- [ ] Rig Rive con ossa e mesh deformabili; state machine: a riposo, ciao, evviva, curioso, sorpreso, bravo, parla, battito di ciglia
 - [ ] Widget riutilizzabile per ogni personaggio
 
 ## Fase 5 — Hub principale
@@ -169,3 +176,4 @@ Un solo APK per tutti e tre i tipi di dispositivo (D-024). I task operativi sono
 | 2026-11-11 | Scheletro | Progetto Flutter preparato a mano (senza SDK): struttura, avvio, hub provvisorio, localizzazioni, test |
 | 2026-11-11 | Dispositivi | Aggiunto in roadmap il supporto a smartphone, tablet e Android TV; giochi riadattati al telecomando (D-025), AGENTS.md aggiornato |
 | 2026-11-11 | Personaggi | Bozze 1-4 dei personaggi (in sospeso); skill kids-character-gen creata e poi annullata; Elide sempre protagonista, argomenti misti |
+| 2026-11-12 | Personaggi | Nuova direzione artistica dal video di riferimento; bozza di Elide e 6 pose approvate provvisoriamente; pipeline Rive con mesh deformabili |
