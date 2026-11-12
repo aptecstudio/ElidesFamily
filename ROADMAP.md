@@ -24,9 +24,9 @@ Last update: 2026-11-12
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** port Rio, Dad and Mom to the new hands and sleeves of `parts.py`, regenerate every draft image and the group sheet, then get the design approved (Phase 4); choose the menu graphics (Phase 5). In parallel, on the owner's PC, complete Phase 2.
+**Next step (next session):** design approval of the updated drafts by the owner (Phase 4); choose the menu graphics (Phase 5); complete Phase 2 now that the Flutter SDK is installed on the owner's PC.
 
-**Previous step:** project translated to English with per-language code style (D-040); Elide's hands and sleeves optimized with the shared `parts.py` (D-041); animation by code instead of Rive (D-039).
+**Previous step:** hands and sleeves of all four characters optimized with the shared `parts.py` (D-041) and every draft image regenerated; project translated to English (D-040).
 
 ---
 
@@ -104,10 +104,10 @@ Last update: 2026-11-12
 - [x] Group sheet: the four characters together, kids at 85% (D-038)
 - [~] Final optimization of the drafts
   - [x] Shared parts module `parts.py` with in-project PNG rendering (D-041)
-  - [x] New hands: thumb on the right side, readable palm, fist and thumbs up (Elide)
-  - [x] Sleeves that follow the arm, with no visible joint (Elide)
-  - [ ] Port Rio, Dad and Mom to `parts.py` (hands and sleeves)
-  - [ ] Regenerate every model, pose sheet and the group sheet
+  - [x] New hands: thumb on the right side, readable palm, fist and thumbs up (all four)
+  - [x] Sleeves that follow the arm, with no visible joint (all four)
+  - [x] Port Rio, Dad and Mom to `parts.py` (hands and sleeves)
+  - [x] Regenerate every model, pose sheet and the group sheet
 - [ ] Design approval by the owner
 - [ ] Final layered illustrations (head, eyes, mouths, limbs, clothes) exported as SVG parts
 - [ ] Flutter character renderer: layered parts + Bezier limbs recomputed every frame (D-039)
@@ -215,3 +215,4 @@ A single APK for all three device types (D-024). The operational tasks are sprea
 | 2026-11-12 | Characters | Created Mom (sheet, model, 6 poses) with `tools/character-drafts/mom.py`; group sheet with the kids at 85% (D-038) |
 | 2026-11-12 | Optimization | Animation by code instead of Rive (D-039); shared `parts.py` with new hands and sleeves following the arm, applied to Elide (D-041) |
 | 2026-11-12 | Conventions | AGENTS.md: English code and docs, Italian chat, English commits, per-language style (D-040); whole project translated, files renamed (D-043), ARB template in English (D-042), PEP 8 with ruff |
+| 2026-11-12 | Optimization | Rio, Dad and Mom ported to `parts.py` (new hands, sleeves following the arm); all models, pose sheets and the group sheet regenerated |

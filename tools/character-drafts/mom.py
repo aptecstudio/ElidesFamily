@@ -8,6 +8,8 @@ Usage:
 import math
 import sys
 
+import parts
+
 OUT = sys.argv[1]
 LINE = "#A8692A"  # honey fur outline
 WLINE = "#C9A27A"  # white parts outline
@@ -77,41 +79,25 @@ def limb(p0, p1, p2, p3, w0, w1, bulge=3, fill="url(#limb)", line=LINE, t0=0.0, 
     )
 
 
-def hand(x, y, rot, mirror=False, kind="open"):
-    """White paw (the white patches reach hands and feet)."""
-    sx = -1 if mirror else 1
-    if kind == "open":
-        body = (
-            f'<path d="M-12,6 C-14,-4 -13,-14 -7,-17 C-5,-21 5,-21 7,-17 C13,-14 14,-6 12,4 C11,12 6,16 0,16 C-6,16 -11,12 -12,6 Z" fill="url(#white)" stroke="{WLINE}" stroke-width="2.4" stroke-linejoin="round"/>'
-            f'<path d="M-11,3 C-21,2 -24,-8 -18,-12 C-15,-9 -12,-5 -10,-2" fill="url(#white)" stroke="{WLINE}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
-            f'<path d="M-4,-17 L-4,-8 M2,-18 L2,-9 M7,-15 L6,-8" fill="none" stroke="{WLINE}" stroke-width="1.8" stroke-linecap="round"/>'
-            f'<ellipse cx="0" cy="5" rx="5.5" ry="4.5" fill="#F7B7CB" opacity="0.85"/>'
-        )
-    else:  # thumb
-        body = (
-            f'<path d="M-13,-2 C-14,-12 -6,-15 2,-15 C10,-15 15,-10 14,0 C13,10 6,14 0,14 C-8,14 -13,8 -13,-2 Z" fill="url(#white)" stroke="{WLINE}" stroke-width="2.4" stroke-linejoin="round"/>'
-            f'<path d="M-10,-10 C-12,-22 -8,-32 -2,-32 C3,-32 4,-26 2,-14" fill="url(#white)" stroke="{WLINE}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
-            f'<path d="M4,-12 Q12,-10 13,-4 M3,-4 Q12,-2 13,4 M2,4 Q10,6 11,10" fill="none" stroke="{WLINE}" stroke-width="1.8" stroke-linecap="round"/>'
-        )
-    return f'<g transform="translate({x:.1f},{y:.1f}) rotate({rot:.1f}) scale({sx * 1.4},1.4)">{body}</g>'
-
-
-def arm(p0, p1, p2, p3, mirror, kind="open", hand_rot=None):
+def arm(p0, p1, p2, p3, kind="back", hand_rot=None):
     """Honey arm, short lavender puff sleeve, white paw."""
-    o = [limb(p0, p1, p2, p3, 30, 24, 3)]
-    o.append(limb(p0, p1, p2, p3, 40, 34, 4, "url(#dress)", DLINE, t1=0.34, cap=False))
-    a = bez(0.33, p0, p1, p2, p3)
-    b = bez(0.37, p0, p1, p2, p3)
-    o.append(
-        f'<path d="M{a[0]:.1f},{a[1]:.1f} L{b[0]:.1f},{b[1]:.1f}" stroke="#FFFFFF" stroke-width="3" opacity="0"/>'
+    return parts.arm(
+        p0,
+        p1,
+        p2,
+        p3,
+        "url(#limb)",
+        LINE,
+        kind,
+        hand_rot,
+        SLEEVE,
+        hand_fill="url(#white)",
+        hand_line=WLINE,
+        pad="#F7B7CB",
     )
-    q = bez(0.92, p0, p1, p2, p3)
-    dx, dy = p3[0] - q[0], p3[1] - q[1]
-    length = math.hypot(dx, dy) or 1
-    dx, dy = dx / length, dy / length
-    rot = math.degrees(math.atan2(dy, dx)) + 90 if hand_rot is None else hand_rot
-    o.append(hand(p3[0] + dx * 16, p3[1] + dy * 16, rot, mirror, kind))
-    return o
+
+
+SLEEVE = dict(fill="url(#dress)", line=DLINE, t1=0.34, w0=40, w1=34)
 
 
 def foot(x, y):
@@ -338,11 +324,11 @@ SL, SR = (148, 322), (252, 322)
 
 
 def arm_l_down():
-    return arm(SL, (132, 348), (124, 376), (126, 398), True)
+    return arm(SL, (132, 348), (124, 376), (126, 398))
 
 
 def arm_r_down():
-    return arm(SR, (268, 348), (276, 376), (274, 398), False)
+    return arm(SR, (268, 348), (276, 376), (274, 398))
 
 
 def character(pose):
@@ -361,25 +347,25 @@ def character(pose):
         back = arm_l_down() + arm_r_down()
         face = ("open", "open", 0, 0, "normal", "smile", -3, False)
     elif pose == "wave":
-        back = arm_l_down() + arm(SR, (284, 318), (300, 296), (306, 264), False)
+        back = arm_l_down() + arm(SR, (284, 318), (300, 296), (306, 264), "palm")
         face = ("smiling", "smiling", 0, 0, "happy", "open", -6, True)
     elif pose == "cheer":
-        back = arm(SL, (120, 310), (104, 286), (100, 256), True) + arm(
-            SR, (280, 310), (296, 286), (300, 256), False
+        back = arm(SL, (120, 310), (104, 286), (100, 256), "palm") + arm(
+            SR, (280, 310), (296, 286), (300, 256), "palm"
         )
         face = ("happy", "happy", 0, 0, "up", "open", 3, True)
     elif pose == "curious":
         back = arm_l_down()
-        front = arm(SR, (286, 380), (262, 376), (244, 330), False, hand_rot=-24)
+        front = arm(SR, (286, 380), (262, 376), (244, 330), "fist", -24)
         face = ("open", "open", 7, -8, "curious", "curious", 8, False)
     elif pose == "surprised":
-        front = arm(SL, (112, 330), (96, 304), (98, 276), True, hand_rot=18) + arm(
-            SR, (288, 330), (304, 304), (302, 276), False, hand_rot=-18
+        front = arm(SL, (112, 330), (96, 304), (98, 276), "palm", 18) + arm(
+            SR, (288, 330), (304, 304), (302, 276), "palm", -18
         )
         face = ("wide", "wide", 0, 0, "up", "o", 0, False)
     elif pose == "proud":
         back = arm_l_down()
-        front = arm(SR, (290, 346), (306, 328), (302, 304), False, "thumb", 0)
+        front = arm(SR, (290, 346), (306, 328), (302, 304), "thumb", 0)
         face = ("happy", "smiling", 0, 0, "happy", "open", -5, True)
     o.append(dress())
     o.extend(back)
@@ -425,12 +411,12 @@ if mode == "single":
     svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="800" height="{H * 2}" viewBox="0 0 400 {H}">{DEFS}{character("idle")}</svg>'
 else:
     cw, ch = 400, H + 60
-    parts = []
+    cells = []
     for i, (p, label) in enumerate(POSES):
         cx = (i % 3) * cw
         cy = (i // 3) * ch
-        parts.append(
+        cells.append(
             f'<g transform="translate({cx},{cy})">{character(p)}<text x="200" y="{H + 32}" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-weight="bold" font-size="26" fill="#3B2C2A">{label}</text></g>'
         )
-    svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="{ch * 2}" viewBox="0 0 1200 {ch * 2}">{DEFS}{"".join(parts)}</svg>'
+    svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="{ch * 2}" viewBox="0 0 1200 {ch * 2}">{DEFS}{"".join(cells)}</svg>'
 open(OUT, "w").write(svg)

@@ -8,6 +8,8 @@ Usage:
 import math
 import sys
 
+import parts
+
 OUT = sys.argv[1]
 LINE = "#A8692A"  # honey fur outline
 WLINE = "#C9A27A"  # white patches outline
@@ -66,24 +68,6 @@ def limb(p0, p1, p2, p3, w0, w1, bulge=3, fill="url(#limb)"):
     return (
         f'<path d="{d}" fill="{fill}" stroke="{LINE}" stroke-width="2.6" stroke-linejoin="round"/>'
     )
-
-
-def hand(x, y, rot, mirror=False, kind="open"):
-    sx = -1 if mirror else 1
-    if kind == "open":
-        body = (
-            f'<path d="M-12,6 C-14,-4 -13,-14 -7,-17 C-5,-21 5,-21 7,-17 C13,-14 14,-6 12,4 C11,12 6,16 0,16 C-6,16 -11,12 -12,6 Z" fill="url(#limb)" stroke="{LINE}" stroke-width="2.4" stroke-linejoin="round"/>'
-            f'<path d="M-11,3 C-21,2 -24,-8 -18,-12 C-15,-9 -12,-5 -10,-2" fill="url(#limb)" stroke="{LINE}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
-            f'<path d="M-4,-17 L-4,-8 M2,-18 L2,-9 M7,-15 L6,-8" fill="none" stroke="{LINE}" stroke-width="1.8" stroke-linecap="round"/>'
-            f'<ellipse cx="0" cy="5" rx="5.5" ry="4.5" fill="#B9705A" opacity="0.7"/>'
-        )
-    else:  # thumb
-        body = (
-            f'<path d="M-13,-2 C-14,-12 -6,-15 2,-15 C10,-15 15,-10 14,0 C13,10 6,14 0,14 C-8,14 -13,8 -13,-2 Z" fill="url(#limb)" stroke="{LINE}" stroke-width="2.4" stroke-linejoin="round"/>'
-            f'<path d="M-10,-10 C-12,-22 -8,-32 -2,-32 C3,-32 4,-26 2,-14" fill="url(#limb)" stroke="{LINE}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
-            f'<path d="M4,-12 Q12,-10 13,-4 M3,-4 Q12,-2 13,4 M2,4 Q10,6 11,10" fill="none" stroke="{LINE}" stroke-width="1.8" stroke-linecap="round"/>'
-        )
-    return f'<g transform="translate({x},{y}) rotate({rot}) scale({sx * 1.4},1.4)">{body}</g>'
 
 
 def foot(x, y):
@@ -158,15 +142,8 @@ def torso():
 
 
 def sleeves():
+    """Neckline and overall straps (the sleeves follow the arm, see parts.arm)."""
     o = []
-    for m in (False, True):
-        tr = ' transform="translate(400,0) scale(-1,1)"' if m else ""
-        o.append(
-            f'<g{tr}><path d="M156,300 C138,302 118,314 110,336 L134,350 C140,340 146,336 152,334 C154,322 155,310 156,300 Z" fill="url(#shirt)" stroke="{TLINE}" stroke-width="2.6" stroke-linejoin="round"/>'
-            '<path d="M128,316 L146,326" stroke="#FFFFFF" stroke-width="6" opacity="0.85"/>'
-            f'<path d="M110,336 L134,350" fill="none" stroke="{TLINE}" stroke-width="8" stroke-linecap="round"/>'
-            '<path d="M110,336 L134,350" fill="none" stroke="#FFE9A6" stroke-width="5" stroke-linecap="round"/></g>'
-        )
     # neckline with the white chest patch
     o.append(
         f'<path d="M174,300 Q200,330 226,300 Q200,293 174,300 Z" fill="url(#white)" stroke="{TLINE}" stroke-width="3" stroke-linejoin="round"/>'
@@ -341,18 +318,22 @@ def sparkle(x, y, s, c="#FFD84A"):
     return f'<path transform="translate({x},{y}) scale({s})" d="M0,-10 L2.5,-2.5 L10,0 L2.5,2.5 L0,10 L-2.5,2.5 L-10,0 L-2.5,-2.5 Z" fill="{c}"/>'
 
 
+SL, SR = (150, 316), (250, 316)
+SLEEVE = dict(
+    fill="url(#shirt)", line=TLINE, t1=0.28, w0=42, w1=36, trim="#FFE9A6", trim_line=TLINE
+)
+
+
+def arm(p0, p1, p2, p3, kind="back", hand_rot=None):
+    return parts.arm(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, SLEEVE, pad="#B9705A")
+
+
 def arm_l_down():
-    return [
-        limb((122, 340), (118, 362), (114, 384), (112, 400), 30, 25, 3),
-        hand(110, 412, 168, True),
-    ]
+    return arm(SL, (134, 340), (120, 372), (114, 400))
 
 
 def arm_r_down():
-    return [
-        limb((278, 340), (282, 362), (286, 384), (288, 400), 30, 25, 3),
-        hand(290, 412, 192, False),
-    ]
+    return arm(SR, (266, 340), (280, 372), (286, 400))
 
 
 def character(pose):
@@ -371,40 +352,25 @@ def character(pose):
         back = arm_l_down() + arm_r_down()
         face = ("open", "open", 0, 0, "normal", "smile", -3, False)
     elif pose == "wave":
-        back = arm_l_down() + [
-            limb((278, 340), (300, 334), (314, 318), (318, 296), 30, 25, 3),
-            hand(321, 280, 12, False),
-        ]
+        back = arm_l_down() + arm(SR, (284, 330), (310, 318), (318, 290), "palm")
         face = ("smiling", "smiling", 0, 0, "happy", "open", -6, True)
     elif pose == "cheer":
-        back = [
-            limb((122, 340), (104, 330), (92, 312), (88, 292), 30, 25, 3),
-            hand(85, 276, -14, True),
-            limb((278, 340), (296, 330), (308, 312), (312, 292), 30, 25, 3),
-            hand(315, 276, 14, False),
-        ]
+        back = arm(SL, (118, 318), (96, 300), (90, 276), "palm") + arm(
+            SR, (282, 318), (304, 300), (310, 276), "palm"
+        )
         face = ("happy", "happy", 0, 0, "up", "open", 3, True)
     elif pose == "curious":
         back = arm_l_down()
-        front = [
-            limb((278, 340), (296, 380), (270, 372), (252, 326), 30, 25, 2),
-            hand(248, 312, -24, False),
-        ]
+        front = arm(SR, (298, 372), (268, 376), (250, 330), "fist", -24)
         face = ("open", "open", 7, -8, "curious", "curious", 8, False)
     elif pose == "surprised":
-        front = [
-            limb((122, 340), (98, 336), (88, 316), (90, 294), 30, 25, 3),
-            hand(92, 276, 18, True),
-            limb((278, 340), (302, 336), (312, 316), (310, 294), 30, 25, 3),
-            hand(308, 276, -18, False),
-        ]
+        front = arm(SL, (104, 334), (88, 314), (92, 290), "palm", 18) + arm(
+            SR, (296, 334), (312, 314), (308, 290), "palm", -18
+        )
         face = ("wide", "wide", 0, 0, "up", "o", 0, False)
     elif pose == "proud":
         back = arm_l_down()
-        front = [
-            limb((278, 340), (304, 352), (314, 334), (306, 312), 30, 25, 3),
-            hand(306, 296, 0, False, "thumb"),
-        ]
+        front = arm(SR, (300, 356), (318, 338), (308, 312), "thumb", 0)
         face = ("happy", "smiling", 0, 0, "happy", "open", -5, True)
     o.append(torso())
     o.extend(back)
@@ -450,12 +416,12 @@ if mode == "single":
     svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1080" viewBox="0 0 400 540">{DEFS}{character("idle")}</svg>'
 else:
     cw, ch = 400, 600
-    parts = []
+    cells = []
     for i, (p, label) in enumerate(POSES):
         cx = (i % 3) * cw
         cy = (i // 3) * ch
-        parts.append(
+        cells.append(
             f'<g transform="translate({cx},{cy})">{character(p)}<text x="200" y="572" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-weight="bold" font-size="26" fill="#4A2E1C">{label}</text></g>'
         )
-    svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">{DEFS}{"".join(parts)}</svg>'
+    svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">{DEFS}{"".join(cells)}</svg>'
 open(OUT, "w").write(svg)
