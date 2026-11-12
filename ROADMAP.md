@@ -102,7 +102,18 @@ Ultimo aggiornamento: 2026-11-12
 - [ ] Ottimizzazione finale delle bozze
 - [ ] Approvazione del design da parte del responsabile
 - [ ] Illustrazioni finali a livelli (testa, occhi, bocche, arti, vestiti) pronte per Rive
-- [ ] Rig Rive con ossa e mesh deformabili; state machine: a riposo, ciao, evviva, curioso, sorpreso, bravo, parla, battito di ciglia
+- [ ] Rig Rive con ossa e mesh deformabili (D-031)
+- [ ] State machine a livelli: corpo, viso, occhi, bocca (D-033)
+- [ ] Animazioni a riposo: respiro, ciglia, guardarsi intorno, attesa, seduto
+- [ ] Movimento: camminata (fronte e lato), corsa, girarsi, entrata/uscita, salti
+- [ ] Contentezza: sorriso, saltello, evviva, applauso, risata, pollice su, abbraccio
+- [ ] Balli: almeno 3 in loop
+- [ ] Disapprovazione gentile: no con la testa, no-no col dito, broncio, braccia conserte, spalle giù, triste leggero
+- [ ] Pensiero e sorpresa: curioso, confuso, sorpreso, piccolo spavento buffo
+- [ ] Interazione: saluto, chiamare, indicare, prendere/porgere, reazione al tocco
+- [ ] Routine: mangiare, bere, lavarsi, sbadigliare, dormire
+- [ ] Lip sync a visemi per le voci TTS
+- [ ] Suite completa per tutti e quattro i personaggi
 - [ ] Widget riutilizzabile per ogni personaggio
 
 ## Fase 5 — Hub principale
@@ -177,3 +188,4 @@ Un solo APK per tutti e tre i tipi di dispositivo (D-024). I task operativi sono
 | 2026-11-11 | Dispositivi | Aggiunto in roadmap il supporto a smartphone, tablet e Android TV; giochi riadattati al telecomando (D-025), AGENTS.md aggiornato |
 | 2026-11-11 | Personaggi | Bozze 1-4 dei personaggi (in sospeso); skill kids-character-gen creata e poi annullata; Elide sempre protagonista, argomenti misti |
 | 2026-11-12 | Personaggi | Nuova direzione artistica dal video di riferimento; bozza di Elide e 6 pose approvate provvisoriamente; pipeline Rive con mesh deformabili |
+| 2026-11-12 | Animazioni | Definita la suite completa di animazioni per tutti i personaggi (D-033) |
