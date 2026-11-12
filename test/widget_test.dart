@@ -3,7 +3,7 @@ import 'package:elides_family/hub/hub_scene.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets("L'app si avvia sulla scena hub", (tester) async {
+  testWidgets('the app starts on the hub scene', (tester) async {
     await tester.pumpWidget(const ElidesFamilyApp());
     await tester.pump();
 

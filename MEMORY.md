@@ -1,183 +1,187 @@
-# MEMORY.md — Memoria del progetto
+# MEMORY.md — Project memory
 
-> Registro delle **scelte** (con motivazione), dei **tratti stilistici** grafici e sonori, della **struttura del codice** e delle **convenzioni**.
-> Le decisioni superate non si cancellano: si marcano con ~~barrato~~ e si rimanda a quella nuova.
+> Log of the **choices** (with their reasons), the graphic and sound **style traits**, the **code structure** and the **conventions**.
+> Superseded decisions are not deleted: they are marked with ~~strikethrough~~ and point to the new one.
 
-Ultimo aggiornamento: 2026-11-12
-
----
-
-## 1. Decisioni
-
-| ID | Data | Decisione | Motivazione | Stato |
-|----|------|-----------|-------------|-------|
-| D-001 | 2026-11-11 | Framework **Flutter**, target **Android (APK)**. | Richiesto dal responsabile; un'unica base di codice, ottime prestazioni grafiche, hot reload per il test in tempo reale. | ✅ attiva |
-| D-002 | 2026-11-11 | Test in tempo reale tramite `flutter run` su dispositivo Android fisico (USB o debug wireless) con **hot reload**. | Il gioco va provato toccandolo, sul dispositivo che userà la bambina. | ✅ attiva |
-| D-003 | 2026-11-11 | Licenza **GPL-3.0**. | Richiesta del responsabile; repository pubblico. | ✅ attiva |
-| D-004 | 2026-11-11 | Un solo branch: **`main`**. | Progetto hobbistico, flusso semplice. | ✅ attiva |
-| D-005 | 2026-11-11 | Struttura: **hub centrale + minigiochi indipendenti**. | Ogni minigioco si sviluppa e si testa da solo; se ne possono aggiungere nel tempo senza toccare gli altri. | ✅ attiva |
-| D-006 | 2026-11-11 | Interfaccia **non in stile app**: niente widget Material visibili (AppBar, Card, ListTile, pulsanti standard). | L'esperienza deve essere quella di un gioco illustrato, non di un'applicazione. | ✅ attiva |
-| D-007 | 2026-11-11 | Personaggi animati con **Rive** (state machine: idle, felice, incoraggia, parla). Precisata da D-031. | Vettoriale e leggero, stati multipli guidati dal codice, adatto a reazioni al tocco. | ✅ attiva |
-| D-008 | 2026-11-11 | Motore: **Flutter** per hub, navigazione e area genitori; **Flame** per i minigiochi. | Flutter è ideale per scene e transizioni, Flame per game loop, movimento e trascinamenti. | ✅ attiva |
-| D-009 | 2026-11-11 | Orientamento **solo orizzontale**, schermo intero immersivo. | Più spazio per le scene, tipico dei giochi per bambini. | ✅ attiva |
-| D-010 | 2026-11-11 | Primo minigioco (prototipo): **Colori**. | Scelta del responsabile. | ✅ attiva |
-| D-011 | 2026-11-11 | Minigioco Colori con **due livelli**: 1) ordinare gli oggetti trascinandoli nel cesto del colore giusto; 2) dipingere un disegno toccando un colore e poi una zona. | Scelta del responsabile: copre riconoscimento dei colori e motricità fine. | ✅ attiva |
-| D-012 | 2026-11-11 | Istruzioni vocali con **voce sintetizzata (TTS)**. | Scelta del responsabile: più veloce da produrre e da tradurre. | ✅ attiva |
-| D-013 | 2026-11-11 | Lingue: **italiano e inglese**, con sistema di localizzazione fin dall'inizio. | Scelta del responsabile; i testi/frasi non vanno mai scritti "a mano" nel codice. | ✅ attiva |
-| D-014 | 2026-11-11 | Application ID Android: **`com.aptecstudio.elidesfamily`**. | Scelta del responsabile. | ✅ attiva |
-
-| D-015 | 2026-11-11 | Voce TTS **pre-generata** come file audio inclusi nell'app (`assets/audio/voice/<lingua>/`). | Stessa voce su ogni telefono, qualità controllata, sempre offline. | ✅ attiva |
-| D-016 | 2026-11-11 | Palette **pastello vivace** (vedi §3). | Toni caldi e saturi ma morbidi, adatti all'età. | ✅ attiva |
-| D-017 | 2026-11-11 | Font **Fredoka** (licenza SIL OFL 1.1), incluso negli asset. | Tondo e giocoso; licenza compatibile; incluso per funzionare offline. | ✅ attiva |
-| D-018 | 2026-11-11 | AGENTS.md aggiornato (con autorizzazione del responsabile): le domande si fanno **sempre con sondaggi interattivi**. | Richiesta del responsabile. | ✅ attiva |
-
-| D-019 | 2026-11-11 | Radice dell'app con **`WidgetsApp`** (non `MaterialApp`), `uses-material-design: false`. | Nessun aspetto "da app" (D-006): temi, transizioni e controlli sono tutti nostri. | ✅ attiva |
-| D-020 | 2026-11-11 | Ogni elemento toccabile passa dal widget comune **`BouncyTap`** (`lib/core/`). | Feedback al tocco uguale ovunque (schiacciamento + rimbalzo, poi suono). | ✅ attiva |
-| D-021 | 2026-11-11 | Le icone dell'interfaccia sono **disegnate** (CustomPainter o asset), mai scritte. | I bambini di 3 anni non leggono. | ✅ attiva |
-| D-022 | 2026-11-11 | Localizzazione con **`flutter gen-l10n`**: ARB in `lib/l10n/` (`app_it.arb` è il modello); i file generati non si versionano. | Italiano + inglese (D-013) senza testi scritti nel codice. | ✅ attiva |
-| D-023 | 2026-11-11 | Cartella `android/` generata con `flutter create` **sul PC del responsabile**, poi adattata. | L'ambiente di sviluppo AI non ha l'SDK Flutter: generarla con lo strumento ufficiale evita versioni Gradle/AGP sbagliate. | ✅ attiva |
-
-| D-024 | 2026-11-11 | Dispositivi supportati: **smartphone, tablet e Android TV**, con **un solo APK**. | Richiesta del responsabile. Un APK unico semplifica build e distribuzione; il gioco si adatta a schermo e tipo di input. | ✅ attiva |
-
-| D-025 | 2026-11-11 | Su Android TV i minigiochi sono **riadattati al telecomando**, non solo "portati": modalità **seleziona e sposta** (frecce per scegliere l'oggetto, OK per prenderlo, frecce per portarlo, OK per lasciarlo). | Richiesta del responsabile: il telecomando è un input diverso e ogni gioco deve risultare naturale anche così. | ✅ attiva |
-| D-026 | 2026-11-11 | AGENTS.md, principio 1, aggiornato con autorizzazione del responsabile: include il telecomando su Android TV. | Coerenza con D-024 e D-025. | ✅ attiva |
-
-| ~~D-027~~ | 2026-11-11 | ~~Skill di progetto `kids-character-gen` per generare i personaggi.~~ **Annullata** il 2026-11-11: la skill è stata rimossa; per la grafica per bambini si procederà in un altro modo. | Richiesta del responsabile. | ❌ superata |
-
-| D-028 | 2026-11-11 | Nessun personaggio ha una "materia" fissa: gli argomenti educativi sono **misti**. Nei minigiochi con **un solo personaggio** c'è sempre **Elide**; in quelli con più personaggi gli altri **si alternano** accanto a lei. **Elide è sempre la protagonista.** | Richiesta del responsabile. | ✅ attiva |
-| ~~D-029~~ | 2026-11-11 | ~~Design dei personaggi (bozze 1-4) non approvato, da riprendere più avanti.~~ Superata da D-030. | Richiesta del responsabile. | ❌ superata |
-| D-030 | 2026-11-12 | Nuova direzione artistica dei personaggi ricavata dal video di riferimento: contorni colorati in tono, testa metà dell'altezza, occhi rotondi distanziati, musetto grande e chiaro, arti paffuti, mani con pollice e piedi con le dita. Regole in `docs/characters/README.md`. **Elide** (bozza, occhi azzurri, fiocco rosso, vestito turchese) e le sue 6 pose sono **approvate provvisoriamente** e da ottimizzare più avanti. | Richiesta del responsabile: le bozze sono la base di lavoro e restano il riferimento. | ✅ attiva |
-| D-031 | 2026-11-12 | Pipeline dei personaggi animati: **illustrazione finale a livelli → Rive con ossa e mesh deformabili** (pesi sui vertici), state machine per pose ed espressioni, runtime `rive` in Flutter. Arti e viso si deformano in modo continuo: nessuna giuntura visibile tra le parti. Spine scartato. | Richiesta del responsabile: animazioni fluide, senza che si capisca che il corpo è fatto a pezzi. Le mesh deformabili di Rive piegano braccia e gambe come un unico pezzo; le espressioni passano da uno stato all'altro con transizioni interpolate. Il runtime Rive è MIT, compatibile con GPL-3.0; quello di Spine ha una licenza proprietaria. | ✅ attiva |
-| D-032 | 2026-11-12 | Le bozze dei personaggi si generano con script Python → SVG → PNG (`tools/character-drafts/`), così tutte le pose condividono la stessa costruzione. | Coerenza garantita tra pose e personaggi; facile da ritoccare. | ✅ attiva |
-| D-033 | 2026-11-12 | **Suite di animazioni completa** e uguale per ogni personaggio: a riposo, camminata, corsa, salti, balli, contentezza, disapprovazione gentile, pensiero e sorpresa, interazione, routine, lip sync a visemi. State machine Rive a livelli (corpo, viso, occhi, bocca) combinabili. Elenco in `docs/characters/README.md`. | Richiesta del responsabile: la suite deve essere completa. I livelli separati permettono di combinare movimento, espressione e parlato. | ✅ attiva |
-| D-034 | 2026-11-12 | **Rio** (bozza) e le sue 6 pose **approvati provvisoriamente**: bulldog francese miele in piedi su due zampe, orecchio destro a pipistrello e sinistro morbido (sua caratteristica), striscia bianca fronte-musetto e petto bianco, occhi nocciola senza ciglia, salopette blu cielo con maglietta a righe giallo burro. Scheda in `docs/characters/rio/`. | Scelte del responsabile tramite sondaggi. Stessa costruzione di Elide (D-032) per coerenza. | ✅ attiva |
-| D-035 | 2026-11-12 | **Destra e sinistra** di un personaggio si intendono sempre **dal suo punto di vista**, non da quello di chi guarda. Corretta di conseguenza la scheda di Elide (fiocco sull'orecchio destro di lei). | Richiesta del responsabile. | ✅ attiva |
-| D-036 | 2026-11-12 | **Papà** (bozza) e le sue 6 pose **approvati provvisoriamente**: labrador bianco, non alto e un po' in carne, orecchie morbide un po' sollevate, occhi marrone scuro senza ciglia, nessun accessorio; felpa liscia verde prato con cappuccio, laccetti e tasca a marsupio, jeans con orlo risvoltato. Scheda in `docs/characters/papa/`. Gli adulti hanno la stessa testa dei piccoli e una scena più alta (580 invece di 540). | Scelte del responsabile tramite sondaggi (prima versione con maglione, più alta e snella, scartata). | ✅ attiva |
-| D-037 | 2026-11-12 | **Mamma** (bozza) e le sue 6 pose **approvate provvisoriamente**: gatta miele con musetto, petto e zampe bianchi, testa costruita come Elide (orecchie a punta, ciglia, nasino rosa), occhi verdi, **occhiali tondi** lavanda scuro, vestito lavanda al ginocchio con maniche corte, cintura e fiocchetto; stessa corporatura di Papà. Scheda in `docs/characters/mamma/`. | Scelte del responsabile tramite sondaggi (cerchietto e poi chignon provati e scartati). | ✅ attiva |
-| D-038 | 2026-11-12 | Nelle scene i **piccoli** (Elide, Rio) si disegnano all'**85%** degli adulti. Tavola di gruppo in `docs/characters/gruppo.png` (`tools/character-drafts/gruppo.py`). | Con la stessa testa per tutti, a scala piena i genitori sembravano poco più alti dei figli; scelta del responsabile. | ✅ attiva |
-
-### Regole per i minigiochi su Android TV (D-025)
-
-- Ogni minigioco ha una **variante per telecomando** progettata insieme a quella touch: meccanica, distanze e ritmo si possono semplificare.
-- L'elemento selezionato è sempre evidente (alone colorato e piccolo rimbalzo) e accompagnato da un suono.
-- Gli oggetti "presi" seguono le frecce a scatti morbidi fra posizioni prestabilite, non a pixel.
-- Nessuna azione richiede tasti diversi da frecce, OK e Indietro.
-
-### Decisioni ancora aperte
-
-- *(nessuna)*
+Last update: 2026-11-12
 
 ---
 
-## 2. Concept del gioco
+## 1. Decisions
 
-- **Nome**: Elide's Family.
-- **Pubblico**: bambini dai 3 anni in su.
-- **Formato**: raccolta di minigiochi che aiutano crescita e apprendimento (colori, forme, numeri, animali, suoni, routine quotidiane, motricità fine…).
-- **Riferimento di stile** (interno, da non citare nel README): modalità di gioco e grafica sullo stile di *Baby Games: Lucas & Friends* — personaggi animali morbidi e tondeggianti, scene colorate, feedback immediato. Si prende ispirazione dallo **stile**, gli asset sono tutti originali.
+| ID | Date | Decision | Reason | Status |
+|----|------|----------|--------|--------|
+| D-001 | 2026-11-11 | Framework **Flutter**, target **Android (APK)**. | Requested by the owner; a single codebase, great graphics performance, hot reload for live testing. | ✅ active |
+| D-002 | 2026-11-11 | Live testing through `flutter run` on a physical Android device (USB or wireless debugging) with **hot reload**. | The game has to be tried by touching it, on the device the child will use. | ✅ active |
+| D-003 | 2026-11-11 | **GPL-3.0** license. | Requested by the owner; public repository. | ✅ active |
+| D-004 | 2026-11-11 | A single branch: **`main`**. | Hobby project, simple workflow. | ✅ active |
+| D-005 | 2026-11-11 | Structure: **central hub + independent minigames**. | Each minigame is developed and tested on its own; more can be added over time without touching the others. | ✅ active |
+| D-006 | 2026-11-11 | **Non-app-like** interface: no visible Material widgets (AppBar, Card, ListTile, standard buttons). | The experience must be that of an illustrated game, not of an application. | ✅ active |
+| ~~D-007~~ | 2026-11-11 | ~~Characters animated with **Rive** (state machine: idle, happy, encourage, talk). Refined by D-031.~~ Superseded by D-039. | Vector-based and lightweight, multiple states driven by code, suited to touch reactions. | ❌ superseded |
+| D-008 | 2026-11-11 | Engine: **Flutter** for hub, navigation and parents' area; **Flame** for the minigames. | Flutter is ideal for scenes and transitions, Flame for game loop, movement and dragging. | ✅ active |
+| D-009 | 2026-11-11 | **Landscape only**, immersive full screen. | More room for the scenes, typical of games for children. | ✅ active |
+| D-010 | 2026-11-11 | First minigame (prototype): **Colors**. | The owner's choice. | ✅ active |
+| D-011 | 2026-11-11 | Colors minigame with **two levels**: 1) sort the objects by dragging them into the basket of the right color; 2) paint a drawing by tapping a color and then an area. | The owner's choice: it covers color recognition and fine motor skills. | ✅ active |
+| D-012 | 2026-11-11 | Voice instructions with a **synthesized voice (TTS)**. | The owner's choice: faster to produce and to translate. | ✅ active |
+| D-013 | 2026-11-11 | Languages: **Italian and English**, with a localization system from the start. | The owner's choice; in-game texts and lines are never hard-coded. | ✅ active |
+| D-014 | 2026-11-11 | Android application ID: **`com.aptecstudio.elidesfamily`**. | The owner's choice. | ✅ active |
+| D-015 | 2026-11-11 | TTS voice **pre-generated** as audio files bundled in the app (`assets/audio/voice/<language>/`). | Same voice on every phone, controlled quality, always offline. | ✅ active |
+| D-016 | 2026-11-11 | **Vivid pastel** palette (see §3). | Warm, saturated but soft tones, suited to the age. | ✅ active |
+| D-017 | 2026-11-11 | **Fredoka** font (SIL OFL 1.1 license), bundled in the assets. | Round and playful; compatible license; bundled so it works offline. | ✅ active |
+| D-018 | 2026-11-11 | AGENTS.md updated (with the owner's authorization): questions are **always asked through interactive polls**. | Requested by the owner. | ✅ active |
+| D-019 | 2026-11-11 | App root with **`WidgetsApp`** (not `MaterialApp`), `uses-material-design: false`. | No "app-like" look (D-006): themes, transitions and controls are all ours. | ✅ active |
+| D-020 | 2026-11-11 | Every tappable element goes through the shared **`BouncyTap`** widget (`lib/core/`). | The same touch feedback everywhere (squash + bounce, then sound). | ✅ active |
+| D-021 | 2026-11-11 | Interface icons are **drawn** (CustomPainter or assets), never written. | 3-year-olds cannot read. | ✅ active |
+| D-022 | 2026-11-11 | Localization with **`flutter gen-l10n`**: ARB files in `lib/l10n/` ~~(`app_it.arb` is the template)~~ (template changed by D-042); generated files are not versioned. | Italian + English (D-013) with no hard-coded texts. | ✅ active |
+| D-023 | 2026-11-11 | The `android/` folder is generated with `flutter create` **on the owner's PC**, then adapted. | The AI development environment has no Flutter SDK: generating it with the official tool avoids wrong Gradle/AGP versions. | ✅ active |
+| D-024 | 2026-11-11 | Supported devices: **smartphones, tablets and Android TV**, with **a single APK**. | Requested by the owner. A single APK makes build and distribution simpler; the game adapts to screen and input type. | ✅ active |
+| D-025 | 2026-11-11 | On Android TV the minigames are **adapted to the remote control**, not just "ported": **select and move** mode (arrows to choose the object, OK to pick it up, arrows to carry it, OK to drop it). | Requested by the owner: the remote is a different input and every game must feel natural with it too. | ✅ active |
+| D-026 | 2026-11-11 | AGENTS.md, principle 1, updated with the owner's authorization: it includes the remote control on Android TV. | Consistency with D-024 and D-025. | ✅ active |
+| ~~D-027~~ | 2026-11-11 | ~~Project skill `kids-character-gen` to generate the characters.~~ **Cancelled** on 2026-11-11: the skill was removed; the graphics for children will be produced another way. | Requested by the owner. | ❌ superseded |
+| D-028 | 2026-11-11 | No character has a fixed "subject": the educational topics are **mixed**. In minigames with **a single character** it is always **Elide**; in those with more characters the others **take turns** next to her. **Elide is always the protagonist.** | Requested by the owner. | ✅ active |
+| ~~D-029~~ | 2026-11-11 | ~~Character design (drafts 1-4) not approved, to be resumed later.~~ Superseded by D-030. | Requested by the owner. | ❌ superseded |
+| D-030 | 2026-11-12 | New art direction for the characters derived from the reference video: outlines colored in tone, head half of the height, round eyes set wide apart, large light muzzle, chubby limbs, hands with a thumb and feet with toes. Rules in `docs/characters/README.md`. **Elide** (draft, light blue eyes, red bow, turquoise dress) and her 6 poses are **provisionally approved** and to be refined later. | Requested by the owner: the drafts are the working base and remain the reference. | ✅ active |
+| ~~D-031~~ | 2026-11-12 | ~~Animated character pipeline: **final layered illustration → Rive with bones and deformable meshes** (vertex weights), state machine for poses and expressions, `rive` runtime in Flutter. Spine discarded.~~ Superseded by D-039. | Requested by the owner: smooth animations, without it being visible that the body is made of pieces. The Rive runtime is MIT, compatible with GPL-3.0; Spine's has a proprietary license. | ❌ superseded |
+| D-032 | 2026-11-12 | Character drafts are generated with Python scripts → SVG → PNG (`tools/character-drafts/`), so all poses share the same construction. | Guaranteed consistency between poses and characters; easy to retouch. | ✅ active |
+| D-033 | 2026-11-12 | **Complete animation suite**, the same for every character: idle, walking, running, jumps, dances, happiness, gentle disapproval, thinking and surprise, interaction, routines, viseme lip sync. Separate combinable layers (body, face, eyes, mouth). List in `docs/characters/README.md`. | Requested by the owner: the suite must be complete. Separate layers allow combining movement, expression and speech. | ✅ active |
+| D-034 | 2026-11-12 | **Rio** (draft) and his 6 poses **provisionally approved**: honey French bulldog standing on two legs, right ear bat-like and left ear soft (his trademark), white blaze from forehead to muzzle and white chest, hazel eyes without eyelashes, sky-blue overalls with a butter-yellow striped T-shirt. Sheet in `docs/characters/rio/`. | The owner's choices through polls. Same construction as Elide (D-032) for consistency. | ✅ active |
+| D-035 | 2026-11-12 | A character's **right and left** are always meant **from their own point of view**, not the viewer's. Elide's sheet was fixed accordingly (bow on her right ear). | Requested by the owner. | ✅ active |
+| D-036 | 2026-11-12 | **Dad** (Papà, draft) and his 6 poses **provisionally approved**: white Labrador, not tall and a bit chubby, soft slightly raised ears, dark brown eyes without eyelashes, no accessories; plain meadow-green hoodie with hood, drawstrings and kangaroo pocket, jeans with a rolled-up hem. Sheet in `docs/characters/dad/`. The adults have the same head as the kids and a taller scene (580 instead of 540). | The owner's choices through polls (a first version with a sweater, taller and slimmer, was discarded). | ✅ active |
+| D-037 | 2026-11-12 | **Mom** (Mamma, draft) and her 6 poses **provisionally approved**: honey cat with white muzzle, chest and paws, head built like Elide's (pointed ears, eyelashes, pink nose), green eyes, dark-lavender **round glasses**, knee-length lavender dress with short sleeves, belt and little bow; same build as Dad. Sheet in `docs/characters/mom/`. | The owner's choices through polls (a headband and then a bun were tried and discarded). | ✅ active |
+| D-038 | 2026-11-12 | In scenes the **kids** (Elide, Rio) are drawn at **85%** of the adults. Group sheet in `docs/characters/group.png` (`tools/character-drafts/group.py`). | With the same head for everyone, at full scale the parents looked barely taller than the kids; the owner's choice. | ✅ active |
+| D-039 | 2026-11-12 | Characters are **animated by code** in Flutter/Flame, starting from **layered SVG parts** (head, eyes, mouths, arms, legs, clothes) produced by the draft scripts. No Rive rig: the `rive` dependency was removed. Arms and legs stay smooth curves (Bezier "limbs") recomputed every frame, so they bend without visible joints. | The owner's choice: the Rive rig can only be done by hand in the Rive editor, while code animation can be done entirely within the project. Drawing the limbs as curves keeps the goal of D-031 (no visible joints). | ✅ active |
+| D-040 | 2026-11-12 | AGENTS.md updated on the owner's request: all **source code and documentation in English**, **chat with the owner in Italian**; **commits in English**; every language follows **its own standard conventions** (Dart: Effective Dart + `dart format` + `flutter_lints`; Python: PEP 8 checked with `ruff`, config in `ruff.toml`). Existing docs, comments and file names were translated. | Requested by the owner. | ✅ active |
+| D-041 | 2026-11-12 | Shared draft parts in `tools/character-drafts/parts.py`: `limb()`, `arm()` with a **sleeve that follows the arm** (puffy sleeve along the arm curve, cuff perpendicular to the arm, soft shadow where the arm comes out), `paw()` with an **automatic thumb side** (back of the hand at rest with the thumb towards the body; palm shown with the thumb outwards), and `render()` SVG → PNG through librsvg (PyGObject), so `rsvg-convert` is no longer required. | Optimization of the drafts requested by the owner: the resting hands looked inside out and the arm looked like a tube attached under a fixed sleeve. | ✅ active |
+| D-042 | 2026-11-12 | The ARB template is now **`app_en.arb`** (it holds the `@` descriptions); `app_it.arb` only holds the Italian translations. | Consequence of D-040: descriptions are documentation and must be in English. | ✅ active |
+| D-043 | 2026-11-12 | File and folder names in English: `dad`/`mom` (Papà/Mamma), `*_model.png`, `*_poses.png`, `group.png`, pose ids `idle`, `wave`, `cheer`, `curious`, `surprised`, `proud`. In English documentation Papà and Mamma are called **Dad** and **Mom**. | Consequence of D-040. | ✅ active |
 
-### Personaggi
+### Rules for the minigames on Android TV (D-025)
 
-| Personaggio | Chi è | Aspetto |
-|-------------|-------|---------|
-| **Elide** | La protagonista, piccola di casa | Gattina piccola, **bianca** |
-| **Rio** | L'amico a quattro zampe | **Bulldog francese** color **miele** |
-| **Papà** | Il papà | **Labrador bianco** |
-| **Mamma** | La mamma | **Gatta color miele** con **macchie bianche** |
+- Every minigame has a **remote-control variant** designed together with the touch one: mechanics, distances and pace can be simplified.
+- The selected element is always obvious (colored halo and a small bounce) and comes with a sound.
+- "Picked up" objects follow the arrows with soft steps between predefined positions, not pixel by pixel.
+- No action requires keys other than arrows, OK and Back.
 
-- Non tutti i personaggi compaiono in ogni minigioco: si scelgono in base al contesto.
-- **Elide è sempre presente**: è l'unica nei minigiochi a un personaggio; negli altri la affiancano Rio, Papà e Mamma a rotazione (D-028).
-- Nessun personaggio è legato a un argomento educativo specifico (D-028).
-- Direzione artistica e schede: `docs/characters/` (D-030). Stati di ogni personaggio: a riposo, ciao, evviva, curioso, sorpreso, bravo.
-- Proporzioni "baby": testa grande, corpo piccolo e tondo, occhi grandi e lucidi, contorni morbidi, nessun angolo vivo.
-- Ogni personaggio ha un set minimo di stati animati: **idle** (respiro/battito ciglia), **felice/festeggia**, **incoraggia**, **parla**.
+### Open decisions
+
+- *(none)*
 
 ---
 
-## 3. Stile grafico e sonoro
+## 2. Game concept
 
-- **Colori**: palette vivace ma morbida (tinte pastello sature), sfondi luminosi e illustrati.
-- **Forme**: tutto arrotondato; elementi interattivi grandi (area minima di tocco ~ 64 dp) e ben distanziati.
-- **Tipografia**: quasi assente (i bambini di 3 anni non leggono); dove serve, font tondo e grande.
-- **Feedback**: ogni tocco produce un'animazione (rimbalzo, schiacciamento, scintille) e un suono.
-- **Successo**: festa con coriandoli/stelline, personaggio che salta, suono allegro.
-- **Errore**: mai punitivo — l'oggetto torna morbidamente al suo posto, il personaggio incoraggia.
-- **Audio**: musica di sottofondo leggera e a volume basso, effetti brevi e gentili, voci chiare.
+- **Name**: Elide's Family.
+- **Audience**: children aged 3 and up.
+- **Format**: a collection of minigames that help growth and learning (colors, shapes, numbers, animals, sounds, daily routines, fine motor skills…).
+- **Style reference** (internal, not to be mentioned in the README): gameplay and graphics in the style of *Baby Games: Lucas & Friends* — soft, rounded animal characters, colorful scenes, immediate feedback. Only the **style** is taken as inspiration; all assets are original.
 
-### Palette "pastello vivace" (D-016)
+### Characters
 
-| Nome | Hex | Uso principale |
-|------|-----|----------------|
-| `skyBlue` | `#8FD3F4` | cielo, sfondi aperti |
-| `butterYellow` | `#FFE08A` | luce, stelle, evidenziazioni |
-| `meadowGreen` | `#9BDB7C` | prati, conferme |
-| `peachPink` | `#FFB5A7` | dettagli caldi, guance |
-| `lavender` | `#C7B8F5` | elementi magici, area hub |
-| `honey` | `#E8B060` | Rio e Mamma, legno |
-| `cream` | `#FFF6E5` | sfondi interni, Elide e Papà (bianco caldo) |
-| `cocoa` | `#5A3E36` | contorni morbidi e testo (al posto del nero) |
+| Character | Who they are | Look |
+|-----------|--------------|------|
+| **Elide** | The protagonist, the little one in the family | Little **white** kitten |
+| **Rio** | The four-legged friend | **Honey**-colored **French bulldog** |
+| **Dad** (Papà) | The dad | **White Labrador** |
+| **Mom** (Mamma) | The mom | **Honey**-colored cat with **white patches** |
 
-- Niente nero puro: i contorni usano `cocoa`.
-- Per il minigioco Colori si usano colori **puri e ben distinti** (rosso, giallo, blu, verde, arancione, viola), definiti a parte nel minigioco.
+- Not every character appears in every minigame: they are chosen according to the context.
+- **Elide is always there**: she is the only one in single-character minigames; in the others Rio, Dad and Mom join her in turn (D-028).
+- No character is tied to a specific educational topic (D-028).
+- Art direction and sheets: `docs/characters/` (D-030). States of every character: idle, hi, hooray, curious, surprised, well done.
+- "Baby" proportions: big head, small round body, big shiny eyes, soft outlines, no sharp corners.
+- Every character has a minimum set of animated states: **idle** (breathing/blinking), **happy/celebrate**, **encourage**, **talk**.
+
+---
+
+## 3. Graphic and sound style
+
+- **Colors**: vivid but soft palette (saturated pastel tints), bright illustrated backgrounds.
+- **Shapes**: everything rounded; large, well-spaced interactive elements (minimum touch area ~64 dp).
+- **Typography**: almost absent (3-year-olds cannot read); where needed, a large round font.
+- **Feedback**: every touch produces an animation (bounce, squash, sparkles) and a sound.
+- **Success**: celebration with confetti/stars, a jumping character, a cheerful sound.
+- **Mistake**: never punishing — the object softly goes back to its place, the character encourages.
+- **Audio**: light background music at low volume, short and gentle effects, clear voices.
+
+### "Vivid pastel" palette (D-016)
+
+| Name | Hex | Main use |
+|------|-----|----------|
+| `skyBlue` | `#8FD3F4` | sky, open backgrounds |
+| `butterYellow` | `#FFE08A` | light, stars, highlights |
+| `meadowGreen` | `#9BDB7C` | meadows, confirmations |
+| `peachPink` | `#FFB5A7` | warm details, cheeks |
+| `lavender` | `#C7B8F5` | magical elements, hub area |
+| `honey` | `#E8B060` | Rio and Mom, wood |
+| `cream` | `#FFF6E5` | indoor backgrounds, Elide and Dad (warm white) |
+| `cocoa` | `#5A3E36` | soft outlines and text (instead of black) |
+
+- No pure black: outlines use `cocoa`.
+- The Colors minigame uses **pure, clearly distinct** colors (red, yellow, blue, green, orange, purple), defined separately inside the minigame.
 
 ### Font (D-017)
 
-- **Fredoka** (SIL OFL 1.1), file in `assets/fonts/`.
+- **Fredoka** (SIL OFL 1.1), files in `assets/fonts/`.
 
-*(Il set di effetti sonori verrà fissato qui quando deciso.)*
+*(The sound effect set will be recorded here once decided.)*
 
 ---
 
-## 4. Struttura del codice (prevista)
+## 4. Code structure (planned)
 
 ```
 lib/
-├── main.dart                     # avvio: solo orizzontale, schermo intero immersivo
+├── main.dart                     # startup: landscape only, immersive full screen
 ├── app/
-│   ├── elides_family_app.dart    # WidgetsApp, localizzazioni, stile testo
+│   ├── elides_family_app.dart    # WidgetsApp, localizations, text style
 │   ├── game_colors.dart          # palette (D-016)
-│   └── game_route.dart           # transizione tra scene
+│   └── game_route.dart           # transition between scenes
 ├── core/
-│   └── bouncy_tap.dart           # feedback al tocco comune (D-020)
-├── characters/                   # Elide, Rio, Papà, Mamma (Rive)
+│   └── bouncy_tap.dart           # shared touch feedback (D-020)
+├── characters/                   # Elide, Rio, Dad, Mom (code animation, D-039)
 ├── hub/
-│   └── hub_scene.dart            # scena principale (provvisoria)
-├── parental_gate/                # area adulti protetta
-├── l10n/                         # app_it.arb, app_en.arb (+ file generati, non versionati)
+│   └── hub_scene.dart            # main scene (temporary)
+├── parental_gate/                # protected adults' area
+├── l10n/                         # app_en.arb (template), app_it.arb (+ generated files, not versioned)
 └── minigames/
     └── colors/
-        └── colors_game_scene.dart  # segnaposto del minigioco Colori
+        └── colors_game_scene.dart  # placeholder of the Colors minigame
 assets/
 ├── images/
-├── animations/                   # file .riv
+├── animations/
 ├── audio/
 │   ├── music/
 │   ├── sfx/
-│   └── voice/{it,en}/            # voci TTS pre-generate (D-015)
+│   └── voice/{it,en}/            # pre-generated TTS voices (D-015)
 └── fonts/                        # Fredoka (D-017)
 test/
 └── widget_test.dart
+tools/
+└── character-drafts/             # Python draft scripts (D-032): parts.py, elide.py, rio.py, dad.py, mom.py, group.py
+docs/
+└── characters/                   # art direction, sheets and draft images
 ```
 
-Le cartelle vuote contengono un `.gitkeep`, da togliere quando ricevono il primo file.
+Empty folders contain a `.gitkeep`, to be removed when they get their first file.
 
 ---
 
-## 5. Convenzioni
+## 5. Conventions
 
-- **Lingua**: codice (identificatori) in inglese; commenti, documentazione e commit in italiano.
-- **Dart**: stile ufficiale (`dart format`), regole di `flutter_lints`.
-- **Naming**: file `snake_case.dart`, classi `PascalCase`, variabili/metodi `camelCase`, costanti `lowerCamelCase`.
-- **Asset**: `snake_case`, con prefisso di categoria (es. `char_elide_idle.riv`, `sfx_pop.ogg`, `bg_kitchen.png`).
-- **Minigiochi**: cartella `lib/minigames/<nome>/`; scena Flutter d'ingresso `<Nome>GameScene`, gioco Flame `<Nome>Game`.
-- **Testi e voci**: chiavi ARB in `camelCase` (es. `gameColorsName`); il file voce corrispondente si chiama `voice_<chiave_in_snake_case>` nella cartella della lingua (es. `assets/audio/voice/it/voice_game_colors_name.ogg`).
-- **Colori**: solo dalle costanti di `GameColors`, mai valori esadecimali sparsi (eccezione: i colori "da imparare" definiti dentro il minigioco Colori).
-- **Commit**: prefisso convenzionale in italiano (vedi `AGENTS.md`).
+- **Language**: identifiers, comments, documentation and commits in English; chat with the owner in Italian (D-040).
+- **Dart**: Effective Dart style (`dart format`), `flutter_lints` rules plus those in `analysis_options.yaml`.
+- **Python**: PEP 8, formatted and checked with `ruff` (`ruff format`, `ruff check`; config in `ruff.toml`).
+- **Naming**: Dart files `snake_case.dart`, classes `PascalCase`, variables/methods `camelCase`, constants `lowerCamelCase`; Python modules, functions and variables `snake_case`, constants `UPPER_CASE`.
+- **Assets**: `snake_case`, with a category prefix (e.g. `char_elide_idle.svg`, `sfx_pop.ogg`, `bg_kitchen.png`).
+- **Minigames**: folder `lib/minigames/<name>/`; Flutter entry scene `<Name>GameScene`, Flame game `<Name>Game`.
+- **Texts and voices**: ARB keys in `camelCase` (e.g. `gameColorsName`); the matching voice file is named `voice_<key_in_snake_case>` in the language folder (e.g. `assets/audio/voice/it/voice_game_colors_name.ogg`).
+- **Colors**: only from the `GameColors` constants, never scattered hex values (exception: the colors "to learn" defined inside the Colors minigame).
+- **Commits**: conventional prefix, in English (see `AGENTS.md`).
 
 ---
 
-## 6. Asset di terze parti
+## 6. Third-party assets
 
-| Asset | Fonte | Licenza | Note |
-|-------|-------|---------|------|
-| *(nessuno per ora)* | | | |
+| Asset | Source | License | Notes |
+|-------|--------|---------|-------|
+| *(none yet)* | | | |

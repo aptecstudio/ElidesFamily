@@ -1,37 +1,37 @@
-# Elide — scheda personaggio
+# Elide — character sheet
 
-> Bozza approvata provvisoriamente il 2026-11-12. Da ottimizzare in seguito.
+> Draft provisionally approved on 2026-11-12. To be refined later.
 
-![Elide, modello](elide_modello.png)
+![Elide, model sheet](elide_model.png)
 
 | | |
 |---|---|
-| **Specie e ruolo** | Gattina bianca, la più piccola di casa. Protagonista: presente in tutti i minigiochi. |
-| **Personalità** | Curiosa, coraggiosa, affettuosa. Quando è contenta saltella sul posto. |
-| **Colore dominante** | Bianco lilla con ombre lilla; contorni lilla scuro (`#9C8DB3`). |
-| **Testa** | Rotonda e piena, ciuffetti di pelo ai lati, ciuffo morbido pettinato di lato in cima. |
-| **Occhi** | Azzurri, rotondi e distanziati; iride scura in alto e chiara in basso; palpebra spessa, due ciglia; sopracciglia lilla. |
-| **Musetto** | Grande e bianco nella parte bassa del viso, nasino rosa lucido, sorriso semplice, guance rosate. |
-| **Orecchie e coda** | Orecchie a punta con interno rosa; coda arricciata. |
-| **Arti** | Braccia paffute con gomito, manine con pollice e tre ditine e cuscinetto rosa; gambe piene, piedi con le dita. |
-| **Abbigliamento** | Vestitino turchese a maniche corte: colletto e polsini bianchi, due bottoncini, cucitura in vita, taschino con zampetta rosa ricamata, orlo smerlato bianco. A piedi nudi. |
-| **Accessorio** | Grande fiocco rosso fragola sull'orecchio destro di Elide (a sinistra di chi guarda), con nodo e due codine. |
-| **Riconoscibile da** | Fiocco rosso, ciuffo di lato, occhi azzurri, coda arricciata. |
+| **Species and role** | White kitten, the youngest in the family. The protagonist: she appears in every minigame. |
+| **Personality** | Curious, brave, affectionate. When she is happy she hops on the spot. |
+| **Main color** | Lilac white with lilac shadows; dark lilac outlines (`#9C8DB3`). |
+| **Head** | Round and full, small fur tufts on the sides, a soft side-swept tuft on top. |
+| **Eyes** | Light blue, round and set wide apart; iris dark at the top and light at the bottom; thick upper eyelid, two eyelashes; lilac eyebrows. |
+| **Muzzle** | Large and white in the lower part of the face, glossy pink little nose, simple smile, rosy cheeks. |
+| **Ears and tail** | Pointed ears with a pink inside; curled tail. |
+| **Limbs** | Chubby arms with an elbow, little hands with a thumb, three fingers and a pink pad; full legs, feet with toes. |
+| **Clothing** | Short-sleeved turquoise dress: white collar and cuffs, two small buttons, waist seam, small pocket with an embroidered pink paw, white scalloped hem. Barefoot. |
+| **Accessory** | Big strawberry-red bow on Elide's right ear (the viewer's left), with a knot and two tails. |
+| **Recognizable by** | Red bow, side tuft, light blue eyes, curled tail. |
 
 ## Palette
 
-| Uso | Colore |
-|-----|--------|
-| Pelo luce / base / ombra | `#FFFFFF` / `#F1EDF7` / `#D6CDE6` |
-| Contorno pelo | `#9C8DB3` |
-| Iride (alto → basso) | `#14306F` → `#2F6FC9` → `#8FD2FF` |
-| Vestito luce / base / ombra | `#6FE6D9` / `#25BBAE` / `#15948A` |
-| Contorno vestito | `#0E7A70` |
-| Fiocco | `#FF8A96` → `#F0475B` → `#C92A40` |
-| Naso, interno orecchie | `#FF9BB8` / `#F49DB8` |
+| Use | Color |
+|-----|-------|
+| Fur light / base / shadow | `#FFFFFF` / `#F1EDF7` / `#D6CDE6` |
+| Fur outline | `#9C8DB3` |
+| Iris (top → bottom) | `#14306F` → `#2F6FC9` → `#8FD2FF` |
+| Dress light / base / shadow | `#6FE6D9` / `#25BBAE` / `#15948A` |
+| Dress outline | `#0E7A70` |
+| Bow | `#FF8A96` → `#F0475B` → `#C92A40` |
+| Nose, inner ears | `#FF9BB8` / `#F49DB8` |
 
-## Pose ed espressioni
+## Poses and expressions
 
-![Elide, pose](elide_pose.png)
+![Elide, poses](elide_poses.png)
 
-A riposo · Ciao! · Evviva! · Curiosa · Sorpresa · Brava!
+Idle · Hi! · Hooray! · Curious · Surprised · Well done!

@@ -1,70 +1,79 @@
-# Personaggi — direzione artistica
+# Characters — art direction
 
-Riferimento visivo comune per tutti i personaggi di Elide's Family.
-Ogni scheda in questa cartella rispetta queste regole: cambia l'identità del personaggio, non lo stile.
+Shared visual reference for every character in Elide's Family.
+Every sheet in this folder follows these rules: what changes is the character's identity, not the style.
 
-> Stato: **bozze approvate provvisoriamente** (2026-11-12). Forme, colori e pose sono la base di lavoro; la resa finale verrà ottimizzata.
+> Status: **drafts provisionally approved** (2026-11-12). Shapes, colors and poses are the working base; the final rendering will be refined.
 
-## Stile
+## Style
 
-- Cartoon morbido, dolce e allegro, con volumi resi da sfumature morbide.
-- **Contorni colorati**: ogni contorno è una versione più scura del colore che delimita (lilla scuro sul pelo bianco, verde acqua scuro sul vestito turchese, rosa scuro su naso e bocca). Mai un nero uniforme.
-- Poche linee interne: occhi, bocca, pochi dettagli dei vestiti.
-- Luce dall'alto a sinistra, ombre lilla morbide, piccoli riflessi lucidi.
-- Vietati: realismo, stile anime, flat 2D.
+- Soft, sweet and cheerful cartoon style, with volumes rendered by soft shading.
+- **Colored outlines**: every outline is a darker version of the color it surrounds (dark lilac on white fur, dark teal on the turquoise dress, dark pink on nose and mouth). Never a flat black.
+- Few inner lines: eyes, mouth, a few clothing details.
+- Light from the top left, soft lilac shadows, small glossy highlights.
+- Not allowed: realism, anime style, flat 2D.
 
-## Proporzioni
+## Proportions
 
-- Testa circa metà dell'altezza, rotonda e piena.
-- Occhi rotondi e distanziati (circa un occhio di distanza), sopracciglia colorate.
-- Musetto grande e chiaro nella parte bassa del viso, nasino in cima, sorriso semplice.
-- Braccia e gambe paffute, più spesse alla radice; manine con pollice e tre ditine, piedi con le dita.
-- Piccoli (Elide, Rio) e adulti (Papà, Mamma) hanno la stessa testa: cambia il corpo.
-- Destra e sinistra si intendono sempre **dal punto di vista del personaggio**.
-- In scena i piccoli (Elide, Rio) si disegnano all'**85%** degli adulti, così Mamma e Papà si riconoscono subito come grandi.
+- The head is about half of the total height, round and full.
+- Round eyes set wide apart (about one eye apart), colored eyebrows.
+- Large light muzzle in the lower part of the face, little nose on top, simple smile.
+- Chubby arms and legs, thicker at the root; little hands with a thumb and three fingers, feet with toes.
+- Hands: at rest the back of the hand faces the viewer with the thumb towards the body; when the palm is shown (wave, cheer, surprised) the thumb points outwards.
+- Sleeves follow the arm in every pose: the arm comes out of the sleeve with a soft shadow, without a visible joint.
+- Kids (Elide, Rio) and adults (Dad, Mom) have the same head: the body is what changes.
+- Right and left are always meant **from the character's point of view**.
+- In scenes the kids (Elide, Rio) are drawn at **85%** of the adults, so Mom and Dad are immediately recognized as grown-ups.
 
-## Occhi
+## Eyes
 
-- Iride grande, scura in alto e chiara in basso; pupilla grande; riflesso grande in alto a destra e uno piccolo in basso a sinistra.
-- Palpebra superiore spessa; ciglia solo per i personaggi femminili.
-- Quando sorride, le guance salgono e chiudono l'occhio dal basso.
+- Large iris, dark at the top and light at the bottom; large pupil; a big highlight at the top right and a small one at the bottom left.
+- Thick upper eyelid; eyelashes only for the female characters.
+- When smiling, the cheeks rise and close the eye from below.
 
-## Espressioni e pose
+## Expressions and poses
 
-Ogni personaggio ha almeno questi stati, costruiti con lo stesso modello (cambiano solo braccia, occhi, sopracciglia, bocca e inclinazione):
-a riposo, ciao, evviva, curiosa/o, sorpresa/o, bravo/a.
+Every character has at least these states, built from the same model (only arms, eyes, eyebrows, mouth and tilt change):
+idle, hi, hooray, curious, surprised, well done.
 
-## Suite di animazioni (D-033)
+## Animation suite (D-033)
 
-Ogni personaggio ha la **suite completa**, uguale per tutti. In Rive è una state machine a **livelli separati** (corpo, viso, occhi, bocca) che si combinano: per esempio Elide può camminare, parlare e sorridere nello stesso momento. Tutte le transizioni sono interpolate, senza scatti.
+Every character has the **complete suite**, the same for everyone. It is organized in **separate layers** (body, face, eyes, mouth) that combine: for example Elide can walk, talk and smile at the same time. All transitions are interpolated, with no jerks. The animations are driven by code (D-039).
 
-| Gruppo | Animazioni |
-|--------|------------|
-| **A riposo** | Respiro, battito di ciglia, guardarsi intorno, attesa dopo un po' di inattività (sbadiglio, dondolarsi), seduto |
-| **Movimento** | Camminata (di fronte e di lato), corsa, girarsi, entrata e uscita di scena, salto sul posto, salto in avanti con atterraggio morbido |
-| **Contentezza** | Sorriso, saltello di gioia, evviva a braccia alzate, applauso, risata, pollice su, cuoricino / abbraccio |
-| **Balli** | Almeno 3 balli diversi in loop (dondolio, giravolta, battimani a ritmo) |
-| **Disapprovazione gentile** | "No" con la testa, ditino che fa no-no, broncio, braccia conserte, spalle giù deluse, faccino triste leggero |
-| **Pensiero e sorpresa** | Curiosità (mano al mento), confusione (grattarsi la testa), sorpresa, piccolo spavento buffo |
-| **Interazione** | Salutare, chiamare con la mano, indicare a destra e a sinistra, prendere e porgere un oggetto, reazione al tocco (solletico, risatina) |
-| **Routine** | Mangiare, bere, lavarsi, sbadigliare e dormire |
-| **Parlato** | Lip sync a visemi per le voci TTS: riposo, A, E, I, O, U, M-B-P, F-V |
+| Group | Animations |
+|-------|------------|
+| **Idle** | Breathing, blinking, looking around, waiting after a while without input (yawning, swaying), sitting |
+| **Movement** | Walking (front and side), running, turning around, entering and leaving the scene, jumping on the spot, jumping forward with a soft landing |
+| **Happiness** | Smile, happy hop, hooray with raised arms, clapping, laughing, thumbs up, little heart / hug |
+| **Dances** | At least 3 different looping dances (swaying, twirl, clapping to the beat) |
+| **Gentle disapproval** | Shaking the head "no", wagging finger, pout, crossed arms, disappointed shoulders, slightly sad face |
+| **Thinking and surprise** | Curiosity (hand on the chin), confusion (scratching the head), surprise, small funny fright |
+| **Interaction** | Waving, beckoning, pointing right and left, taking and handing over an object, reaction to touch (tickles, giggle) |
+| **Routines** | Eating, drinking, washing, yawning and sleeping |
+| **Speech** | Viseme lip sync for the TTS voices: rest, A, E, I, O, U, M-B-P, F-V |
 
-La disapprovazione è sempre dolce e buffa, mai punitiva o spaventosa: serve a dire "riproviamo", non "hai sbagliato".
+Disapproval is always sweet and funny, never punishing or scary: it means "let's try again", not "you got it wrong".
 
-## Schede
+## Sheets
 
-| Personaggio | Stato | Scheda |
-|-------------|-------|--------|
-| Elide | Bozza approvata provvisoriamente | [elide.md](elide/elide.md) |
-| Rio | Bozza approvata provvisoriamente | [rio.md](rio/rio.md) |
-| Papà | Bozza approvata provvisoriamente | [papa.md](papa/papa.md) |
-| Mamma | Bozza approvata provvisoriamente | [mamma.md](mamma/mamma.md) |
+| Character | Status | Sheet |
+|-----------|--------|-------|
+| Elide | Draft provisionally approved | [elide.md](elide/elide.md) |
+| Rio | Draft provisionally approved | [rio.md](rio/rio.md) |
+| Dad (Papà) | Draft provisionally approved | [dad.md](dad/dad.md) |
+| Mom (Mamma) | Draft provisionally approved | [mom.md](mom/mom.md) |
 
-Le immagini delle bozze sono generate da `tools/character-drafts/` (`elide.py`, `rio.py`, `papa.py`, `mamma.py`) (SVG creato da script Python, convertito in PNG con `rsvg-convert`).
+The draft images are generated by `tools/character-drafts/` (`elide.py`, `rio.py`, `dad.py`, `mom.py`): each script writes an SVG, which is converted to PNG with `parts.py` (librsvg). Shared hands, arms and sleeves live in `parts.py`.
 
-## Tavola di gruppo
+```bash
+cd tools/character-drafts
+python3 elide.py /tmp/elide_poses.svg && python3 parts.py /tmp/elide_poses.svg ../../docs/characters/elide/elide_poses.png
+python3 elide.py /tmp/elide_model.svg single && python3 parts.py /tmp/elide_model.svg ../../docs/characters/elide/elide_model.png
+python3 group.py ../../docs/characters/group.png
+```
 
-![La famiglia al completo](gruppo.png)
+## Group sheet
 
-Mamma · Papà · Elide · Rio, sullo stesso piano e con i piccoli all'85%. Generata da `tools/character-drafts/gruppo.py`.
+![The whole family](group.png)
+
+Mom · Dad · Elide · Rio, on the same ground line and with the kids at 85%. Generated by `tools/character-drafts/group.py`.

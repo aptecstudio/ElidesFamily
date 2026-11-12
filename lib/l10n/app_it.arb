@@ -1,15 +1,6 @@
 {
   "@@locale": "it",
   "appTitle": "Elide's Family",
-  "@appTitle": {
-    "description": "Nome del gioco"
-  },
   "gameColorsName": "Colori",
-  "@gameColorsName": {
-    "description": "Nome del minigioco dei colori (usato anche per la voce)"
-  },
-  "comingSoon": "Presto in arrivo!",
-  "@comingSoon": {
-    "description": "Frase quando si tocca un minigioco non ancora pronto"
-  }
+  "comingSoon": "Presto in arrivo!"
 }

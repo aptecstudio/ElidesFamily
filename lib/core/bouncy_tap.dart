@@ -1,11 +1,11 @@
 import 'package:flutter/widgets.dart';
 
-/// Rende toccabile qualsiasi elemento della scena con un feedback "morbido":
-/// si schiaccia al tocco e rimbalza al rilascio.
+/// Makes any scene element tappable with a "soft" feedback:
+/// it squashes on touch and bounces back on release.
 ///
-/// Ogni elemento interattivo del gioco deve passare da qui, così il
-/// feedback al tocco è uguale ovunque (AGENTS.md, principio 3).
-// TODO(fase-3): aggiungere il suono del tocco tramite il servizio audio.
+/// Every interactive element in the game must go through this widget, so
+/// the touch feedback is the same everywhere (AGENTS.md, principle 3).
+// TODO(phase-3): play the tap sound through the audio service.
 class BouncyTap extends StatefulWidget {
   const BouncyTap({required this.child, this.onTap, super.key});
 

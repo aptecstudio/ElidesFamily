@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-/// Palette "pastello vivace" del gioco (MEMORY.md, D-016).
+/// The game's "vivid pastel" palette (MEMORY.md, D-016).
 ///
-/// Niente nero puro: per contorni e testo si usa [cocoa].
+/// No pure black: outlines and text use [cocoa].
 abstract final class GameColors {
   static const Color skyBlue = Color(0xFF8FD3F4);
   static const Color butterYellow = Color(0xFFFFE08A);

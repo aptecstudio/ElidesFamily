@@ -7,11 +7,11 @@ import '../app/game_route.dart';
 import '../core/bouncy_tap.dart';
 import '../minigames/colors/colors_game_scene.dart';
 
-/// Scena principale (hub): da qui la bambina sceglie il minigioco.
+/// Main scene (hub): this is where the child picks a minigame.
 ///
-/// Versione provvisoria della Fase 2: paesaggio disegnato in codice e una
-/// "bolla" per il minigioco Colori. La casa illustrata con i personaggi
-/// arriverà nella Fase 5.
+/// Temporary Phase 2 version: a landscape drawn in code and a "bubble" for
+/// the Colors minigame. The illustrated house with the characters comes in
+/// Phase 5.
 class HubScene extends StatelessWidget {
   const HubScene({super.key});
 
@@ -34,7 +34,7 @@ class HubScene extends StatelessWidget {
   }
 }
 
-/// Bolla che galleggia dolcemente e rimbalza al tocco.
+/// Bubble that floats gently and bounces when tapped.
 class _FloatingBubble extends StatefulWidget {
   const _FloatingBubble({required this.child, required this.onTap});
 
@@ -91,17 +91,17 @@ class _FloatingBubbleState extends State<_FloatingBubble>
   }
 }
 
-/// Icona del minigioco Colori: una tavolozza di gocce colorate.
+/// Colors minigame icon: a palette of colored drops.
 class _PaletteIcon extends StatelessWidget {
   const _PaletteIcon();
 
   static const _drops = [
-    Color(0xFFE94B4B), // rosso
-    Color(0xFFFFC93C), // giallo
-    Color(0xFF3C8DE9), // blu
-    Color(0xFF4CBF5A), // verde
-    Color(0xFFFF8A3C), // arancione
-    Color(0xFF9B5DE5), // viola
+    Color(0xFFE94B4B), // red
+    Color(0xFFFFC93C), // yellow
+    Color(0xFF3C8DE9), // blue
+    Color(0xFF4CBF5A), // green
+    Color(0xFFFF8A3C), // orange
+    Color(0xFF9B5DE5), // purple
   ];
 
   @override
@@ -133,7 +133,7 @@ class _PaletteIcon extends StatelessWidget {
   }
 }
 
-/// Paesaggio di sfondo: cielo, sole, colline.
+/// Background landscape: sky, sun, hills.
 class _LandscapePainter extends CustomPainter {
   const _LandscapePainter();
 
@@ -147,14 +147,14 @@ class _LandscapePainter extends CustomPainter {
       ).createShader(Offset.zero & size);
     canvas.drawRect(Offset.zero & size, sky);
 
-    // Sole
+    // Sun
     canvas.drawCircle(
       Offset(size.width * 0.85, size.height * 0.18),
       size.height * 0.1,
       Paint()..color = GameColors.butterYellow,
     );
 
-    // Colline (due strati)
+    // Hills (two layers)
     _hill(canvas, size, 0.72, GameColors.meadowGreen.withValues(alpha: 0.7));
     _hill(canvas, size, 0.8, GameColors.meadowGreen);
   }

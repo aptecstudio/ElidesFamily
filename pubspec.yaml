@@ -1,5 +1,5 @@
 name: elides_family
-description: "Elide's Family — minigiochi educativi per bambini dai 3 anni in su."
+description: "Elide's Family — educational minigames for children aged 3 and up."
 publish_to: "none"
 version: 0.1.0+1
 
@@ -12,12 +12,10 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
-  # Motore per i minigiochi (D-008)
+  # Minigame engine (D-008)
   flame: ^1.28.0
   flame_audio: ^2.11.0
-  # Animazioni dei personaggi (D-007)
-  rive: ^0.13.20
-  # Salvataggio locale dei progressi (offline)
+  # Local progress storage (offline)
   shared_preferences: ^2.5.0
 
 dev_dependencies:
@@ -37,8 +35,8 @@ flutter:
     - assets/audio/voice/it/
     - assets/audio/voice/en/
 
-  # Font Fredoka (D-017): da attivare dopo aver copiato il file in assets/fonts/
-  # (vedi ROADMAP, Fase 2).
+  # Fredoka font (D-017): enable after copying the file into assets/fonts/
+  # (see ROADMAP, Phase 2).
   # fonts:
   #   - family: Fredoka
   #     fonts:

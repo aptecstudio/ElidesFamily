@@ -1,65 +1,65 @@
 # 🐾 Elide's Family
 
-**Elide's Family** è una raccolta di minigiochi educativi per bambini **dai 3 anni in su**, pensata per accompagnare i più piccoli nella crescita e nell'apprendimento giocando insieme a una famiglia di animaletti.
+**Elide's Family** is a collection of educational minigames for children **aged 3 and up**, designed to help little ones grow and learn by playing together with a family of cute animals.
 
-> 🚧 Progetto in fase iniziale di sviluppo.
+> 🚧 Project in early development.
 
 ---
 
-## 🏡 La famiglia
+## 🏡 The family
 
-| | Personaggio | Chi è |
-|---|-------------|-------|
-| 🐱 | **Elide** | Una piccola gattina bianca, curiosa e allegra: è lei la protagonista. |
-| 🐶 | **Rio** | Un bulldog francese color miele, amico inseparabile e sempre pronto a giocare. |
-| 🐕 | **Papà** | Un grande labrador bianco, paziente e affettuoso. |
-| 🐈 | **Mamma** | Una gatta color miele con macchie bianche, dolce e premurosa. |
+| | Character | Who they are |
+|---|-----------|--------------|
+| 🐱 | **Elide** | A little white kitten, curious and cheerful: she is the protagonist. |
+| 🐶 | **Rio** | A honey-colored French bulldog, an inseparable friend who is always ready to play. |
+| 🐕 | **Dad** | A big white Labrador, patient and affectionate. |
+| 🐈 | **Mom** | A honey-colored cat with white patches, sweet and caring. |
 
-Ogni minigioco coinvolge i personaggi più adatti all'attività: a volte tutta la famiglia, a volte solo Elide e Rio.
+Each minigame involves the characters that best fit the activity: sometimes the whole family, sometimes just Elide and Rio.
 
-## 🎈 Il gioco
+## 🎈 The game
 
-- **Minigiochi educativi** su colori, forme, numeri, animali, suoni, musica e piccole routine quotidiane.
-- **Facile da usare**: si gioca solo toccando e trascinando, senza bisogno di saper leggere.
-- **Sempre incoraggiante**: nessuna sconfitta, solo tentativi e tante feste quando si riesce.
-- **Suoni e animazioni gradevoli** ad ogni tocco.
-- **Un mondo da esplorare**, illustrato e colorato, invece dei classici menu.
-- **Sicuro**: nessuna pubblicità, nessun acquisto, nessun tracciamento, funziona offline.
+- **Educational minigames** about colors, shapes, numbers, animals, sounds, music and little daily routines.
+- **Easy to use**: you play just by tapping and dragging, no reading needed.
+- **Always encouraging**: no losing, just tries and lots of celebrations when you succeed.
+- **Pleasant sounds and animations** on every touch.
+- **A world to explore**, illustrated and colorful, instead of the usual menus.
+- **Safe**: no ads, no purchases, no tracking, works offline.
 
-## 🛠️ Tecnologia
+## 🛠️ Technology
 
 - [Flutter](https://flutter.dev)
-- Piattaforma: **Android** (APK)
+- Platform: **Android** (APK)
 
-## 🚀 Provarlo in sviluppo
+## 🚀 Trying it in development
 
-Requisiti: Flutter SDK e un dispositivo Android con il debug USB (o wireless) attivo.
+Requirements: the Flutter SDK and an Android device with USB (or wireless) debugging enabled.
 
 ```bash
 git clone https://github.com/aptecstudio/ElidesFamily.git
 cd ElidesFamily
 flutter pub get
-flutter run          # avvia sul dispositivo; premi "r" per l'hot reload
+flutter run          # runs on the device; press "r" for hot reload
 ```
 
-Per generare l'APK:
+To build the APK:
 
 ```bash
 flutter build apk --release
 ```
 
-*(I comandi saranno validi una volta inizializzato il progetto Flutter: vedi `ROADMAP.md`.)*
+*(These commands will work once the Flutter project is initialized: see `ROADMAP.md`.)*
 
-## 📂 Documentazione del progetto
+## 📂 Project documentation
 
-- [`AGENTS.md`](AGENTS.md) — regole di lavoro per collaboratori umani e agenti AI
-- [`MEMORY.md`](MEMORY.md) — scelte, stile grafico e convenzioni
-- [`ROADMAP.md`](ROADMAP.md) — avanzamento e prossimi passi
+- [`AGENTS.md`](AGENTS.md) — working rules for human contributors and AI agents
+- [`MEMORY.md`](MEMORY.md) — choices, art style and conventions
+- [`ROADMAP.md`](ROADMAP.md) — progress and next steps
 
-## ❤️ Perché
+## ❤️ Why
 
-Elide's Family nasce come progetto di famiglia: un papà sviluppatore e la sua bambina che, insieme, provano e scelgono i giochi.
+Elide's Family started as a family project: a developer dad and his little girl who try out and choose the games together.
 
-## 📄 Licenza
+## 📄 License
 
-Distribuito con licenza **GNU General Public License v3.0**. Vedi il file [`LICENSE`](LICENSE).
+Distributed under the **GNU General Public License v3.0**. See the [`LICENSE`](LICENSE) file.

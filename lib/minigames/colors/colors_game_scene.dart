@@ -4,10 +4,10 @@ import '../../app/game_colors.dart';
 import '../../core/bouncy_tap.dart';
 import '../../l10n/app_localizations.dart';
 
-/// Minigioco Colori (D-010, D-011).
+/// Colors minigame (D-010, D-011).
 ///
-/// Segnaposto della Fase 2: la meccanica (livello 1 "ordina nei cesti",
-/// livello 2 "dipingi") verrà realizzata con Flame nella Fase 6.
+/// Phase 2 placeholder: the mechanics (level 1 "sort into the baskets",
+/// level 2 "paint") will be built with Flame in Phase 6.
 class ColorsGameScene extends StatelessWidget {
   const ColorsGameScene({super.key});
 
@@ -41,7 +41,7 @@ class ColorsGameScene extends StatelessWidget {
   }
 }
 
-/// Casetta disegnata: il pulsante "torna a casa" è un'icona, non una scritta.
+/// Drawn little house: the "back home" button is an icon, not a label.
 class _HomeIconPainter extends CustomPainter {
   const _HomeIconPainter();
 

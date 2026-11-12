@@ -1,6 +1,15 @@
 {
   "@@locale": "en",
   "appTitle": "Elide's Family",
+  "@appTitle": {
+    "description": "Name of the game"
+  },
   "gameColorsName": "Colors",
-  "comingSoon": "Coming soon!"
+  "@gameColorsName": {
+    "description": "Name of the colors minigame (also used for the voice-over)"
+  },
+  "comingSoon": "Coming soon!",
+  "@comingSoon": {
+    "description": "Line shown when tapping a minigame that is not ready yet"
+  }
 }

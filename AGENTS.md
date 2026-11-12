@@ -1,77 +1,79 @@
-# AGENTS.md — Guida per agenti AI e collaboratori umani
+# AGENTS.md — Guide for AI agents and human contributors
 
-> **Elide's Family** — raccolta di minigiochi educativi per bambini dai 3 anni in su.
-> Flutter · target Android (APK) · licenza GPL-3.0
-
----
-
-## 1. Scopo di questo file
-
-Questo file è la guida di riferimento per **agenti AI** e **persone** che lavorano sul progetto.
-Spiega come si lavora qui, dove si trovano le informazioni sui **progressi fatti**, sulle **strategie adottate** e sul **perché** di ogni scelta.
-
-Prima di qualsiasi intervento, chi lavora sul progetto **deve leggere**, in quest'ordine:
-
-1. `AGENTS.md` (questo file) — le regole.
-2. `MEMORY.md` — le decisioni prese, lo stile grafico, la struttura del codice e le convenzioni.
-3. `ROADMAP.md` — cosa è stato fatto e cosa resta da fare.
+> **Elide's Family** — a collection of educational minigames for children aged 3 and up.
+> Flutter · Android target (APK) · GPL-3.0 license
 
 ---
 
-## 2. Regola di immutabilità di AGENTS.md
+## 1. Purpose of this file
 
-- `AGENTS.md` viene creato una sola volta all'avvio del progetto.
-- **Non può essere modificato** senza una richiesta esplicita **e** l'approvazione del responsabile umano del progetto.
-- Un agente AI che ritiene necessaria una modifica a questo file **deve proporla** al responsabile umano, spiegandone il motivo, e attendere l'autorizzazione prima di applicarla.
-- Questa regola riguarda solo `AGENTS.md`: il codice sorgente, gli asset e le risorse del progetto si possono creare e modificare normalmente come parte del lavoro.
+This file is the reference guide for **AI agents** and **people** working on the project.
+It explains how work is done here and where to find information about the **progress made**, the **strategies adopted** and the **reasons** behind every choice.
 
----
+Before any work, contributors **must read**, in this order:
 
-## 3. File di stato del progetto
-
-Gli **unici file di stato** che gli agenti aggiornano autonomamente sono:
-
-| File | Contenuto | Quando aggiornarlo |
-|------|-----------|--------------------|
-| `MEMORY.md` | Scelte tecniche e di design (con motivazione), tratti stilistici grafici e sonori, struttura del codice, convenzioni sintattiche e di naming. | Ogni volta che si prende o si cambia una decisione, si introduce una convenzione o si modifica la struttura. |
-| `ROADMAP.md` | Passaggi eseguiti e passaggi ancora da eseguire, per avere uno stato **globale** (fasi) e **parziale** (singoli task) del progetto. | All'inizio e alla fine di ogni sessione di lavoro, e ogni volta che un task cambia stato. |
-
-### Regole di aggiornamento
-
-- **MEMORY.md**: ogni decisione riporta *cosa* si è deciso e *perché*. Se una decisione viene superata, non si cancella: si segna come superata e si indica quella nuova (la storia delle scelte è utile).
-- **ROADMAP.md**: i task usano le checkbox (`- [ ]` da fare, `- [x]` fatto, `- [~]` in corso). Un task si segna come fatto solo quando è davvero completo e verificato.
-- Le date usano il formato `AAAA-MM-GG`.
+1. `AGENTS.md` (this file) — the rules.
+2. `MEMORY.md` — the decisions taken, the art style, the code structure and the conventions.
+3. `ROADMAP.md` — what has been done and what is left to do.
 
 ---
 
-## 4. Flusso di lavoro
+## 2. Immutability rule for AGENTS.md
 
-- **Branch unico**: si lavora solo su `main`. Non si creano altri branch.
-- **Commit piccoli e descrittivi**, in italiano, con prefisso convenzionale:
+- `AGENTS.md` is created once, when the project starts.
+- It **cannot be changed** without an explicit request **and** the approval of the project's human owner.
+- An AI agent that believes a change to this file is needed **must propose it** to the human owner, explaining why, and wait for authorization before applying it.
+- This rule only applies to `AGENTS.md`: source code, assets and project resources can be created and modified normally as part of the work.
+
+---
+
+## 3. Project status files
+
+The **only status files** that agents update on their own are:
+
+| File | Content | When to update it |
+|------|---------|-------------------|
+| `MEMORY.md` | Technical and design choices (with their reasons), graphic and sound style traits, code structure, syntax and naming conventions. | Every time a decision is taken or changed, a convention is introduced or the structure changes. |
+| `ROADMAP.md` | Steps completed and steps still to do, giving both a **global** (phases) and a **partial** (single tasks) view of the project. | At the start and end of every work session, and every time a task changes status. |
+
+### Update rules
+
+- **MEMORY.md**: every decision states *what* was decided and *why*. When a decision is superseded it is not deleted: it is marked as superseded and points to the new one (the history of the choices is useful).
+- **ROADMAP.md**: tasks use checkboxes (`- [ ]` to do, `- [x]` done, `- [~]` in progress). A task is marked done only when it is really complete and verified.
+- Dates use the `YYYY-MM-DD` format.
+
+---
+
+## 4. Workflow
+
+- **Single branch**: work happens only on `main`. No other branches are created.
+- **Small, descriptive commits**, in English, with a conventional prefix:
   `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`, `chore:`, `assets:`.
-  Esempio: `feat: aggiunto minigioco "Forme e colori" con Elide e Rio`.
-- **In caso di dubbio, chiedere**: le scelte di gusto, di contenuto o che riguardano l'esperienza del bambino si sottopongono al responsabile umano **sempre tramite sondaggi interattivi** (domande a scelta multipla), invece di decidere da soli.
-- A fine sessione: aggiornare `ROADMAP.md` e, se serve, `MEMORY.md`, poi fare commit.
+  Example: `feat: add the "Shapes and colors" minigame with Elide and Rio`.
+- **When in doubt, ask**: choices of taste, of content, or that affect the child's experience are submitted to the human owner **always through interactive polls** (multiple-choice questions), instead of deciding alone.
+- At the end of a session: update `ROADMAP.md` and, if needed, `MEMORY.md`, then commit.
+- **Code style**: every language follows its own standard conventions for naming, spacing, comments and overall code style (Dart: Effective Dart, `dart format` and `flutter_lints`; Python: PEP 8, checked with `ruff`).
+- **Language**: all source code and documentation are written in **English**. The only exception is chat communication with the human owner, which is exclusively in **Italian**.
 
 ---
 
-## 5. Principi del progetto (non negoziabili)
+## 5. Project principles (non-negotiable)
 
-1. **Pensato per bambini dai 3 anni**: interazioni semplici (tocco e trascinamento; su Android TV telecomando, con i giochi riadattati a questo uso), nessuna lettura richiesta, istruzioni vocali o visive, nessun modo di "perdere" in modo frustrante.
-2. **Aspetto da gioco, non da app**: niente AppBar, menu a tendina, liste o pulsanti in stile Material. Ogni schermata è una scena illustrata, colorata e animata.
-3. **Suoni e animazioni gradevoli** ad ogni interazione: ogni tocco deve dare una risposta visiva e sonora.
-4. **Sicurezza e privacy**: nessuna pubblicità, nessun acquisto in-app, nessun tracciamento, nessun collegamento esterno raggiungibile dal bambino. Eventuali impostazioni per adulti stanno dietro un "parental gate".
-5. **Asset originali**: personaggi, illustrazioni, suoni e musiche devono essere originali o con licenza compatibile con GPL-3.0 / libera. Non si copiano asset di altri giochi. La provenienza e la licenza di ogni asset di terze parti si annota in `MEMORY.md`.
-6. **Funziona offline**.
+1. **Designed for children aged 3 and up**: simple interactions (tap and drag; on Android TV the remote control, with the games adapted to it), no reading required, voice or visual instructions, no frustrating way to "lose".
+2. **Looks like a game, not an app**: no AppBar, drop-down menus, lists or Material-style buttons. Every screen is an illustrated, colorful, animated scene.
+3. **Pleasant sounds and animations** on every interaction: every touch must give a visual and audio response.
+4. **Safety and privacy**: no ads, no in-app purchases, no tracking, no external links reachable by the child. Any settings for adults sit behind a "parental gate".
+5. **Original assets**: characters, illustrations, sounds and music must be original or under a license compatible with GPL-3.0 / free. Assets from other games are never copied. The origin and license of every third-party asset is recorded in `MEMORY.md`.
+6. **Works offline**.
 
 ---
 
-## 6. Dove trovare le cose
+## 6. Where to find things
 
-| Cosa | Dove |
-|------|------|
-| Regole di lavoro | `AGENTS.md` |
-| Decisioni, stile, convenzioni, struttura | `MEMORY.md` |
-| Avanzamento e prossimi passi | `ROADMAP.md` |
-| Descrizione pubblica del gioco | `README.md` |
-| Licenza | `LICENSE` (GPL-3.0) |
+| What | Where |
+|------|-------|
+| Working rules | `AGENTS.md` |
+| Decisions, style, conventions, structure | `MEMORY.md` |
+| Progress and next steps | `ROADMAP.md` |
+| Public description of the game | `README.md` |
+| License | `LICENSE` (GPL-3.0) |

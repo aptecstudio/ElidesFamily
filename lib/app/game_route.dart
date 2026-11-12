@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-/// Transizione tra scene in stile gioco: la nuova scena "sboccia"
-/// con una dissolvenza e un leggero ingrandimento elastico.
+/// Game-style transition between scenes: the new scene "blossoms in"
+/// with a fade and a slight elastic zoom.
 class GameRoute<T> extends PageRouteBuilder<T> {
   GameRoute({required WidgetBuilder builder, super.settings})
       : super(

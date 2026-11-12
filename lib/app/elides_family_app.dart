@@ -5,10 +5,10 @@ import '../l10n/app_localizations.dart';
 import 'game_colors.dart';
 import 'game_route.dart';
 
-/// Radice dell'app.
+/// Root of the app.
 ///
-/// Si usa [WidgetsApp] e non MaterialApp: nessun aspetto "da app" (D-006),
-/// ogni schermata è una scena di gioco disegnata da noi.
+/// Uses [WidgetsApp] instead of MaterialApp: no "app-like" look (D-006);
+/// every screen is a game scene that we draw ourselves.
 class ElidesFamilyApp extends StatelessWidget {
   const ElidesFamilyApp({super.key});
 
@@ -21,7 +21,7 @@ class ElidesFamilyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       textStyle: const TextStyle(
-        // Diventerà 'Fredoka' quando il font sarà negli asset (D-017).
+        // Will become 'Fredoka' once the font is in the assets (D-017).
         color: GameColors.cocoa,
         fontSize: 28,
         fontWeight: FontWeight.w600,
