@@ -2,5 +2,8 @@
   "@@locale": "it",
   "appTitle": "Elide's Family",
   "gameColorsName": "Colori",
-  "comingSoon": "Presto in arrivo!"
+  "comingSoon": "Presto in arrivo!",
+  "parentsGateTitle": "Per i grandi",
+  "parentsGateQuestion": "Quanto fa {a} × {b}?",
+  "parentsAreaTitle": "Area genitori"
 }

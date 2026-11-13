@@ -11,5 +11,25 @@
   "comingSoon": "Coming soon!",
   "@comingSoon": {
     "description": "Line shown when tapping a minigame that is not ready yet"
+  },
+  "parentsGateTitle": "For grown-ups",
+  "@parentsGateTitle": {
+    "description": "Heading of the parental gate (read by adults only)"
+  },
+  "parentsGateQuestion": "How much is {a} × {b}?",
+  "@parentsGateQuestion": {
+    "description": "Multiplication asked by the parental gate",
+    "placeholders": {
+      "a": {
+        "type": "int"
+      },
+      "b": {
+        "type": "int"
+      }
+    }
+  },
+  "parentsAreaTitle": "Parents' area",
+  "@parentsAreaTitle": {
+    "description": "Title of the protected adults' area"
   }
 }

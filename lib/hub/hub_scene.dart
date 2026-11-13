@@ -8,6 +8,8 @@ import '../characters/character_controller.dart';
 import '../characters/character_view.dart';
 import '../core/bouncy_tap.dart';
 import '../l10n/app_localizations.dart';
+import '../parental_gate/parental_gate.dart';
+import '../parental_gate/parents_area_scene.dart';
 import 'game_card.dart';
 import 'hub_background.dart';
 import 'hub_games.dart';
@@ -78,6 +80,18 @@ class _HubSceneState extends State<HubScene>
     if (mounted) _elideController.play(CharacterAction.wave);
   }
 
+  Future<void> _openParentsArea() async {
+    if (_opening) return;
+    _opening = true;
+    final passed = await showParentalGate(context);
+    if (passed && mounted) {
+      await Navigator.of(
+        context,
+      ).push(GameRoute<void>(builder: (_) => const ParentsAreaScene()));
+    }
+    _opening = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -114,8 +128,7 @@ class _HubSceneState extends State<HubScene>
                   height: _gearBox,
                   child: Center(
                     child: BouncyTap(
-                      // TODO(phase-8): open the parental gate (D-048).
-                      onTap: () {},
+                      onTap: _openParentsArea,
                       child: const SizedBox.square(
                         dimension: 96,
                         child: OverflowBox(
