@@ -24,9 +24,9 @@ Last update: 2026-11-13
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** `flutter run` with hot reload on the emulators and on the owner's phone (wireless debugging); add the Fredoka font; design approval of the updated drafts (Phase 4); menu graphics (Phase 5).
+**Next step (next session):** design approval of the updated drafts (Phase 4); menu graphics (Phase 5); `flutter run` on the owner's phone (wireless debugging).
 
-**Previous step:** new PC set up with emulators (D-045); first debug APK built and tested on the phone emulator.
+**Previous step:** new PC set up with emulators (D-045); first debug APK, hot reload and Fredoka font verified on the phone emulator.
 
 ---
 
@@ -72,11 +72,11 @@ Last update: 2026-11-13
 - [x] Set `applicationId` and `namespace` to `com.aptecstudio.elidesfamily` (D-014) in `android/app/build.gradle.kts` and move `MainActivity.kt` to the matching package
 - [x] `AndroidManifest.xml`: label "Elide's Family", `android:screenOrientation="sensorLandscape"` on the activity
 - [ ] Check the `minSdk` required by Flame (Flutter's default is 24)
-- [ ] Copy the Fredoka font (SIL OFL) into `assets/fonts/` with the `OFL.txt` file and enable it in `pubspec.yaml` and `elides_family_app.dart`
+- [x] Copy the Fredoka font (SIL OFL) into `assets/fonts/` with the `OFL.txt` file and enable it in `pubspec.yaml` and `elides_family_app.dart` (verified on `ef_phone`, 2026-11-13)
 - [x] Flutter SDK, JDK 17 and Android SDK (platform 36, build-tools 36.0.0) installed on the owner's PC (D-044)
 - [x] `flutter pub get` (versions resolved, `pubspec.lock` committed)
 - [x] `flutter analyze` and `flutter test` with no errors
-- [ ] Live test: `flutter run` on the phone (USB or wireless debugging) + hot reload
+- [~] Live test: `flutter run` + hot reload works on `ef_phone` (2026-11-13); still to try on the owner's phone (USB or wireless debugging)
 - [x] First test APK build (`flutter build apk --debug`): installed on `ef_phone`, starts in landscape and full screen, hub → Colors → home works (2026-11-13)
 - [x] Manifest ready for Android TV: `android.hardware.touchscreen` and `android.software.leanback` with `required="false"`, `LEANBACK_LAUNCHER` intent, temporary TV banner (320×180, `tools/character-drafts/tv_banner.py`)
 - [x] Test emulators: smartphone (`ef_phone`), tablet (`ef_tablet`), Android TV 1080p (`ef_tv`) on the new PC (D-045)

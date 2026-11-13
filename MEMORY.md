@@ -123,7 +123,7 @@ Last update: 2026-11-13
 
 ### Font (D-017)
 
-- **Fredoka** (SIL OFL 1.1), files in `assets/fonts/`.
+- **Fredoka** (SIL OFL 1.1), variable font in `assets/fonts/fredoka_variable.ttf` with `OFL.txt`; default text style in `elides_family_app.dart` (weight 600 via `fontWeight` and `FontVariation.weight`).
 
 *(The sound effect set will be recorded here once decided.)*
 
@@ -186,4 +186,4 @@ Empty folders contain a `.gitkeep`, to be removed when they get their first file
 
 | Asset | Source | License | Notes |
 |-------|--------|---------|-------|
-| *(none yet)* | | | |
+| Fredoka (variable font, `wdth` 75–125, `wght` 300–700) → `assets/fonts/fredoka_variable.ttf` | Google Fonts repository (`google/fonts`, `ofl/fredoka`), by Milena Brandão / Hafontia | SIL OFL 1.1 (`assets/fonts/OFL.txt`) | Copyright 2016 The Fredoka Project Authors. Added 2026-11-13. Being a variable font, the weight is also set with `FontVariation.weight`. |
