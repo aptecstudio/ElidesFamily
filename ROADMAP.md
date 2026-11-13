@@ -24,9 +24,9 @@ Last update: 2026-11-13
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** menu graphics (Phase 5); layered SVG parts of the characters for code animation (Phase 4); `flutter run` on the owner's phone (wireless debugging).
+**Next step (next session):** build the approved hub in Flutter (Phase 5): sky-and-meadow scene, Elide, scrolling two-row card grid, gear; then the remaining menu choices (loading screen, in-game buttons, item bar).
 
-**Previous step:** new PC set up with emulators (D-045); first debug APK, hot reload and Fredoka font verified on the phone emulator; character design approved (D-046).
+**Previous step:** new PC with emulators (D-045); debug build, hot reload and Fredoka verified; character design approved (D-046); menu design approved (D-047, D-048, D-049).
 
 ---
 
@@ -129,15 +129,15 @@ Last update: 2026-11-13
 
 **Choosing the in-game menu graphics** (with polls for the owner):
 
-- [ ] Hub layout: illustrated scene with an animated Elide and the minigame tiles
-- [ ] Tile style: frames, illustrations, game name, "new" marker
-- [ ] Buttons for adults (parents, languages, settings) and their position
+- [x] Hub layout: illustrated scene with an animated Elide and the minigame tiles (D-047)
+- [x] Tile style: frames, illustrations, game name on a badge (D-047, D-049); "new" marker still to decide
+- [x] Buttons for adults (parents, languages, settings) and their position: gear in the top-right corner (D-048)
 - [ ] Animated loading screen with a character
 - [ ] Buttons inside the minigames: back to the games, exit protected by dragging
 - [ ] Item bar inside the minigames (tray to drag from)
 - [ ] Transitions between menus and minigames
 - [ ] Android TV variant with remote focus
-- [ ] Menu design sheet approved and saved in `docs/`
+- [x] Menu design sheet approved and saved in `docs/menu/hub_menu.png` (2026-11-13)
 
 - [ ] Illustrated house scene with the characters
 - [ ] Access to the minigames through tappable objects/doors

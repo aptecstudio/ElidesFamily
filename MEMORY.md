@@ -57,6 +57,9 @@ Last update: 2026-11-13
 | D-044 | 2026-11-12 | Development toolchain on the owner's PC: **Flutter stable via snap** (3.50, Dart 3.14), **Temurin JDK 17** and the **Android SDK** command-line tools (platform 36, build-tools 36.0.0, platform-tools), installed in the user's home and linked with `flutter config`. ~~No emulators for now; tests run on the owner's physical phone.~~ (emulators added by D-045) `pubspec.lock` is versioned. Supersedes the "no SDK" limitation of D-023: `android/` can now be generated directly. | Requested by the owner. Limited free disk space, so only what is needed for Android builds was installed. `pubspec.lock` keeps builds reproducible for an app. | ✅ active |
 | D-045 | 2026-11-13 | Work moved to a new PC with more disk space (project on an NTFS partition, SDKs in the home on ext4; git needs a `safe.directory` exception). **Android emulators** added with KVM: `ef_phone` (Pixel 8), `ef_tablet` (Pixel Tablet), both on `android-36;google_apis;x86_64`, and `ef_tv` (TV 1080p, `android-36;android-tv;x86_64`), with a hardware keyboard enabled to simulate the remote. JDK in `~/jdk/jdk-17.0.21+9`. The physical phone remains the reference for the final touch test. | Requested by the owner: test without being physically connected to the phone. Covers the three device types of D-024. | ✅ active |
 | D-046 | 2026-11-13 | **Design of the four characters approved** (Elide, Rio, Dad, Mom) in the optimized drafts (new hands, sleeves that follow the arm, D-041). The sheets in `docs/characters/` are now the final reference for the layered SVG parts to animate by code (D-039). Supersedes the "provisionally approved" status of D-030, D-034, D-036 and D-037. | The owner's choice through a poll. | ✅ active |
+| D-047 | 2026-11-13 | **Main menu (hub)**: sky-and-meadow scene (far hill, meadow, bushes, flowers, drifting clouds, sun with a glow); **Elide on the left** who breathes, blinks and **reacts** to touches (waves, laughs) and cheers when a game is chosen; the games are **straight rounded postcards in two rows** that **scroll sideways**, filled column by column; each card has a pastel frame, a cream drawing area and the game **name on a cream badge** across the bottom edge (small Fredoka text, read aloud by the voice on touch). Draft: `docs/menu/hub_menu.png` (`tools/menu-drafts/hub_menu.py`). | The owner's choices through polls; the first drafts (tilted cards in one row, then a flat look) were discarded. | ✅ active |
+| D-048 | 2026-11-13 | **Parents' entrance**: a small, low-contrast **drawn gear** in the top-right corner, leading to the parental gate. | The owner's choice: easy for adults to find, not attractive for the child. | ✅ active |
+| D-049 | 2026-11-13 | **Graphics with volume**, not flat: soft gradients, glossy highlights, drop shadows, cards with a darker "cushion" edge, and a **"puffy" lighting filter** (specular light from the top left) on drawn icons, in the same style as the characters. | The owner rejected a flat version of the menu as "too flat". | ✅ active |
 
 ### Rules for the minigames on Android TV (D-025)
 
@@ -160,9 +163,11 @@ assets/
 test/
 └── widget_test.dart
 tools/
-└── character-drafts/             # Python draft scripts (D-032): parts.py, elide.py, rio.py, dad.py, mom.py, group.py
+├── character-drafts/             # Python draft scripts (D-032): parts.py, elide.py, rio.py, dad.py, mom.py, group.py
+└── menu-drafts/                  # menu design drafts (hub_menu.py, D-047)
 docs/
-└── characters/                   # art direction, sheets and draft images
+├── characters/                   # art direction, sheets and draft images
+└── menu/                         # menu design sheets (hub_menu.png)
 ```
 
 Empty folders contain a `.gitkeep`, to be removed when they get their first file.
