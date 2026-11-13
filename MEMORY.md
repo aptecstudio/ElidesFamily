@@ -3,7 +3,7 @@
 > Log of the **choices** (with their reasons), the graphic and sound **style traits**, the **code structure** and the **conventions**.
 > Superseded decisions are not deleted: they are marked with ~~strikethrough~~ and point to the new one.
 
-Last update: 2026-11-12
+Last update: 2026-11-13
 
 ---
 
@@ -54,7 +54,8 @@ Last update: 2026-11-12
 | D-041 | 2026-11-12 | Shared draft parts in `tools/character-drafts/parts.py`: `limb()`, `arm()` with a **sleeve that follows the arm** (puffy sleeve along the arm curve, cuff perpendicular to the arm, soft shadow where the arm comes out), `paw()` with an **automatic thumb side** (back of the hand at rest with the thumb towards the body; palm shown with the thumb outwards), and `render()` SVG → PNG through librsvg (PyGObject), so `rsvg-convert` is no longer required. | Optimization of the drafts requested by the owner: the resting hands looked inside out and the arm looked like a tube attached under a fixed sleeve. | ✅ active |
 | D-042 | 2026-11-12 | The ARB template is now **`app_en.arb`** (it holds the `@` descriptions); `app_it.arb` only holds the Italian translations. | Consequence of D-040: descriptions are documentation and must be in English. | ✅ active |
 | D-043 | 2026-11-12 | File and folder names in English: `dad`/`mom` (Papà/Mamma), `*_model.png`, `*_poses.png`, `group.png`, pose ids `idle`, `wave`, `cheer`, `curious`, `surprised`, `proud`. In English documentation Papà and Mamma are called **Dad** and **Mom**. | Consequence of D-040. | ✅ active |
-| D-044 | 2026-11-12 | Development toolchain on the owner's PC: **Flutter stable via snap** (3.50, Dart 3.14), **Temurin JDK 17** and the **Android SDK** command-line tools (platform 36, build-tools 36.0.0, platform-tools), installed in the user's home and linked with `flutter config`. No emulators for now; tests run on the owner's physical phone. `pubspec.lock` is versioned. Supersedes the "no SDK" limitation of D-023: `android/` can now be generated directly. | Requested by the owner. Limited free disk space, so only what is needed for Android builds was installed. `pubspec.lock` keeps builds reproducible for an app. | ✅ active |
+| D-044 | 2026-11-12 | Development toolchain on the owner's PC: **Flutter stable via snap** (3.50, Dart 3.14), **Temurin JDK 17** and the **Android SDK** command-line tools (platform 36, build-tools 36.0.0, platform-tools), installed in the user's home and linked with `flutter config`. ~~No emulators for now; tests run on the owner's physical phone.~~ (emulators added by D-045) `pubspec.lock` is versioned. Supersedes the "no SDK" limitation of D-023: `android/` can now be generated directly. | Requested by the owner. Limited free disk space, so only what is needed for Android builds was installed. `pubspec.lock` keeps builds reproducible for an app. | ✅ active |
+| D-045 | 2026-11-13 | Work moved to a new PC with more disk space (project on an NTFS partition, SDKs in the home on ext4; git needs a `safe.directory` exception). **Android emulators** added with KVM: `ef_phone` (Pixel 8), `ef_tablet` (Pixel Tablet), both on `android-36;google_apis;x86_64`, and `ef_tv` (TV 1080p, `android-36;android-tv;x86_64`), with a hardware keyboard enabled to simulate the remote. JDK in `~/jdk/jdk-17.0.21+9`. The physical phone remains the reference for the final touch test. | Requested by the owner: test without being physically connected to the phone. Covers the three device types of D-024. | ✅ active |
 
 ### Rules for the minigames on Android TV (D-025)
 
