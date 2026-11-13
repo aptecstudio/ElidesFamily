@@ -47,6 +47,13 @@ def tube(d, w, color=LIMB, line=LINE):
 
 
 def limb(p0, p1, p2, p3, w0, w1, bulge=3, fill="url(#limb)"):
+    d = limb_d(p0, p1, p2, p3, w0, w1, bulge)
+    return (
+        f'<path d="{d}" fill="{fill}" stroke="{LINE}" stroke-width="2.6" stroke-linejoin="round"/>'
+    )
+
+
+def limb_d(p0, p1, p2, p3, w0, w1, bulge=3):
     steps = 40
 
     def bez_at(t, a, b, c, d):
@@ -72,18 +79,26 @@ def limb(p0, p1, p2, p3, w0, w1, bulge=3, fill="url(#limb)"):
     # rounded end cap
     d += " A%.1f,%.1f 0 0 1 %.1f,%.1f " % (w1 / 2, w1 / 2, right[-1][0], right[-1][1])
     d += " ".join("L%.1f,%.1f" % q for q in reversed(right)) + " Z"
-    return (
-        f'<path d="{d}" fill="{fill}" stroke="{LINE}" stroke-width="2.6" stroke-linejoin="round"/>'
-    )
+    return d
 
 
-def foot(x, y):
-    return (
-        f'<g transform="translate({x},{y}) scale(1.25)">'
-        f'<path d="M-21,4 C-23,-8 -12,-14 0,-14 C12,-14 23,-8 21,4 C21,11 12,14 0,14 C-12,14 -21,11 -21,4 Z" fill="url(#limb)" stroke="{LINE}" stroke-width="2.6"/>'
-        f'<path d="M-9,3 C-10,8 -9,11 -8,13 M0,4 C0,9 0,12 0,14 M9,3 C10,8 9,11 8,13" fill="none" stroke="{LINE}" stroke-width="2" stroke-linecap="round"/>'
-        f'<ellipse cx="-6" cy="-6" rx="7" ry="3" fill="#FFFFFF" opacity="0.8"/></g>'
-    )
+FOOT_D = "M-21,4 C-23,-8 -12,-14 0,-14 C12,-14 23,-8 21,4 C21,11 12,14 0,14 C-12,14 -21,11 -21,4 Z"
+
+
+def foot(x, y, layer="both"):
+    """Foot; layer "outline" / "fill" / "both" as in parts.paw, so the foot
+    and the leg merge into one piece."""
+    o = [f'<g transform="translate({x},{y}) scale(1.25)">']
+    if layer in ("outline", "both"):
+        o.append(parts.merged_outline(FOOT_D, LINE, 2.6 / 1.25))
+    if layer in ("fill", "both"):
+        o.append(f'<path d="{FOOT_D}" fill="url(#limb)"/>')
+        o.append(
+            f'<path d="M-9,3 C-10,8 -9,11 -8,13 M0,4 C0,9 0,12 0,14 M9,3 C10,8 9,11 8,13" fill="none" stroke="{LINE}" stroke-width="2" stroke-linecap="round"/>'
+        )
+        o.append('<ellipse cx="-6" cy="-6" rx="7" ry="3" fill="#FFFFFF" opacity="0.8"/>')
+    o.append("</g>")
+    return "".join(o)
 
 
 def hem_scallops():
@@ -120,11 +135,14 @@ def tail():
 
 
 def body_lower(pose):
+    """Tail, legs and feet; each leg and its foot are one piece: all the
+    outlines first, then all the fills."""
     o = [tail()]
-    for pts, w0, w1, bulge, _ in LEGS:
-        o.append(limb(*pts, w0, w1, bulge))
-    for *_, (fx, fy) in LEGS:
-        o.append(foot(fx, fy))
+    legs = [limb_d(*pts, w0, w1, bulge) for pts, w0, w1, bulge, _ in LEGS]
+    o.extend(parts.merged_outline(d, LINE) for d in legs)
+    o.extend(foot(fx, fy, "outline") for *_, (fx, fy) in LEGS)
+    o.extend(f'<path d="{d}" fill="url(#limb)"/>' for d in legs)
+    o.extend(foot(fx, fy, "fill") for *_, (fx, fy) in LEGS)
     return "".join(o)
 
 
@@ -380,19 +398,21 @@ SLEEVE = dict(
 )
 
 
-def arm(p0, p1, p2, p3, kind="back", hand_rot=None):
-    return parts.arm(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, SLEEVE)
+def arm(p0, p1, p2, p3, kind="back", hand_rot=None, fold=None):
+    return parts.arm(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, SLEEVE, fold=fold)
 
 
-def arm_pose(side, p1, p2, p3, kind="back", hand_rot=None, layer="back"):
+def arm_pose(side, p1, p2, p3, kind="back", hand_rot=None, layer="back", fold=None):
     """One arm of a pose: Bezier from the shoulder, hand kind and rotation,
-    drawn behind ("back") or in front of ("front") the head."""
+    drawn behind ("back") or in front of ("front") the head; fold as in
+    parts.arm, for a forearm that crosses in front of the upper arm."""
     return dict(
         side=side,
         points=((SL if side == "L" else SR), p1, p2, p3),
         kind=kind,
         hand_rot=hand_rot,
         layer=layer,
+        fold=fold,
     )
 
 
@@ -426,8 +446,8 @@ POSE_DATA = {
         lean=0,
         shadow=82,
         arms=(
-            arm_pose("L", (118, 318), (96, 300), (90, 276), "palm"),
-            arm_pose("R", (282, 318), (304, 300), (310, 276), "palm"),
+            arm_pose("L", (110, 326), (66, 304), (54, 260), "palm"),
+            arm_pose("R", (290, 326), (334, 304), (346, 260), "palm"),
         ),
         face=face(("happy", "happy"), (0, 0), "up", "open", 3, True),
         sparkles=(
@@ -441,7 +461,10 @@ POSE_DATA = {
         lift=0,
         lean=2,
         shadow=106,
-        arms=(ARM_L_DOWN, arm_pose("R", (298, 372), (268, 376), (250, 330), "fist", -24, "front")),
+        arms=(
+            ARM_L_DOWN,
+            arm_pose("R", (312, 392), (286, 412), (248, 340), "fist", -24, "front", 0.5),
+        ),
         face=face(("open", "open"), (7, -8), "curious", "curious", 8, False),
     ),
     "surprised": dict(
@@ -449,8 +472,8 @@ POSE_DATA = {
         lean=0,
         shadow=106,
         arms=(
-            arm_pose("L", (104, 334), (88, 314), (92, 290), "palm", 18, "front"),
-            arm_pose("R", (296, 334), (312, 314), (308, 290), "palm", -18, "front"),
+            arm_pose("L", (98, 350), (62, 330), (78, 292), "palm", 18, "front"),
+            arm_pose("R", (302, 350), (338, 330), (322, 292), "palm", -18, "front"),
         ),
         face=face(("wide", "wide"), (0, 0), "up", "o", 0, False),
         marks=True,
@@ -459,7 +482,7 @@ POSE_DATA = {
         lift=0,
         lean=-2,
         shadow=106,
-        arms=(ARM_L_DOWN, arm_pose("R", (300, 356), (318, 338), (308, 312), "thumb", 0, "front")),
+        arms=(ARM_L_DOWN, arm_pose("R", (306, 378), (346, 370), (338, 324), "thumb", 0, "front")),
         face=face(("happy", "smiling"), (0, 0), "happy", "open", -5, True),
         sparkles=((338, 262, 1.1, SPARKLE),),
     ),
@@ -488,7 +511,7 @@ def character(pose):
     back = []
     front = []
     for a in data["arms"]:
-        drawn = arm(*a["points"], a["kind"], a["hand_rot"])
+        drawn = arm(*a["points"], a["kind"], a["hand_rot"], a["fold"])
         (front if a["layer"] == "front" else back).extend(drawn)
     o.append(dress())
     o.extend(back)

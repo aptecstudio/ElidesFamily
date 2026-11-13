@@ -50,7 +50,21 @@ def bez(t, p0, p1, p2, p3):
     )
 
 
-def limb(p0, p1, p2, p3, w0, w1, bulge=3, fill="url(#limb)", line=LINE, t0=0.0, t1=1.0, cap=True):
+def limb(
+    p0,
+    p1,
+    p2,
+    p3,
+    w0,
+    w1,
+    bulge=3,
+    fill="url(#limb)",
+    line=LINE,
+    t0=0.0,
+    t1=1.0,
+    cap=True,
+    layer="both",
+):
     steps = 40
 
     def dbez_at(t, a, b, c, d):
@@ -74,6 +88,10 @@ def limb(p0, p1, p2, p3, w0, w1, bulge=3, fill="url(#limb)", line=LINE, t0=0.0, 
     else:
         d += " L%.1f,%.1f " % right[-1]
     d += " ".join("L%.1f,%.1f" % q for q in reversed(right)) + " Z"
+    if layer == "outline":
+        return parts.merged_outline(d, line)
+    if layer == "fill":
+        return f'<path d="{d}" fill="{fill}"/>'
     return (
         f'<path d="{d}" fill="{fill}" stroke="{line}" stroke-width="2.6" stroke-linejoin="round"/>'
     )
@@ -100,13 +118,23 @@ def arm(p0, p1, p2, p3, kind="back", hand_rot=None):
 SLEEVE = dict(fill="url(#dress)", line=DLINE, t1=0.34, w0=40, w1=34)
 
 
-def foot(x, y):
-    return (
-        f'<g transform="translate({x},{y}) scale(1.25)">'
-        f'<path d="M-21,4 C-23,-8 -12,-14 0,-14 C12,-14 23,-8 21,4 C21,11 12,14 0,14 C-12,14 -21,11 -21,4 Z" fill="url(#white)" stroke="{WLINE}" stroke-width="2.6"/>'
-        f'<path d="M-9,3 C-10,8 -9,11 -8,13 M0,4 C0,9 0,12 0,14 M9,3 C10,8 9,11 8,13" fill="none" stroke="{WLINE}" stroke-width="2" stroke-linecap="round"/>'
-        f'<ellipse cx="-6" cy="-6" rx="7" ry="3" fill="#FFFFFF" opacity="0.8"/></g>'
-    )
+FOOT_D = "M-21,4 C-23,-8 -12,-14 0,-14 C12,-14 23,-8 21,4 C21,11 12,14 0,14 C-12,14 -21,11 -21,4 Z"
+
+
+def foot(x, y, layer="both"):
+    """Foot; layer "outline" / "fill" / "both" as in parts.paw, so the foot
+    and the leg merge into one piece."""
+    o = [f'<g transform="translate({x},{y}) scale(1.25)">']
+    if layer in ("outline", "both"):
+        o.append(parts.merged_outline(FOOT_D, WLINE, 2.6 / 1.25))
+    if layer in ("fill", "both"):
+        o.append(f'<path d="{FOOT_D}" fill="url(#white)"/>')
+        o.append(
+            f'<path d="M-9,3 C-10,8 -9,11 -8,13 M0,4 C0,9 0,12 0,14 M9,3 C10,8 9,11 8,13" fill="none" stroke="{WLINE}" stroke-width="2" stroke-linecap="round"/>'
+        )
+        o.append('<ellipse cx="-6" cy="-6" rx="7" ry="3" fill="#FFFFFF" opacity="0.8"/>')
+    o.append("</g>")
+    return "".join(o)
 
 
 def body_lower():
@@ -118,10 +146,12 @@ def body_lower():
     o.append(
         '<path d="M258,440 C304,442 330,404 324,366 C320,340 298,336 292,352 C288,364 302,370 306,360" fill="none" stroke="#E2A85A" stroke-width="17" stroke-linecap="round"/>'
     )
-    o.append(limb((174, 446), (173, 468), (173, 488), (174, 506), 44, 38, 2))
-    o.append(limb((226, 446), (227, 468), (227, 488), (226, 506), 44, 38, 2))
-    o.append(foot(172, 520))
-    o.append(foot(228, 520))
+    # Each leg and its foot are one piece: all the outlines, then the fills.
+    for layer in ("outline", "fill"):
+        o.append(limb((174, 446), (173, 468), (173, 488), (174, 506), 44, 38, 2, layer=layer))
+        o.append(limb((226, 446), (227, 468), (227, 488), (226, 506), 44, 38, 2, layer=layer))
+        o.append(foot(172, 520, layer))
+        o.append(foot(228, 520, layer))
     return "".join(o)
 
 

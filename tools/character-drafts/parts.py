@@ -28,8 +28,13 @@ def _dbez(t, p0, p1, p2, p3):
     )
 
 
-def limb_outline(p0, p1, p2, p3, w0, w1, bulge=3, t0=0.0, t1=1.0, cap_end=True, cap_start=False):
-    """Closed outline of a limb; the width goes from w0 (root) to w1 (tip)."""
+def limb_outline(
+    p0, p1, p2, p3, w0, w1, bulge=3, t0=0.0, t1=1.0, cap_end=True, cap_start=False, closed=True
+):
+    """Closed outline of a limb; the width goes from w0 (root) to w1 (tip).
+
+    closed=False leaves out the edge across the start (t0), to outline a piece
+    of limb drawn over the rest of the same limb without a visible cut."""
     steps = 40
     left = []
     right = []
@@ -68,7 +73,8 @@ def limb_outline(p0, p1, p2, p3, w0, w1, bulge=3, t0=0.0, t1=1.0, cap_end=True, 
     path += list(reversed(right))
     if cap_start:
         path += cap(right[0], left[0], t0, -1)
-    return "M%.1f,%.1f " % path[0] + " ".join("L%.1f,%.1f" % q for q in path[1:]) + " Z"
+    d = "M%.1f,%.1f " % path[0] + " ".join("L%.1f,%.1f" % q for q in path[1:])
+    return d + " Z" if closed else d
 
 
 def limb(
@@ -105,67 +111,122 @@ _FIST = "M-12,3 C-13,-7 -8,-12 0,-12 C8,-12 13,-7 12,3 C11,11 6,15 0,15 C-6,15 -
 _THUMB_UP = "M-10,-7 C-12,-18 -9,-28 -3,-28 C3,-28 4,-20 2,-10"
 
 
+def thumb_mirror(kind, side):
+    """Horizontal flip of the hand so the thumb sits on the right side.
+
+    A hand has a fixed handedness: the thumb side only depends on which hand
+    it is and on whether the palm or the back is shown, while the rotation of
+    the hand does the rest. With the palm side shown ("palm", "fist" and
+    "thumb", whose curled fingers face the viewer) the thumb points towards the
+    body when the fingers are up; with the back shown, it points outwards when
+    the fingers are up and towards the body when the arm hangs down.
+
+    side: "L" for the hand on the viewer's left (the character's right), "R"
+    for the other one. Local frame: fingers towards -y, thumb towards -x.
+    """
+    palm_side = kind != "back"
+    return (-1 if palm_side else 1) * (1 if side == "L" else -1)
+
+
+_clip_n = [0]
+
+
 def paw(
-    x, y, rot, kind="back", fill="url(#limb)", line="#000", pad="#F7B7CB", scale=1.4, mirror=None
+    x,
+    y,
+    rot,
+    kind="back",
+    fill="url(#limb)",
+    line="#000",
+    pad="#F7B7CB",
+    scale=1.4,
+    mirror=None,
+    side=None,
+    layer="both",
 ):
     """Little hand.
 
-    kind: "back"  back of the hand facing the viewer (idle), thumb towards the body;
-          "palm"  palm with pads (wave, cheer, surprised), thumb pointing outwards;
-          "fist"  soft fist (hand on the chin), thumb towards the body;
-          "thumb" thumbs up (proud), thumb towards the body.
-    The thumb side is computed from the position relative to the body axis,
-    unless mirror (+1 or -1) forces it (used by the animation rig export).
+    kind: "back"  back of the hand facing the viewer (idle);
+          "palm"  palm with pads (wave, cheer, surprised);
+          "fist"  soft fist (hand on the chin);
+          "thumb" thumbs up (proud).
+    The thumb side follows the handedness (see thumb_mirror); side defaults to
+    the side of the body axis the hand is on; mirror (+1 or -1) forces the flip
+    (used by the animation rig export).
+
+    layer: "outline" draws only the silhouette outline, "fill" everything else,
+    "both" the whole hand. Drawing the outlines of hand and arm first and the
+    fills on top makes them one smooth piece, with no line at the wrist.
     """
-    th = math.radians(rot)
-    tx = -math.cos(th)  # thumb direction (world x axis)
-    toward_body = (CENTER_X - x) * tx > 0
-    want_body = kind != "palm"
-    sx = 1 if toward_body == want_body else -1
-    if mirror is not None:
-        sx = mirror
-    s = f' stroke="{line}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"'
+    if mirror is None:
+        mirror = thumb_mirror(kind, side or ("L" if x < CENTER_X else "R"))
+    sx = mirror
     if kind in ("back", "palm"):
-        thumb = f'<path d="{_THUMB}" fill="{fill}"{s}/>'
-        palm = f'<path d="{_PALM}" fill="{fill}"{s}/>'
-        creases = f'<path d="M-4,-15 L-4,-10 M4,-15 L4,-10" fill="none" stroke="{line}" stroke-width="1.8" stroke-linecap="round"/>'
-        if kind == "palm":
-            body = (
-                thumb
-                + palm
-                + creases
-                + f'<ellipse cx="0" cy="5" rx="6" ry="5" fill="{pad}" opacity="0.85"/>'
-                + f'<circle cx="-7" cy="-12" r="2.2" fill="{pad}" opacity="0.8"/>'
-                + f'<circle cx="0" cy="-14" r="2.2" fill="{pad}" opacity="0.8"/>'
-                + f'<circle cx="7" cy="-12" r="2.2" fill="{pad}" opacity="0.8"/>'
-            )
-        else:  # back of the hand: the thumb is partly behind the palm
-            body = (
-                thumb
-                + palm
-                + creases
-                + '<ellipse cx="-3" cy="-6" rx="5" ry="3" fill="#FFFFFF" opacity="0.6"/>'
-            )
+        shapes = (_THUMB, _PALM)
     elif kind == "fist":
-        body = (
-            f'<path d="{_FIST}" fill="{fill}"{s}/>'
-            f'<path d="M-6,-11 Q-4,-6 -6,-2 M2,-12 Q4,-7 2,-3 M9,-8 Q10,-4 8,0" fill="none" stroke="{line}" stroke-width="1.7" stroke-linecap="round"/>'
-            f'<path d="M-12,2 C-6,-2 2,-1 6,3" fill="none"{s}/>'
-            '<ellipse cx="-2" cy="7" rx="5" ry="3" fill="#FFFFFF" opacity="0.5"/>'
+        shapes = (_FIST,)
+    else:
+        shapes = (_FIST, _THUMB_UP)
+
+    o = []
+    if layer in ("outline", "both"):
+        # Silhouette: a stroke twice as wide, half of it covered by the fill.
+        o.extend(
+            f'<path d="{d}" fill="{line}" stroke="{line}" stroke-width="4.8" stroke-linejoin="round"/>'
+            for d in shapes
         )
-    else:  # thumb
-        body = (
-            f'<path d="{_FIST}" fill="{fill}"{s}/>'
-            f'<path d="{_THUMB_UP}" fill="{fill}"{s}/>'
-            f'<path d="M3,-6 Q11,-5 12,0 M2,2 Q11,3 12,7 M1,9 Q8,11 9,13" fill="none" stroke="{line}" stroke-width="1.7" stroke-linecap="round"/>'
-            '<ellipse cx="-5" cy="-20" rx="2" ry="4" fill="#FFFFFF" opacity="0.6"/>'
-        )
-    return f'<g transform="translate({x:.1f},{y:.1f}) rotate({rot:.1f}) scale({sx * scale},{scale})">{body}</g>'
+    if layer in ("fill", "both"):
+        o.extend(f'<path d="{d}" fill="{fill}"/>' for d in shapes)
+        thin = f'fill="none" stroke="{line}" stroke-linecap="round"'
+        if kind in ("back", "palm"):
+            # Line between thumb and palm: the edge of the palm on the thumb side.
+            o.append(
+                f'<path d="M-11,8 C-13,0 -13,-7 -11,-12" fill="none" stroke="{line}" stroke-width="2.4" stroke-linecap="round"/>'
+            )
+            o.append(f'<path d="M-4,-15 L-4,-10 M4,-15 L4,-10" {thin} stroke-width="1.8"/>')
+            if kind == "palm":
+                o.append(
+                    f'<ellipse cx="0" cy="5" rx="6" ry="5" fill="{pad}" opacity="0.85"/>'
+                    f'<circle cx="-7" cy="-12" r="2.2" fill="{pad}" opacity="0.8"/>'
+                    f'<circle cx="0" cy="-14" r="2.2" fill="{pad}" opacity="0.8"/>'
+                    f'<circle cx="7" cy="-12" r="2.2" fill="{pad}" opacity="0.8"/>'
+                )
+            else:
+                o.append('<ellipse cx="-3" cy="-6" rx="5" ry="3" fill="#FFFFFF" opacity="0.6"/>')
+        elif kind == "fist":
+            o.append(
+                f'<path d="M-6,-11 Q-4,-6 -6,-2 M2,-12 Q4,-7 2,-3 M9,-8 Q10,-4 8,0" {thin} stroke-width="1.7"/>'
+            )
+            o.append(
+                f'<path d="M-12,2 C-6,-2 2,-1 6,3" fill="none" stroke="{line}" stroke-width="2.4" stroke-linecap="round"/>'
+            )
+            o.append('<ellipse cx="-2" cy="7" rx="5" ry="3" fill="#FFFFFF" opacity="0.5"/>')
+        else:
+            # The thumb is in front of the fist: outline it only over the fist.
+            _clip_n[0] += 1
+            cid = f"fistC{_clip_n[0]}"
+            o.append(
+                f'<clipPath id="{cid}"><path d="{_FIST}"/></clipPath>'
+                f'<path d="{_THUMB_UP}" fill="none" stroke="{line}" stroke-width="2.4" '
+                f'stroke-linecap="round" clip-path="url(#{cid})"/>'
+            )
+            o.append(
+                f'<path d="M3,-6 Q11,-5 12,0 M2,2 Q11,3 12,7 M1,9 Q8,11 9,13" {thin} stroke-width="1.7"/>'
+            )
+            o.append('<ellipse cx="-5" cy="-20" rx="2" ry="4" fill="#FFFFFF" opacity="0.6"/>')
+    return (
+        f'<g transform="translate({x:.1f},{y:.1f}) rotate({rot:.1f}) scale({sx * scale},{scale})">'
+        + "".join(o)
+        + "</g>"
+    )
+
+
+def merged_outline(d, line, width=2.6):
+    """Outline pass of a shape that must merge with its neighbours."""
+    return f'<path d="{d}" fill="{line}" stroke="{line}" stroke-width="{2 * width}" stroke-linejoin="round"/>'
 
 
 # ---------------------------------------------------------------- arms
-
-_clip_n = [0]
 
 
 def arm(
@@ -182,21 +243,41 @@ def arm(
     hand_line=None,
     pad="#F7B7CB",
     w=(30, 24),
+    fold=None,
 ):
     """Chubby arm with a sleeve that follows the arm curve.
 
     sleeve: None, or a dict with fill, line, t1 (where the sleeve ends, 0..1),
             w0/w1 (sleeve width), trim (optional trim color), trim_line,
             long (True for long sleeves: no shadow under the cuff).
+    fold:   for an arm folded onto itself (hand near the shoulder), the point
+            of the curve (0..1) after which the forearm is drawn again in front
+            of the upper arm and of the sleeve.
     """
     _clip_n[0] += 1
     cid = f"armC{_clip_n[0]}"
     o = []
     arm_d = limb_outline(p0, p1, p2, p3, w[0], w[1], 3)
-    o.append(f'<clipPath id="{cid}"><path d="{arm_d}"/></clipPath>')
-    o.append(
-        f'<path d="{arm_d}" fill="{fur}" stroke="{line}" stroke-width="2.6" stroke-linejoin="round"/>'
+    q = bez(0.92, p0, p1, p2, p3)
+    dx, dy = p3[0] - q[0], p3[1] - q[1]
+    length = math.hypot(dx, dy) or 1
+    dx, dy = dx / length, dy / length
+    rot = math.degrees(math.atan2(dy, dx)) + 90 if hand_rot is None else hand_rot
+    side = "L" if p0[0] < CENTER_X else "R"
+    hand_args = (
+        p3[0] + dx * 14,
+        p3[1] + dy * 14,
+        rot,
+        kind,
+        hand_fill or fur,
+        hand_line or line,
+        pad,
     )
+    # Arm and hand are one piece: both outlines first, then the fills.
+    o.append(f'<clipPath id="{cid}"><path d="{arm_d}"/></clipPath>')
+    o.append(merged_outline(arm_d, line))
+    o.append(paw(*hand_args, side=side, layer="outline"))
+    o.append(f'<path d="{arm_d}" fill="{fur}"/>')
     if sleeve:
         t1 = sleeve["t1"]
         if not sleeve.get("long"):
@@ -231,14 +312,17 @@ def arm(
                 f'<path d="M{c[0]:.1f},{c[1] - hw:.1f} a3,{hw:.1f} 0 0 1 0,{2 * hw:.1f}" transform="rotate({ang:.1f} {c[0]:.1f} {c[1]:.1f})" '
                 f'fill="none" stroke="{sleeve["line"]}" stroke-width="2" stroke-linecap="round" opacity="0.6"/>'
             )
-    q = bez(0.92, p0, p1, p2, p3)
-    dx, dy = p3[0] - q[0], p3[1] - q[1]
-    length = math.hypot(dx, dy) or 1
-    dx, dy = dx / length, dy / length
-    rot = math.degrees(math.atan2(dy, dx)) + 90 if hand_rot is None else hand_rot
-    o.append(
-        paw(p3[0] + dx * 14, p3[1] + dy * 14, rot, kind, hand_fill or fur, hand_line or line, pad)
-    )
+    if fold is not None:
+        # Forearm in front: outline its sides and tip only, so it starts
+        # seamlessly from the arm underneath.
+        edge = limb_outline(p0, p1, p2, p3, w[0], w[1], 3, t0=fold, closed=False)
+        o.append(
+            f'<path d="{edge}" fill="none" stroke="{line}" stroke-width="5.2" stroke-linejoin="round"/>'
+        )
+        o.append(paw(*hand_args, side=side, layer="outline"))
+        piece = limb_outline(p0, p1, p2, p3, w[0], w[1], 3, t0=fold)
+        o.append(f'<path d="{piece}" fill="{fur}"/>')
+    o.append(paw(*hand_args, side=side, layer="fill"))
     return o
 
 

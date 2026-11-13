@@ -185,10 +185,13 @@ def main():
     part("dress", ch.dress())
     part("collar", ch.sleeves())
     part("tail", ch.tail())
-    part("foot", ch.foot(*ANCHOR), ANCHOR)
-    for kind in HAND_KINDS:
-        hand = parts.paw(*ANCHOR, 0, kind, "url(#limb)", ch.LINE, mirror=1)
-        part(f"hand_{kind}", hand, ANCHOR)
+    # Hands and feet come in two layers, so the game can merge them with the
+    # limbs like the drafts do: all outlines first, then all fills.
+    for layer in ("outline", "fill"):
+        part(f"foot_{layer}", ch.foot(*ANCHOR, layer), ANCHOR)
+        for kind in HAND_KINDS:
+            hand = parts.paw(*ANCHOR, 0, kind, "url(#limb)", ch.LINE, mirror=1, layer=layer)
+            part(f"hand_{kind}_{layer}", hand, ANCHOR)
 
     sleeve = dict(ch.SLEEVE)
     rig = dict(
@@ -250,6 +253,7 @@ def main():
                         kind=a["kind"],
                         handRot=a["hand_rot"],
                         layer=a["layer"],
+                        fold=a.get("fold"),
                     )
                     for a in d["arms"]
                 ],

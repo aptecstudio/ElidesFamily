@@ -19,7 +19,9 @@ Every sheet in this folder follows these rules: what changes is the character's 
 - Round eyes set wide apart (about one eye apart), colored eyebrows.
 - Large light muzzle in the lower part of the face, little nose on top, simple smile.
 - Chubby arms and legs, thicker at the root; little hands with a thumb and three fingers, feet with toes.
-- Hands: at rest the back of the hand faces the viewer with the thumb towards the body; when the palm is shown (wave, cheer, surprised) the thumb points outwards.
+- Hands follow their **handedness** (D-051): with the palm shown and the fingers up (wave, cheer, surprised) the thumb points **towards the body**; at rest, arm hanging and back of the hand to the viewer, the thumb is also towards the body; with the back shown and the fingers up it points outwards.
+- Hands and feet are **one piece with the limbs**: no outline at the wrist or ankle, only the outer silhouette is outlined (lines stay only inside: thumb against palm, fingers, toes).
+- In every pose the arms must stay **visible**: raised arms go beside the head, not behind it; a forearm that comes back to the face or the chest crosses in front of its own upper arm and sleeve.
 - Sleeves follow the arm in every pose: the arm comes out of the sleeve with a soft shadow, without a visible joint.
 - Kids (Elide, Rio) and adults (Dad, Mom) have the same head: the body is what changes.
 - Right and left are always meant **from the character's point of view**.
