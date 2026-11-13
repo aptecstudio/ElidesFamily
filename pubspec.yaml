@@ -29,6 +29,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/hub/
     - assets/images/characters/elide/
     - assets/images/characters/rio/
     - assets/images/characters/mom/

@@ -16,6 +16,7 @@ class CharacterView extends StatefulWidget {
     this.controller,
     this.reactToTouch = true,
     this.onTap,
+    this.onReady,
     super.key,
   });
 
@@ -28,6 +29,9 @@ class CharacterView extends StatefulWidget {
   /// Play a random reaction when touched.
   final bool reactToTouch;
   final VoidCallback? onTap;
+
+  /// Called once the rig is loaded and the character can play actions.
+  final VoidCallback? onReady;
 
   @override
   State<CharacterView> createState() => _CharacterViewState();
@@ -53,6 +57,7 @@ class _CharacterViewState extends State<CharacterView>
     _controller.attach(rig);
     setState(() => _renderer = CharacterRenderer(rig));
     _ticker.start();
+    widget.onReady?.call();
   }
 
   void _onTick(Duration elapsed) {
