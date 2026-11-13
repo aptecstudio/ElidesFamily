@@ -24,9 +24,9 @@ Last update: 2026-11-13
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** on the new PC, finish the first debug build, install it on the emulators and on the owner's phone and check the landscape start, then `flutter run` with hot reload (Phase 2); design approval of the updated drafts (Phase 4); menu graphics (Phase 5).
+**Next step (next session):** `flutter run` with hot reload on the emulators and on the owner's phone (wireless debugging); add the Fredoka font; design approval of the updated drafts (Phase 4); menu graphics (Phase 5).
 
-**Previous step:** Android platform generated and configured (app ID, landscape, Android TV manifest and banner); the first build stopped because the disk was full.
+**Previous step:** new PC set up with emulators (D-045); first debug APK built and tested on the phone emulator.
 
 ---
 
@@ -77,7 +77,7 @@ Last update: 2026-11-13
 - [x] `flutter pub get` (versions resolved, `pubspec.lock` committed)
 - [x] `flutter analyze` and `flutter test` with no errors
 - [ ] Live test: `flutter run` on the phone (USB or wireless debugging) + hot reload
-- [ ] First test APK build (`flutter build apk --debug`)
+- [x] First test APK build (`flutter build apk --debug`): installed on `ef_phone`, starts in landscape and full screen, hub → Colors → home works (2026-11-13)
 - [x] Manifest ready for Android TV: `android.hardware.touchscreen` and `android.software.leanback` with `required="false"`, `LEANBACK_LAUNCHER` intent, temporary TV banner (320×180, `tools/character-drafts/tv_banner.py`)
 - [x] Test emulators: smartphone (`ef_phone`), tablet (`ef_tablet`), Android TV 1080p (`ef_tv`) on the new PC (D-045)
 
