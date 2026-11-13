@@ -9,8 +9,8 @@ import math
 import sys
 
 import parts
+import poses
 
-OUT = sys.argv[1]
 LINE = "#A8692A"  # honey fur outline
 WLINE = "#C9A27A"  # white patches outline
 SLINE = "#2A7AAE"  # overalls outline
@@ -93,21 +93,31 @@ def foot(x, y, layer="both"):
     return "".join(o)
 
 
+TAIL_D = "M254,420 C276,420 288,406 280,394 C276,388 268,392 270,398"
+TAIL_ROOT = (254, 420)
+# Legs: Bezier control points, root width, tip width, bulge; foot position.
+LEGS = (
+    (((172, 432), (171, 450), (171, 468), (172, 486)), 44, 38, 2, (170, 496)),
+    (((228, 432), (229, 450), (229, 468), (228, 486)), 44, 38, 2, (230, 496)),
+)
+
+
+def tail():
+    """Short curly tail, typical of the French bulldog."""
+    return (
+        f'<path d="{TAIL_D}" fill="none" stroke="{LINE}" stroke-width="21" stroke-linecap="round"/>'
+        f'<path d="{TAIL_D}" fill="none" stroke="#E2A85A" stroke-width="16" stroke-linecap="round"/>'
+    )
+
+
 def body_lower():
-    o = []
-    # short curly tail, typical of the French bulldog
-    o.append(
-        f'<path d="M254,420 C276,420 288,406 280,394 C276,388 268,392 270,398" fill="none" stroke="{LINE}" stroke-width="21" stroke-linecap="round"/>'
-    )
-    o.append(
-        '<path d="M254,420 C276,420 288,406 280,394 C276,388 268,392 270,398" fill="none" stroke="#E2A85A" stroke-width="16" stroke-linecap="round"/>'
-    )
+    o = [tail()]
     # Each leg and its foot are one piece: all the outlines, then the fills.
     for layer in ("outline", "fill"):
-        o.append(limb((172, 432), (171, 450), (171, 468), (172, 486), 44, 38, 2, layer=layer))
-        o.append(limb((228, 432), (229, 450), (229, 468), (228, 486), 44, 38, 2, layer=layer))
-        o.append(foot(170, 496, layer))
-        o.append(foot(230, 496, layer))
+        for pts, w0, w1, bulge, _ in LEGS:
+            o.append(limb(*pts, w0, w1, bulge, layer=layer))
+        for *_, (fx, fy) in LEGS:
+            o.append(foot(fx, fy, layer))
     return "".join(o)
 
 
@@ -245,34 +255,56 @@ def head_base():
     return "".join(o)
 
 
+# Eye geometry, shared with the animation rig (export_rig.py).
+EYE_X = (150, 250)
+EYE_CY, EYE_RX, EYE_RY = 198, 30, 31
+OPEN_EYES = ("open", "wide", "smiling")
+PUPIL = "#1A0E08"
+
+
+def iris_geometry(cx, side, dx=0, dy=0, kind="open"):
+    """Center, iris radius and pupil radius of an open eye."""
+    r = 25 if kind != "wide" else 21
+    pr = 11.5 if kind != "wide" else 8
+    ix = cx + (1 if side == "L" else -1) + dx
+    iy = 201 + dy + (0 if kind != "wide" else -3)
+    return ix, iy, r, pr
+
+
+def eye_cover(cx, kind):
+    """Cheek that rises and closes the eye from below (inside the eye clip)."""
+    if kind != "smiling":
+        return ""
+    return f'<path d="M{cx - 34},232 Q{cx},210 {cx + 34},232 L{cx + 34},240 L{cx - 34},240 Z" fill="#E8B060"/>'
+
+
 def eye(cx, side, dx=0, dy=0, kind="open"):
     """Like Elide but without eyelashes (male character)."""
-    o = []
     clip = "eyeLC" if side == "L" else "eyeRC"
-    left = side == "L"
-    if kind in ("open", "wide", "smiling"):
-        o.append(
-            f'<ellipse cx="{cx}" cy="198" rx="30" ry="31" fill="#FFFFFF" stroke="{EYE}" stroke-width="2.2"/>'
-        )
-        r = 25 if kind != "wide" else 21
-        pr = 11.5 if kind != "wide" else 8
-        ix = cx + (1 if left else -1) + dx
-        iy = 201 + dy + (0 if kind != "wide" else -3)
-        o.append(
-            f'<g clip-path="url(#{clip})"><circle cx="{ix}" cy="{iy}" r="{r}" fill="url(#iris)"/><circle cx="{ix}" cy="{iy + 1}" r="{pr}" fill="#1A0E08"/>'
-            f'<ellipse cx="{ix + 8}" cy="{iy - 10}" rx="7.5" ry="8.5" fill="#FFFFFF"/><circle cx="{ix - 9}" cy="{iy + 10}" r="3.4" fill="#FFFFFF" opacity="0.9"/>'
-        )
-        if kind == "smiling":
-            o.append(
-                f'<path d="M{cx - 34},232 Q{cx},210 {cx + 34},232 L{cx + 34},240 L{cx - 34},240 Z" fill="#E8B060"/>'
-            )
-        o.append("</g>")
+    if kind not in OPEN_EYES:
+        return eye_lids(cx, side, kind)
+    ix, iy, r, pr = iris_geometry(cx, side, dx, dy, kind)
+    return (
+        f'<ellipse cx="{cx}" cy="{EYE_CY}" rx="{EYE_RX}" ry="{EYE_RY}" fill="#FFFFFF" stroke="{EYE}" stroke-width="2.2"/>'
+        f'<g clip-path="url(#{clip})"><circle cx="{ix}" cy="{iy}" r="{r}" fill="url(#iris)"/><circle cx="{ix}" cy="{iy + 1}" r="{pr}" fill="{PUPIL}"/>'
+        f'<ellipse cx="{ix + 8}" cy="{iy - 10}" rx="7.5" ry="8.5" fill="#FFFFFF"/><circle cx="{ix - 9}" cy="{iy + 10}" r="3.4" fill="#FFFFFF" opacity="0.9"/>'
+        + eye_cover(cx, kind)
+        + "</g>"
+        + eye_lids(cx, side, kind)
+    )
+
+
+def eye_lids(cx, side, kind="open"):
+    """Everything drawn over the iris (lid, cheek line), or the whole eye
+    when it is closed ("happy" arc, "closed" blink)."""
+    o = []
+    if kind in OPEN_EYES:
         if kind == "smiling":
             o.append(
                 f'<path d="M{cx - 26},222 Q{cx},212 {cx + 26},222" fill="none" stroke="{LINE}" stroke-width="2" stroke-linecap="round"/>'
             )
         lift = -5 if kind == "wide" else 0
-        if left:
+        if side == "L":
             o.append(
                 f'<path d="M121,{193 + lift} Q150,{164 + lift} 179,{191 + lift}" fill="none" stroke="{EYE}" stroke-width="4" stroke-linecap="round"/>'
             )
@@ -283,6 +315,10 @@ def eye(cx, side, dx=0, dy=0, kind="open"):
     elif kind == "happy":
         o.append(
             f'<path d="M{cx - 25},206 Q{cx},182 {cx + 25},206" fill="none" stroke="{EYE}" stroke-width="4.6" stroke-linecap="round"/>'
+        )
+    elif kind == "closed":
+        o.append(
+            f'<path d="M{cx - 26},202 Q{cx},216 {cx + 26},202" fill="none" stroke="{EYE}" stroke-width="4.4" stroke-linecap="round"/>'
         )
     return "".join(o)
 
@@ -330,8 +366,18 @@ def mouth(kind="smile"):
         )
 
 
-def sparkle(x, y, s, c="#FFD84A"):
-    return f'<path transform="translate({x},{y}) scale({s})" d="M0,-10 L2.5,-2.5 L10,0 L2.5,2.5 L0,10 L-2.5,2.5 L-10,0 L-2.5,-2.5 Z" fill="{c}"/>'
+SPARKLE_D = "M0,-10 L2.5,-2.5 L10,0 L2.5,2.5 L0,10 L-2.5,2.5 L-10,0 L-2.5,-2.5 Z"
+SURPRISE_MARKS = "M330,94 L340,78 M344,110 L360,104 M60,94 L50,78"
+MARKS_COLOR = "#4A2E1C"
+PAD = "#B9705A"
+
+
+def blush_cheeks():
+    return '<ellipse cx="114" cy="248" rx="20" ry="12" fill="#FF7F6A" opacity="0.4" filter="url(#b3)"/><ellipse cx="286" cy="248" rx="20" ry="12" fill="#FF7F6A" opacity="0.4" filter="url(#b3)"/>'
+
+
+def sparkle(x, y, s, c=poses.SPARKLE):
+    return f'<path transform="translate({x},{y}) scale({s})" d="{SPARKLE_D}" fill="{c}"/>'
 
 
 SL, SR = (150, 316), (250, 316)
@@ -340,104 +386,14 @@ SLEEVE = dict(
 )
 
 
-def arm(p0, p1, p2, p3, kind="back", hand_rot=None):
-    return parts.arm(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, SLEEVE, pad="#B9705A")
+def arm(p0, p1, p2, p3, kind="back", hand_rot=None, fold=None):
+    return parts.arm(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, SLEEVE, pad=PAD, fold=fold)
 
 
-def arm_l_down():
-    return arm(SL, (134, 340), (120, 372), (114, 400))
+# Poses shared with Elide (same body): see poses.py.
+POSE_DATA = poses.kid_poses(SL, SR, accents=("#8FD3F4", "#FFB5A7"))
+body = torso
+collar = sleeves
 
-
-def arm_r_down():
-    return arm(SR, (266, 340), (280, 372), (286, 400))
-
-
-def character(pose):
-    o = []
-    lift = -16 if pose == "cheer" else 0
-    shadow_rx = 82 if pose == "cheer" else 106
-    o.append(
-        f'<ellipse cx="200" cy="520" rx="{shadow_rx}" ry="11" fill="#1D5A3A" opacity="0.28" filter="url(#b6)"/>'
-    )
-    lean = {"idle": 0, "wave": -2, "cheer": 0, "curious": 2, "surprised": 0, "proud": -2}[pose]
-    o.append(f'<g transform="translate(0,{lift}) rotate({lean} 200 500)">')
-    o.append(body_lower())
-    back = []
-    front = []
-    if pose == "idle":
-        back = arm_l_down() + arm_r_down()
-        face = ("open", "open", 0, 0, "normal", "smile", -3, False)
-    elif pose == "wave":
-        back = arm_l_down() + arm(SR, (284, 330), (310, 318), (318, 290), "palm")
-        face = ("smiling", "smiling", 0, 0, "happy", "open", -6, True)
-    elif pose == "cheer":
-        back = arm(SL, (118, 318), (96, 300), (90, 276), "palm") + arm(
-            SR, (282, 318), (304, 300), (310, 276), "palm"
-        )
-        face = ("happy", "happy", 0, 0, "up", "open", 3, True)
-    elif pose == "curious":
-        back = arm_l_down()
-        front = arm(SR, (298, 372), (268, 376), (250, 330), "fist", -24)
-        face = ("open", "open", 7, -8, "curious", "curious", 8, False)
-    elif pose == "surprised":
-        front = arm(SL, (104, 334), (88, 314), (92, 290), "palm", 18) + arm(
-            SR, (296, 334), (312, 314), (308, 290), "palm", -18
-        )
-        face = ("wide", "wide", 0, 0, "up", "o", 0, False)
-    elif pose == "proud":
-        back = arm_l_down()
-        front = arm(SR, (300, 356), (318, 338), (308, 312), "thumb", 0)
-        face = ("happy", "smiling", 0, 0, "happy", "open", -5, True)
-    o.append(torso())
-    o.extend(back)
-    o.append(sleeves())
-    eye_l, eye_r, dx, dy, br, mo, tilt, blush = face
-    o.append(f'<g transform="rotate({tilt} 200 300)">')
-    o.append(head_base())
-    if blush:
-        o.append(
-            '<ellipse cx="114" cy="248" rx="20" ry="12" fill="#FF7F6A" opacity="0.4" filter="url(#b3)"/><ellipse cx="286" cy="248" rx="20" ry="12" fill="#FF7F6A" opacity="0.4" filter="url(#b3)"/>'
-        )
-    o.append(brows(br))
-    o.append(eye(150, "L", dx, dy, eye_l))
-    o.append(eye(250, "R", dx, dy, eye_r))
-    o.append(mouth(mo))
-    o.append("</g>")
-    o.extend(front)
-    if pose == "cheer":
-        o.append(sparkle(52, 210, 1.5))
-        o.append(sparkle(352, 186, 1.2))
-        o.append(sparkle(344, 322, 1.0, "#8FD3F4"))
-        o.append(sparkle(60, 334, 0.9, "#FFB5A7"))
-    if pose == "proud":
-        o.append(sparkle(338, 262, 1.1))
-    if pose == "surprised":
-        o.append(
-            '<path d="M330,94 L340,78 M344,110 L360,104 M60,94 L50,78" fill="none" stroke="#4A2E1C" stroke-width="3.5" stroke-linecap="round"/>'
-        )
-    o.append("</g>")
-    return "".join(o)
-
-
-POSES = [
-    ("idle", "Idle"),
-    ("wave", "Hi!"),
-    ("cheer", "Hooray!"),
-    ("curious", "Curious"),
-    ("surprised", "Surprised"),
-    ("proud", "Well done!"),
-]
-mode = sys.argv[2] if len(sys.argv) > 2 else "sheet"
-if mode == "single":
-    svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1080" viewBox="0 0 400 540">{DEFS}{character("idle")}</svg>'
-else:
-    cw, ch = 400, 600
-    cells = []
-    for i, (p, label) in enumerate(POSES):
-        cx = (i % 3) * cw
-        cy = (i // 3) * ch
-        cells.append(
-            f'<g transform="translate({cx},{cy})">{character(p)}<text x="200" y="572" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-weight="bold" font-size="26" fill="#4A2E1C">{label}</text></g>'
-        )
-    svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">{DEFS}{"".join(cells)}</svg>'
-open(OUT, "w").write(svg)
+if __name__ == "__main__":
+    poses.main(sys.modules[__name__], "#4A2E1C")

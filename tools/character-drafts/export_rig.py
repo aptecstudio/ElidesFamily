@@ -159,6 +159,7 @@ def main():
     os.makedirs(anim_dir, exist_ok=True)
     asset_dir = f"assets/images/characters/{name}"
     defs = ch.DEFS
+    pad = getattr(ch, "PAD", "#F7B7CB")
     part_rects = {}
 
     def part(key, content, anchor=None):
@@ -182,15 +183,15 @@ def main():
                 cx, side, kind
             )
             part(f"eye_{side.lower()}_{kind}", content)
-    part("dress", ch.dress())
-    part("collar", ch.sleeves())
+    part("body", ch.body())
+    part("collar", ch.collar())
     part("tail", ch.tail())
     # Hands and feet come in two layers, so the game can merge them with the
     # limbs like the drafts do: all outlines first, then all fills.
     for layer in ("outline", "fill"):
         part(f"foot_{layer}", ch.foot(*ANCHOR, layer), ANCHOR)
         for kind in HAND_KINDS:
-            hand = parts.paw(*ANCHOR, 0, kind, "url(#limb)", ch.LINE, mirror=1, layer=layer)
+            hand = parts.paw(*ANCHOR, 0, kind, "url(#limb)", ch.LINE, pad, mirror=1, layer=layer)
             part(f"hand_{kind}_{layer}", hand, ANCHOR)
 
     sleeve = dict(ch.SLEEVE)
@@ -230,7 +231,7 @@ def main():
             line=ch.EYE,
             lineWidth=2.2,
             iris="iris",
-            pupil="#0E1330",
+            pupil=getattr(ch, "PUPIL", "#0E1330"),
             open=list(ch.OPEN_EYES),
             geometry={
                 kind: dict(
@@ -240,7 +241,7 @@ def main():
             },
         ),
         sparkle=dict(d=ch.SPARKLE_D),
-        marks=dict(d=ch.SURPRISE_MARKS, color="#3B2C55", width=3.5),
+        marks=dict(d=ch.SURPRISE_MARKS, color=ch.MARKS_COLOR, width=3.5),
         poses={
             pose: dict(
                 lift=d["lift"],
