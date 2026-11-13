@@ -24,9 +24,9 @@ Last update: 2026-11-13
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** build the approved hub in Flutter (Phase 5): sky-and-meadow scene, Elide, scrolling two-row card grid, gear; then the remaining menu choices (loading screen, in-game buttons, item bar).
+**Next step (next session):** owner review of Elide's animations on the emulator; export Rio, Dad and Mom with `export_rig.py`; then build the approved hub (Phase 5).
 
-**Previous step:** new PC with emulators (D-045); debug build, hot reload and Fredoka verified; character design approved (D-046); menu design approved (D-047, D-048, D-049).
+**Previous step:** menu design approved (D-047..D-049); character animation engine and animated Elide (D-050), shown in the temporary hub.
 
 ---
 
@@ -110,20 +110,20 @@ Last update: 2026-11-13
   - [x] Port Rio, Dad and Mom to `parts.py` (hands and sleeves)
   - [x] Regenerate every model, pose sheet and the group sheet
 - [x] Design approval by the owner: all four characters approved (D-046, 2026-11-13)
-- [ ] Final layered illustrations (head, eyes, mouths, limbs, clothes) exported as SVG parts
-- [ ] Flutter character renderer: layered parts + Bezier limbs recomputed every frame (D-039)
-- [ ] Layered animation controller: body, face, eyes, mouth (D-033)
-- [ ] Idle animations: breathing, blinking, looking around, waiting, sitting
+- [~] Layered parts exported by `export_rig.py` as PNG layers + vector data + poses (D-050): **Elide done** (2026-11-13); Rio, Dad, Mom to do
+- [x] Flutter character renderer: layered parts + Bezier limbs recomputed every frame (D-039, D-050), checked against the approved sheet
+- [x] Animation controller: smooth pose blending, always-on layers, timed actions (`CharacterController`)
+- [~] Idle animations: breathing, blinking, looking around, tail swing done; waiting, sitting to do
 - [ ] Movement: walking (front and side), running, turning, entering/leaving, jumps
-- [ ] Happiness: smile, hop, hooray, clapping, laughing, thumbs up, hug
+- [~] Happiness: hooray with two hops, giggle, thumbs-up pose done; clapping, hug to do
 - [ ] Dances: at least 3 looping
 - [ ] Gentle disapproval: head shake, wagging finger, pout, crossed arms, shoulders down, slightly sad
-- [ ] Thinking and surprise: curious, confused, surprised, small funny fright
-- [ ] Interaction: wave, beckon, point, take/hand over, reaction to touch
+- [~] Thinking and surprise: curious and surprised poses, surprise jump done; confused, fright to do
+- [~] Interaction: animated wave and random reaction to touch done; beckon, point, take/hand over to do
 - [ ] Routines: eating, drinking, washing, yawning, sleeping
 - [ ] Viseme lip sync for the TTS voices
 - [ ] Complete suite for all four characters
-- [ ] Reusable widget for every character
+- [x] Reusable widget for every character (`CharacterView`), painter usable in Flame too (`CharacterRenderer`)
 
 ## Phase 5 — Main hub
 

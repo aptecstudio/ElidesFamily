@@ -49,7 +49,7 @@ Last update: 2026-11-13
 | D-036 | 2026-11-12 | **Dad** (Papà, draft) and his 6 poses **provisionally approved**: white Labrador, not tall and a bit chubby, soft slightly raised ears, dark brown eyes without eyelashes, no accessories; plain meadow-green hoodie with hood, drawstrings and kangaroo pocket, jeans with a rolled-up hem. Sheet in `docs/characters/dad/`. The adults have the same head as the kids and a taller scene (580 instead of 540). | The owner's choices through polls (a first version with a sweater, taller and slimmer, was discarded). | ✅ active |
 | D-037 | 2026-11-12 | **Mom** (Mamma, draft) and her 6 poses **provisionally approved**: honey cat with white muzzle, chest and paws, head built like Elide's (pointed ears, eyelashes, pink nose), green eyes, dark-lavender **round glasses**, knee-length lavender dress with short sleeves, belt and little bow; same build as Dad. Sheet in `docs/characters/mom/`. | The owner's choices through polls (a headband and then a bun were tried and discarded). | ✅ active |
 | D-038 | 2026-11-12 | In scenes the **kids** (Elide, Rio) are drawn at **85%** of the adults. Group sheet in `docs/characters/group.png` (`tools/character-drafts/group.py`). | With the same head for everyone, at full scale the parents looked barely taller than the kids; the owner's choice. | ✅ active |
-| D-039 | 2026-11-12 | Characters are **animated by code** in Flutter/Flame, starting from **layered SVG parts** (head, eyes, mouths, arms, legs, clothes) produced by the draft scripts. No Rive rig: the `rive` dependency was removed. Arms and legs stay smooth curves (Bezier "limbs") recomputed every frame, so they bend without visible joints. | The owner's choice: the Rive rig can only be done by hand in the Rive editor, while code animation can be done entirely within the project. Drawing the limbs as curves keeps the goal of D-031 (no visible joints). | ✅ active |
+| D-039 | 2026-11-12 | Characters are **animated by code** in Flutter/Flame, starting from **layered SVG parts** (format of the parts refined by D-050) (head, eyes, mouths, arms, legs, clothes) produced by the draft scripts. No Rive rig: the `rive` dependency was removed. Arms and legs stay smooth curves (Bezier "limbs") recomputed every frame, so they bend without visible joints. | The owner's choice: the Rive rig can only be done by hand in the Rive editor, while code animation can be done entirely within the project. Drawing the limbs as curves keeps the goal of D-031 (no visible joints). | ✅ active |
 | D-040 | 2026-11-12 | AGENTS.md updated on the owner's request: all **source code and documentation in English**, **chat with the owner in Italian**; **commits in English**; every language follows **its own standard conventions** (Dart: Effective Dart + `dart format` + `flutter_lints`; Python: PEP 8 checked with `ruff`, config in `ruff.toml`). Existing docs, comments and file names were translated. | Requested by the owner. | ✅ active |
 | D-041 | 2026-11-12 | Shared draft parts in `tools/character-drafts/parts.py`: `limb()`, `arm()` with a **sleeve that follows the arm** (puffy sleeve along the arm curve, cuff perpendicular to the arm, soft shadow where the arm comes out), `paw()` with an **automatic thumb side** (back of the hand at rest with the thumb towards the body; palm shown with the thumb outwards), and `render()` SVG → PNG through librsvg (PyGObject), so `rsvg-convert` is no longer required. | Optimization of the drafts requested by the owner: the resting hands looked inside out and the arm looked like a tube attached under a fixed sleeve. | ✅ active |
 | D-042 | 2026-11-12 | The ARB template is now **`app_en.arb`** (it holds the `@` descriptions); `app_it.arb` only holds the Italian translations. | Consequence of D-040: descriptions are documentation and must be in English. | ✅ active |
@@ -60,6 +60,7 @@ Last update: 2026-11-13
 | D-047 | 2026-11-13 | **Main menu (hub)**: sky-and-meadow scene (far hill, meadow, bushes, flowers, drifting clouds, sun with a glow); **Elide on the left** who breathes, blinks and **reacts** to touches (waves, laughs) and cheers when a game is chosen; the games are **straight rounded postcards in two rows** that **scroll sideways**, filled column by column; each card has a pastel frame, a cream drawing area and the game **name on a cream badge** across the bottom edge (small Fredoka text, read aloud by the voice on touch). Draft: `docs/menu/hub_menu.png` (`tools/menu-drafts/hub_menu.py`). | The owner's choices through polls; the first drafts (tilted cards in one row, then a flat look) were discarded. | ✅ active |
 | D-048 | 2026-11-13 | **Parents' entrance**: a small, low-contrast **drawn gear** in the top-right corner, leading to the parental gate. | The owner's choice: easy for adults to find, not attractive for the child. | ✅ active |
 | D-049 | 2026-11-13 | **Graphics with volume**, not flat: soft gradients, glossy highlights, drop shadows, cards with a darker "cushion" edge, and a **"puffy" lighting filter** (specular light from the top left) on drawn icons, in the same style as the characters. | The owner rejected a flat version of the menu as "too flat". | ✅ active |
+| D-050 | 2026-11-13 | **Character rig pipeline**: `tools/character-drafts/export_rig.py <name>` exports, from the same draft code, (1) the parts with soft shading (head, dress, collar, tail, feet, hands, brows, mouths, eye lids) as cropped **PNG layers at 3x** in `assets/images/characters/<name>/`, (2) the **vector data** of what moves every frame (arms with sleeves, legs, irises, shadow, sparkles) and (3) the **poses** (`POSE_DATA`) in `assets/animations/char_<name>_rig.json`. In Flutter, `lib/characters/` draws it: `CharacterRig` (loading), `CharacterRenderer`/`CharacterPainter` (drawing, also usable from Flame), `CharacterFrame` (blendable state), `CharacterController` (pose blending, breathing, blinking, gaze, tail, actions wave/cheer/giggle/surprise) and `CharacterView` (widget that reacts to touch). The draft scripts keep their poses as data (`POSE_DATA`) so sheets and game never diverge; refactors are checked by comparing the generated SVGs byte by byte. New pieces not on the sheets (blink "closed" eyes, "giggle" pose) are built from approved shapes. | Flutter's SVG support does not render blur filters, which the drafts use for their soft shading: PNG layers keep the approved look exactly, while code-drawn limbs still bend without visible joints (goal of D-039). | ✅ active |
 
 ### Rules for the minigames on Android TV (D-025)
 
@@ -144,7 +145,7 @@ lib/
 │   └── game_route.dart           # transition between scenes
 ├── core/
 │   └── bouncy_tap.dart           # shared touch feedback (D-020)
-├── characters/                   # Elide, Rio, Dad, Mom (code animation, D-039)
+├── characters/                   # rig loading, renderer, controller, CharacterView (D-039, D-050)
 ├── hub/
 │   └── hub_scene.dart            # main scene (temporary)
 ├── parental_gate/                # protected adults' area
@@ -154,7 +155,8 @@ lib/
         └── colors_game_scene.dart  # placeholder of the Colors minigame
 assets/
 ├── images/
-├── animations/
+│   └── characters/<name>/        # rig PNG layers (D-050)
+├── animations/                   # char_<name>_rig.json (D-050)
 ├── audio/
 │   ├── music/
 │   ├── sfx/
@@ -163,7 +165,7 @@ assets/
 test/
 └── widget_test.dart
 tools/
-├── character-drafts/             # Python draft scripts (D-032): parts.py, elide.py, rio.py, dad.py, mom.py, group.py
+├── character-drafts/             # Python draft scripts (D-032): parts.py, elide.py, rio.py, dad.py, mom.py, group.py, export_rig.py
 └── menu-drafts/                  # menu design drafts (hub_menu.py, D-047)
 docs/
 ├── characters/                   # art direction, sheets and draft images

@@ -3,7 +3,7 @@
 Shared visual reference for every character in Elide's Family.
 Every sheet in this folder follows these rules: what changes is the character's identity, not the style.
 
-> Status: **drafts provisionally approved** (2026-11-12). Shapes, colors and poses are the working base; the final rendering will be refined.
+> Status: **design approved** (2026-11-13, D-046). Shapes, colors and poses are the working base; the final rendering will be refined.
 
 ## Style
 
@@ -71,6 +71,17 @@ python3 elide.py /tmp/elide_poses.svg && python3 parts.py /tmp/elide_poses.svg .
 python3 elide.py /tmp/elide_model.svg single && python3 parts.py /tmp/elide_model.svg ../../docs/characters/elide/elide_model.png
 python3 group.py ../../docs/characters/group.png
 ```
+
+### Animation rig (D-050)
+
+The game does not use the sheets: `export_rig.py` turns the same draft code into the parts the game animates.
+
+```bash
+cd tools/character-drafts
+python3 export_rig.py elide   # PNG layers in assets/images/characters/elide/, rig in assets/animations/char_elide_rig.json
+```
+
+The poses live in `POSE_DATA` inside each draft script, so a pose changed there changes both the sheet and the game. After changing a draft, regenerate the sheet **and** the rig.
 
 ## Group sheet
 
