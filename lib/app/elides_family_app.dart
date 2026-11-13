@@ -21,10 +21,12 @@ class ElidesFamilyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       textStyle: const TextStyle(
-        // Will become 'Fredoka' once the font is in the assets (D-017).
+        fontFamily: 'Fredoka',
         color: GameColors.cocoa,
         fontSize: 28,
         fontWeight: FontWeight.w600,
+        // Fredoka is a variable font: the weight is set on its axis too.
+        fontVariations: [FontVariation.weight(600)],
       ),
       pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) =>
           GameRoute<T>(settings: settings, builder: builder),
