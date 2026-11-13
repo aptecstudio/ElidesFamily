@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:elides_family/app/elides_family_app.dart';
 import 'package:elides_family/hub/game_card.dart';
+import 'package:elides_family/hub/surprise_card.dart';
 import 'package:elides_family/minigames/colors/colors_game_scene.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -59,6 +60,13 @@ void main() {
           '$previewDir/hub_${size.width.round()}.png',
         ).writeAsBytesSync(png!.buffer.asUint8List());
       }
+
+      // A surprise wiggles but opens nothing.
+      await tester.tap(find.byType(SurpriseCard).first);
+      for (var i = 0; i < 20; i++) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
+      expect(find.byType(ColorsGameScene), findsNothing);
 
       await tester.tap(find.byType(GameCard).first);
       for (var i = 0; i < 40; i++) {

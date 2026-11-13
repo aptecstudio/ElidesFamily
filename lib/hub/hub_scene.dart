@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
+import '../app/game_colors.dart';
 import '../app/game_route.dart';
 import '../characters/character_controller.dart';
 import '../characters/character_view.dart';
@@ -10,12 +11,14 @@ import '../l10n/app_localizations.dart';
 import 'game_card.dart';
 import 'hub_background.dart';
 import 'hub_games.dart';
+import 'surprise_card.dart';
 
 /// Main scene (hub), where the child picks a minigame (D-047..D-049).
 ///
 /// A sky-and-meadow scene with Elide on the left, who waves when the hub
 /// opens, reacts to touches and cheers when a game is chosen; the games are
-/// postcards in two rows that scroll sideways; a small gear in the top-right
+/// postcards in two rows that scroll sideways, completed by closed surprises
+/// for the games still to come (D-056); a small gear in the top-right
 /// corner is the parents' entrance (D-048).
 ///
 /// Everything is laid out in design units: the scene is [hubDesignHeight]
@@ -38,6 +41,16 @@ class _HubSceneState extends State<HubScene>
   static const _elide = Rect.fromLTWH(29, 161, 392, 529);
   static const _gearCenter = Offset(-64, 56); // from the top-right corner
   static const _gearBox = 160.0;
+
+  /// Cards on the hub: the games, completed with surprises (D-056).
+  static const _minCards = 8;
+  static const _surpriseColors = [
+    GameColors.skyBlue,
+    GameColors.butterYellow,
+    GameColors.meadowGreen,
+    GameColors.lavender,
+    GameColors.peachPink,
+  ];
 
   final _elideController = CharacterController();
   final _time = ValueNotifier<double>(0);
@@ -127,30 +140,40 @@ class _HubSceneState extends State<HubScene>
   }
 
   Widget _grid(AppLocalizations l10n) {
-    final columns = <Widget>[];
-    for (var i = 0; i < hubGames.length; i += 2) {
-      columns.add(
+    // The real games first, then closed surprises for the games still to
+    // come (D-056), so the meadow is never empty.
+    final cards = <Widget>[
+      for (final game in hubGames)
+        GameCard(
+          color: game.color,
+          art: cardIcon(game.icon),
+          name: game.name(l10n),
+          onTap: () => _openGame(game),
+        ),
+      for (var i = hubGames.length; i < _minCards; i++)
+        SurpriseCard(
+          color: _surpriseColors[i % _surpriseColors.length],
+          onTap: () => _elideController.play(CharacterAction.surprise),
+        ),
+    ];
+    // Filled column by column, so the grid grows sideways.
+    final columns = <Widget>[
+      for (var i = 0; i < cards.length; i += 2)
         Padding(
           padding: const EdgeInsets.only(right: _columnGap),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              for (final game in hubGames.skip(i).take(2))
+              for (final card in cards.skip(i).take(2))
                 Padding(
                   padding: const EdgeInsets.only(bottom: _rowGap),
-                  child: GameCard(
-                    color: game.color,
-                    icon: game.icon,
-                    name: game.name(l10n),
-                    onTap: () => _openGame(game),
-                  ),
+                  child: card,
                 ),
             ],
           ),
         ),
-      );
-    }
+    ];
     return ScrollConfiguration(
       // Also scroll with a mouse drag (desktop and emulator).
       behavior: const ScrollBehavior().copyWith(

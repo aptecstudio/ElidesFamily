@@ -16,6 +16,18 @@ const double _depth = 12;
 const double _badgeHeight = 50;
 const double _line = 7;
 
+/// Size of the cream drawing area, where the icon sits.
+const Size cardArtSize = Size(230 - 36, 200 - 52);
+
+/// An icon exported by `tools/menu-drafts/export_hub.py`, sized for
+/// the drawing area of a card.
+Widget cardIcon(String asset) => Image.asset(
+  asset,
+  width: cardArtSize.width,
+  height: cardArtSize.height,
+  filterQuality: FilterQuality.medium,
+);
+
 /// Soft drop shadow of cards and badges (the draft's `soft` filter).
 const _soft = BoxShadow(
   color: Color(0x473E5A2E),
@@ -29,7 +41,7 @@ const _soft = BoxShadow(
 class GameCard extends StatelessWidget {
   const GameCard({
     required this.color,
-    required this.icon,
+    required this.art,
     required this.name,
     required this.onTap,
     super.key,
@@ -37,8 +49,8 @@ class GameCard extends StatelessWidget {
 
   final Color color;
 
-  /// Asset of the game icon, exported by `tools/menu-drafts/export_hub.py`.
-  final String icon;
+  /// Drawing in the cream area, [cardArtSize] large (usually [cardIcon]).
+  final Widget art;
   final String name;
   final VoidCallback onTap;
 
@@ -112,8 +124,8 @@ class GameCard extends StatelessWidget {
             Positioned(
               left: 18,
               top: 20,
-              width: cardSize.width - 36,
-              height: cardSize.height - 52,
+              width: cardArtSize.width,
+              height: cardArtSize.height,
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(_radius - 16),
@@ -133,16 +145,7 @@ class GameCard extends StatelessWidget {
                     stops: const [0, 0.16, 1],
                   ),
                 ),
-                child: OverflowBox(
-                  maxWidth: double.infinity,
-                  maxHeight: double.infinity,
-                  child: Image.asset(
-                    icon,
-                    width: cardSize.width - 36,
-                    height: cardSize.height - 52,
-                    filterQuality: FilterQuality.medium,
-                  ),
-                ),
+                child: art,
               ),
             ),
             // Name badge.
