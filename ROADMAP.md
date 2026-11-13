@@ -122,6 +122,8 @@ Last update: 2026-11-13
 - [~] Interaction: animated wave and random reaction to touch done; beckon, point, take/hand over to do
 - [ ] Routines: eating, drinking, washing, yawning, sleeping
 - [ ] Viseme lip sync for the TTS voices
+- [x] Hands with the right handedness, paws merged with the limbs, visible arms (D-051); Elide's poses fixed
+- [ ] Rio, Dad and Mom: poses as `POSE_DATA` with visible arms (same fix as Elide), then `export_rig.py`
 - [ ] Complete suite for all four characters
 - [x] Reusable widget for every character (`CharacterView`), painter usable in Flame too (`CharacterRenderer`)
 
