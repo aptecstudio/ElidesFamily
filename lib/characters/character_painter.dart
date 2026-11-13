@@ -53,7 +53,7 @@ class CharacterRenderer {
 
     canvas.save();
     _scaleAround(canvas, _waist, 1 - f.breathe * 0.4, 1 + f.breathe);
-    _part(canvas, 'dress');
+    _part(canvas, 'body');
     for (final MapEntry(key: side, value: arm) in f.arms.entries) {
       if (!arm.front) _arm(canvas, side, arm);
     }

@@ -186,8 +186,8 @@
     18.0
    ]
   },
-  "dress": {
-   "file": "assets/images/characters/elide/char_elide_dress.png",
+  "body": {
+   "file": "assets/images/characters/elide/char_elide_body.png",
    "rect": [
     124.0,
     294.0,

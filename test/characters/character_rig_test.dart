@@ -45,22 +45,24 @@ void main() {
     );
   });
 
-  test('every pose of Elide is drawn', () async {
-    final rig = await CharacterRig.load('elide');
-    for (final pose in rig.poses.keys) {
-      final image = await _render(
-        rig,
-        CharacterFrame.fromPose(rig.poses[pose]!),
-      );
-      expect(await _inked(image), greaterThan(500), reason: pose);
-      if (previewDir != null) {
-        final png = await image.toByteData(format: ui.ImageByteFormat.png);
-        File(
-          '$previewDir/elide_$pose.png',
-        ).writeAsBytesSync(png!.buffer.asUint8List());
+  for (final name in ['elide', 'rio']) {
+    test('every pose of $name is drawn', () async {
+      final rig = await CharacterRig.load(name);
+      for (final pose in rig.poses.keys) {
+        final image = await _render(
+          rig,
+          CharacterFrame.fromPose(rig.poses[pose]!),
+        );
+        expect(await _inked(image), greaterThan(500), reason: pose);
+        if (previewDir != null) {
+          final png = await image.toByteData(format: ui.ImageByteFormat.png);
+          File(
+            '$previewDir/${name}_$pose.png',
+          ).writeAsBytesSync(png!.buffer.asUint8List());
+        }
       }
-    }
-  });
+    });
+  }
 
   test('actions play and the character goes back to rest', () async {
     final rig = await CharacterRig.load('elide');
