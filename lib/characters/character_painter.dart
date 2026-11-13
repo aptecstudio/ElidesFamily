@@ -53,14 +53,20 @@ class CharacterRenderer {
 
     canvas.save();
     _scaleAround(canvas, _waist, 1 - f.breathe * 0.4, 1 + f.breathe);
-    _part(canvas, 'body');
+    // Torso, shoulders and sleeves are one piece (D-053): torso outline,
+    // all the arms, then the torso fill over the roots of the sleeves.
+    _part(canvas, 'body_outline');
     for (final MapEntry(key: side, value: arm) in f.arms.entries) {
-      if (!arm.front) _arm(canvas, side, arm);
+      _arm(canvas, side, arm);
     }
+    _part(canvas, 'body_fill');
     _part(canvas, 'collar');
     _head(canvas, f);
+    // Forearms and hands in front of the head or of their own sleeve.
     for (final MapEntry(key: side, value: arm) in f.arms.entries) {
-      if (arm.front) _arm(canvas, side, arm);
+      if (arm.front || arm.fold != null) {
+        _armFront(canvas, side, arm, arm.fold ?? rig.arm.frontFrom);
+      }
     }
     canvas.restore();
 
@@ -96,20 +102,7 @@ class CharacterRenderer {
     final style = rig.arm;
     final armPath = limbOutline(p, style.w0, style.w1, bulge: style.bulge);
 
-    // Hand, at the end of the arm and turned along it.
-    final q = bezierAt(p, 0.92);
-    var dir = p[3] - q;
-    dir = dir / (dir.distance == 0 ? 1 : dir.distance);
-    final rotDeg = a.handRot ?? math.atan2(dir.dy, dir.dx) * 180 / math.pi + 90;
-    final handPos = p[3] + dir * style.handOffset;
-    void hand(String layer) {
-      canvas.save();
-      canvas.translate(handPos.dx, handPos.dy);
-      canvas.rotate(rad(rotDeg));
-      canvas.scale(thumbMirror(a.kind, side), 1);
-      _part(canvas, 'hand_${a.kind}_$layer');
-      canvas.restore();
-    }
+    void hand(String layer) => _hand(canvas, side, a, layer);
 
     _outline(canvas, armPath);
     hand('outline');
@@ -181,30 +174,51 @@ class CharacterRenderer {
     }
     canvas.restore();
 
-    final fold = a.fold;
-    if (fold != null) {
-      // Forearm crossing in front of the upper arm and of the sleeve: outline
-      // only its sides and tip, so it starts seamlessly from the arm below.
-      final edge = limbOutline(
-        p,
-        style.w0,
-        style.w1,
-        bulge: style.bulge,
-        t0: fold,
-        closed: false,
-      );
-      _stroke(canvas, edge, rig.line, 2 * rig.limbStroke);
-      hand('outline');
-      final piece = limbOutline(
-        p,
-        style.w0,
-        style.w1,
-        bulge: style.bulge,
-        t0: fold,
-      );
-      _fill(canvas, piece, rig.limbFill);
-    }
     hand('fill');
+  }
+
+  /// Forearm (from [t0]) and hand drawn again over the arm: in front of the
+  /// head, or over its own sleeve. Only its sides and tip are outlined, so it
+  /// starts seamlessly from the arm underneath (`parts.arm_front()`).
+  void _armFront(Canvas canvas, String side, ArmFrame a, double t0) {
+    final p = a.points;
+    final style = rig.arm;
+    final edge = limbOutline(
+      p,
+      style.w0,
+      style.w1,
+      bulge: style.bulge,
+      t0: t0,
+      closed: false,
+    );
+    _stroke(canvas, edge, rig.line, 2 * rig.limbStroke);
+    _hand(canvas, side, a, 'outline');
+    final piece = limbOutline(
+      p,
+      style.w0,
+      style.w1,
+      bulge: style.bulge,
+      t0: t0,
+    );
+    _fill(canvas, piece, rig.limbFill);
+    _hand(canvas, side, a, 'fill');
+  }
+
+  /// One layer (`outline` or `fill`) of the hand at the end of an arm,
+  /// turned along it.
+  void _hand(Canvas canvas, String side, ArmFrame a, String layer) {
+    final p = a.points;
+    final q = bezierAt(p, 0.92);
+    var dir = p[3] - q;
+    dir = dir / (dir.distance == 0 ? 1 : dir.distance);
+    final rotDeg = a.handRot ?? math.atan2(dir.dy, dir.dx) * 180 / math.pi + 90;
+    final pos = p[3] + dir * rig.arm.handOffset;
+    canvas.save();
+    canvas.translate(pos.dx, pos.dy);
+    canvas.rotate(rad(rotDeg));
+    canvas.scale(thumbMirror(a.kind, side), 1);
+    _part(canvas, 'hand_${a.kind}_$layer');
+    canvas.restore();
   }
 
   // ------------------------------------------------------------ head

@@ -151,7 +151,8 @@ class ArmStyle {
     : w0 = _d(json['w0']),
       w1 = _d(json['w1']),
       bulge = _d(json['bulge']),
-      handOffset = _d(json['handOffset']);
+      handOffset = _d(json['handOffset']),
+      frontFrom = _d(json['frontFrom']);
 
   final double w0;
   final double w1;
@@ -159,6 +160,10 @@ class ArmStyle {
 
   /// Distance of the palm center beyond the end of the arm curve.
   final double handOffset;
+
+  /// Point of the arm curve (0..1) from which an arm in front of the head is
+  /// drawn again over it.
+  final double frontFrom;
 }
 
 class SleeveStyle {
