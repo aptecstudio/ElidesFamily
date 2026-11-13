@@ -105,20 +105,25 @@ _FIST = "M-12,3 C-13,-7 -8,-12 0,-12 C8,-12 13,-7 12,3 C11,11 6,15 0,15 C-6,15 -
 _THUMB_UP = "M-10,-7 C-12,-18 -9,-28 -3,-28 C3,-28 4,-20 2,-10"
 
 
-def paw(x, y, rot, kind="back", fill="url(#limb)", line="#000", pad="#F7B7CB", scale=1.4):
+def paw(
+    x, y, rot, kind="back", fill="url(#limb)", line="#000", pad="#F7B7CB", scale=1.4, mirror=None
+):
     """Little hand.
 
     kind: "back"  back of the hand facing the viewer (idle), thumb towards the body;
           "palm"  palm with pads (wave, cheer, surprised), thumb pointing outwards;
           "fist"  soft fist (hand on the chin), thumb towards the body;
           "thumb" thumbs up (proud), thumb towards the body.
-    The thumb side is computed from the position relative to the body axis.
+    The thumb side is computed from the position relative to the body axis,
+    unless mirror (+1 or -1) forces it (used by the animation rig export).
     """
     th = math.radians(rot)
     tx = -math.cos(th)  # thumb direction (world x axis)
     toward_body = (CENTER_X - x) * tx > 0
     want_body = kind != "palm"
     sx = 1 if toward_body == want_body else -1
+    if mirror is not None:
+        sx = mirror
     s = f' stroke="{line}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"'
     if kind in ("back", "palm"):
         thumb = f'<path d="{_THUMB}" fill="{fill}"{s}/>'
