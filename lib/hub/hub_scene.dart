@@ -23,9 +23,9 @@ class HubScene extends StatelessWidget {
         const CustomPaint(painter: _LandscapePainter()),
         Center(
           child: _FloatingBubble(
-            onTap: () => Navigator.of(context).push(
-              GameRoute<void>(builder: (_) => const ColorsGameScene()),
-            ),
+            onTap: () => Navigator.of(
+              context,
+            ).push(GameRoute<void>(builder: (_) => const ColorsGameScene())),
             child: const _PaletteIcon(),
           ),
         ),
