@@ -24,9 +24,9 @@ Last update: 2026-11-13
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** owner review of Elide's animations on the emulator; export Rio, Dad and Mom with `export_rig.py`; then build the approved hub (Phase 5).
+**Next step (next session):** build the approved hub in Flutter (Phase 5) with the animated Elide; then the remaining animation suite (walking, dances, disapproval, routines, lip sync).
 
-**Previous step:** menu design approved (D-047..D-049); character animation engine and animated Elide (D-050), shown in the temporary hub.
+**Previous step:** menu design approved (D-047..D-049); character animation engine (D-050) and the whole family refined and animated (D-051..D-054).
 
 ---
 
@@ -110,7 +110,7 @@ Last update: 2026-11-13
   - [x] Port Rio, Dad and Mom to `parts.py` (hands and sleeves)
   - [x] Regenerate every model, pose sheet and the group sheet
 - [x] Design approval by the owner: all four characters approved (D-046, 2026-11-13)
-- [~] Layered parts exported by `export_rig.py` as PNG layers + vector data + poses (D-050): **Elide and Rio done** (2026-11-13, kids share `poses.py`); Dad, Mom to do
+- [x] Layered parts exported by `export_rig.py` as PNG layers + vector data + poses (D-050): all four characters (2026-11-13)
 - [x] Flutter character renderer: layered parts + Bezier limbs recomputed every frame (D-039, D-050), checked against the approved sheet
 - [x] Animation controller: smooth pose blending, always-on layers, timed actions (`CharacterController`)
 - [~] Idle animations: breathing, blinking, looking around, tail swing done; waiting, sitting to do
@@ -124,7 +124,7 @@ Last update: 2026-11-13
 - [ ] Viseme lip sync for the TTS voices
 - [x] Hands with the right handedness, paws merged with the limbs, visible arms (D-051); Elide's poses fixed
 - [x] Rio: shared kids' poses with visible arms, rig exported
-- [ ] Dad and Mom: poses as `POSE_DATA` with visible arms (adult body, Dad's long sleeves), then `export_rig.py`
+- [x] Dad and Mom: shared poses, delicate shoulders, visible arms, rigs exported (D-054)
 - [ ] Complete suite for all four characters
 - [x] Reusable widget for every character (`CharacterView`), painter usable in Flame too (`CharacterRenderer`)
 
