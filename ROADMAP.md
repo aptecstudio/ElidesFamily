@@ -16,7 +16,7 @@ Last update: 2026-11-13
 | 2 | Flutter project setup and live testing | 🟡 in progress |
 | 3 | Shared engine (audio, animations, navigation) | ⚪ not started |
 | 4 | Characters | 🟡 in progress |
-| 5 | Main hub | ⚪ not started |
+| 5 | Main hub | 🟡 in progress |
 | 6 | First minigame (vertical prototype) | ⚪ not started |
 | 7 | More minigames | ⚪ not started |
 | 8 | Parents' area and settings | ⚪ not started |
@@ -24,9 +24,9 @@ Last update: 2026-11-13
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** build the approved hub in Flutter (Phase 5) with the animated Elide; then the remaining animation suite (walking, dances, disapproval, routines, lip sync).
+**Next step (next session):** try the hub on the emulator and the phone; the parental gate behind the gear; then the remaining animation suite (walking, dances, disapproval, routines, lip sync).
 
-**Previous step:** menu design approved (D-047..D-049); character animation engine (D-050) and the whole family refined and animated (D-051..D-054).
+**Previous step:** the approved hub built in Flutter with the animated Elide (D-055).
 
 ---
 
@@ -138,6 +138,8 @@ Last update: 2026-11-13
 - [ ] Animated loading screen with a character
 - [ ] Buttons inside the minigames: back to the games, exit protected by dragging
 - [ ] Item bar inside the minigames (tray to drag from)
+- [x] Hub built in Flutter from the approved draft, with the animated Elide, scrolling cards and the gear (D-055, 2026-11-13)
+- [ ] Parental gate behind the gear (the gear only bounces for now)
 - [ ] Transitions between menus and minigames
 - [ ] Android TV variant with remote focus
 - [x] Menu design sheet approved and saved in `docs/menu/hub_menu.png` (2026-11-13)

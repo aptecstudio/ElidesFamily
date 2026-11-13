@@ -65,6 +65,7 @@ Last update: 2026-11-13
 | D-052 | 2026-11-13 | **Shared poses** in `tools/character-drafts/poses.py`: the pose table (`kid_poses()`), the drawing order (`character()`) and the command line (`main()`) are shared; Elide and Rio (same body) use the same kids' table, each with its own sparkle accents. The adults will get their own table. | One fix to a pose fixes both kids; less duplicated code between the draft scripts. | ✅ active |
 | D-053 | 2026-11-13 | **Torso, shoulders and sleeves as one piece** (kids): the torso has gently **sloping, narrow shoulders** (version "B": narrower at shoulder height, more delicate) and the arms attach at (148,330)/(252,330). Drawing order: torso outline → all the arms (with sleeves) → torso fill → collar → head → forearm and hand again (`arm_front()`, from t=0.5 or the pose's `fold`) for arms in front of the head or over their own sleeve. The old per-arm `fold` drawing is replaced by this. Torso exported as `body_outline` / `body_fill`; Rio's torso outline is yellow (like the sleeves) at the top and blue along the overalls. | The owner: shoulders looked narrow, high and detached ("the sleeve must continue the torso, seen in profile"), then "less athletic, more delicate". A neck and wider shoulders were tried and discarded. | ✅ active |
 | D-054 | 2026-11-13 | **Mom and Dad refined** like the kids: same pose table (`kid_poses()`, the head is the same for everyone) with shoulders at (148,336)/(252,336), delicate sloping shoulders merged with the sleeves, fixed hands and visible arms. The rig format now covers the adults: scene height 580, `waist`, ground and lean pivot per character, optional short `sleeve`, optional `arm.cuff` (Dad's long hoodie sleeve with ribbed cuff, arm drawn in sweater colors), `lower` layer for legs that do not bend (Dad's jeans and feet), `face_over` layer (Mom's glasses over the eyes), hand colors per character (Mom's white paws). All four characters are animated in the game (`CharacterView(character: 'mom' / 'dad')`). | Requested by the owner: the same refinements for the whole family. | ✅ active |
+| D-055 | 2026-11-13 | **Hub built in Flutter** from the approved draft (D-047..D-049): the background (sky, sun, drifting clouds, hills, bushes, swaying flowers) and the cards (cushion, gradient frame, gloss, cream area, name badge) are drawn by Flutter code ported from `hub_menu.py`; the game icons and the gear, which use the "puffy" lighting filter, are exported as PNG at 3x by `tools/menu-drafts/export_hub.py` into `assets/images/hub/`. The scene is laid out in **design units** (720 high, as wide as the screen ratio allows: 1600 on a 20:9 phone) and scaled to the screen; the hills stretch sideways, the other pieces only move. The cards scroll sideways behind Elide; the game list is `hubGames` in `lib/hub/hub_games.dart` (only real games are shown). Elide waves when the hub opens, reacts to touches and cheers before a game opens. | Same look as the approved draft on every screen ratio; drawing in code keeps it sharp and lets it move, while PNGs keep the lighting filter Flutter cannot render (as in D-050). | ✅ active |
 
 ### Rules for the minigames on Android TV (D-025)
 
@@ -150,8 +151,7 @@ lib/
 ├── core/
 │   └── bouncy_tap.dart           # shared touch feedback (D-020)
 ├── characters/                   # rig loading, renderer, controller, CharacterView (D-039, D-050)
-├── hub/
-│   └── hub_scene.dart            # main scene (temporary)
+├── hub/                          # main scene (D-055): hub_scene, hub_background, game_card, hub_games
 ├── parental_gate/                # protected adults' area
 ├── l10n/                         # app_en.arb (template), app_it.arb (+ generated files, not versioned)
 └── minigames/
@@ -159,7 +159,8 @@ lib/
         └── colors_game_scene.dart  # placeholder of the Colors minigame
 assets/
 ├── images/
-│   └── characters/<name>/        # rig PNG layers (D-050)
+│   ├── characters/<name>/        # rig PNG layers (D-050)
+│   └── hub/                      # hub icons and gear (D-055)
 ├── animations/                   # char_<name>_rig.json (D-050)
 ├── audio/
 │   ├── music/
@@ -167,10 +168,12 @@ assets/
 │   └── voice/{it,en}/            # pre-generated TTS voices (D-015)
 └── fonts/                        # Fredoka (D-017)
 test/
-└── widget_test.dart
+├── widget_test.dart
+├── characters/                   # rig tests (CHARACTER_PREVIEW_DIR saves renders)
+└── hub/                          # hub test on phone, tablet and TV ratios
 tools/
 ├── character-drafts/             # Python draft scripts (D-032): parts.py, poses.py, elide.py, rio.py, dad.py, mom.py, group.py, export_rig.py
-└── menu-drafts/                  # menu design drafts (hub_menu.py, D-047)
+└── menu-drafts/                  # menu design drafts (hub_menu.py, D-047) and export_hub.py (D-055)
 docs/
 ├── characters/                   # art direction, sheets and draft images
 └── menu/                         # menu design sheets (hub_menu.png)
