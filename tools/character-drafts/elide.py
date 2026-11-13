@@ -30,13 +30,13 @@ DEFS = """<defs>
 <linearGradient id="earIn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD0DE"/><stop offset="1" stop-color="#F49DB8"/></linearGradient>
 <radialGradient id="bow" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#FF8A96"/><stop offset="0.6" stop-color="#F0475B"/><stop offset="1" stop-color="#C92A40"/></radialGradient>
 <clipPath id="headC"><path d="M200,72 C276,72 322,120 324,188 C326,238 300,280 252,296 C236,302 218,304 200,304 C182,304 164,302 148,296 C100,280 74,238 76,188 C78,120 124,72 200,72 Z"/></clipPath>
-<clipPath id="dressC"><path d="M156,300 Q200,292 244,300 C250,320 254,346 255,372 C261,394 267,416 274,438 Q200,458 126,438 C133,416 139,394 145,372 C146,346 150,320 156,300 Z"/></clipPath>
+<clipPath id="dressC"><path d="M172,297 Q200,292 228,297 C241,303 250,315 252,330 C254,346 256,358 257,372 C261,394 267,416 274,438 Q200,458 126,438 C133,416 139,394 143,372 C144,358 146,346 148,330 C150,315 159,303 172,297 Z"/></clipPath>
 <clipPath id="eyeLC"><ellipse cx="150" cy="198" rx="30" ry="31"/></clipPath>
 <clipPath id="eyeRC"><ellipse cx="250" cy="198" rx="30" ry="31"/></clipPath>
 </defs>"""
 
 HEADP = "M200,72 C276,72 322,120 324,188 C326,238 300,280 252,296 C236,302 218,304 200,304 C182,304 164,302 148,296 C100,280 74,238 76,188 C78,120 124,72 200,72 Z"
-DRESSP = "M156,300 Q200,292 244,300 C250,320 254,346 255,372 C261,394 267,416 274,438 Q200,458 126,438 C133,416 139,394 145,372 C146,346 150,320 156,300 Z"
+DRESSP = "M172,297 Q200,292 228,297 C241,303 250,315 252,330 C254,346 256,358 257,372 C261,394 267,416 274,438 Q200,458 126,438 C133,416 139,394 143,372 C144,358 146,346 148,330 C150,315 159,303 172,297 Z"
 
 
 def tube(d, w, color=LIMB, line=LINE):
@@ -147,7 +147,11 @@ def body_lower(pose=None):
     return "".join(o)
 
 
-def dress():
+def dress(layer="both"):
+    """Dress; layer "outline" / "fill" / "both": the outline is drawn before
+    the arms and the fill after, so shoulders and sleeves are one piece."""
+    if layer == "outline":
+        return parts.merged_outline(DRESSP, DLINE)
     o = []
     o.append(f'<path d="{DRESSP}" fill="url(#dress)"/>')
     o.append(
@@ -156,9 +160,10 @@ def dress():
         '<ellipse cx="262" cy="400" rx="30" ry="70" fill="#0B6158" opacity="0.3" filter="url(#b12)"/>'
         '<ellipse cx="168" cy="360" rx="16" ry="50" fill="#BFFAF3" opacity="0.5" filter="url(#b6)"/></g>'
     )
-    o.append(
-        f'<path d="{DRESSP}" fill="none" stroke="{DLINE}" stroke-width="2.6" stroke-linejoin="round"/>'
-    )
+    if layer == "both":
+        o.append(
+            f'<path d="{DRESSP}" fill="none" stroke="{DLINE}" stroke-width="2.6" stroke-linejoin="round"/>'
+        )
     o.append(hem_scallops())
     o.append(
         f'<path d="M148,362 Q200,372 252,362" fill="none" stroke="{DLINE}" stroke-width="2" stroke-linecap="round" opacity="0.7"/>'
@@ -393,14 +398,18 @@ def sparkle(x, y, s, c=SPARKLE):
     return f'<path transform="translate({x},{y}) scale({s})" d="{SPARKLE_D}" fill="{c}"/>'
 
 
-SL, SR = (150, 316), (250, 316)
+SL, SR = (148, 330), (252, 330)
 SLEEVE = dict(
     fill="url(#dress)", line=DLINE, t1=0.3, w0=44, w1=36, trim="#FFFFFF", trim_line="#B9AFCB"
 )
 
 
-def arm(p0, p1, p2, p3, kind="back", hand_rot=None, fold=None):
-    return parts.arm(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, SLEEVE, fold=fold)
+def arm(p0, p1, p2, p3, kind="back", hand_rot=None):
+    return parts.arm(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, SLEEVE)
+
+
+def arm_front(p0, p1, p2, p3, kind="back", hand_rot=None, t0=0.5):
+    return parts.arm_front(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, t0)
 
 
 # Poses shared with Rio (same body): see poses.py.

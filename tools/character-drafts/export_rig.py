@@ -21,6 +21,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 import parts
+import poses
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..", "..")
@@ -183,7 +184,8 @@ def main():
                 cx, side, kind
             )
             part(f"eye_{side.lower()}_{kind}", content)
-    part("body", ch.body())
+    part("body_outline", ch.body("outline"))
+    part("body_fill", ch.body("fill"))
     part("collar", ch.collar())
     part("tail", ch.tail())
     # Hands and feet come in two layers, so the game can merge them with the
@@ -204,7 +206,7 @@ def main():
         line=ch.LINE,
         limbStroke=2.6,
         limbFill="limb",
-        arm=dict(w0=30, w1=24, bulge=3, handOffset=14),
+        arm=dict(w0=30, w1=24, bulge=3, handOffset=14, frontFrom=poses.FRONT_FROM),
         sleeve=dict(
             fill=url_id(sleeve["fill"]),
             line=sleeve["line"],

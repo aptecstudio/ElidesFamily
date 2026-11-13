@@ -5,14 +5,16 @@ into the animation rig, so the game animates exactly the approved poses.
 The kids (Elide, Rio) have the same body, so they share the same pose table.
 
 A character module using character() / main() provides: DEFS, EYE_X,
-SURPRISE_MARKS, MARKS_COLOR, POSE_DATA and the functions body_lower(), body(),
-arm(), collar(), head_base(), blush_cheeks(), brows(), eye(), mouth(),
+SURPRISE_MARKS, MARKS_COLOR, POSE_DATA and the functions body_lower(),
+body(layer), arm(), arm_front(), collar(), head_base(), blush_cheeks(), brows(), eye(), mouth(),
 sparkle().
 """
 
 import sys
 
 SPARKLE = "#FFD84A"
+# Point of the arm curve from which a "front" arm is drawn again over the head.
+FRONT_FROM = 0.5
 
 
 def arm_pose(shoulder, side, p1, p2, p3, kind="back", hand_rot=None, layer="back", fold=None):
@@ -135,13 +137,12 @@ def character(ch, pose):
     )
     o.append(f'<g transform="translate(0,{data["lift"]}) rotate({data["lean"]} 200 500)">')
     o.append(ch.body_lower())
-    back = []
-    front = []
+    # Torso, shoulders and sleeves are one piece (D-053): torso outline, all
+    # the arms, then the torso fill over the roots of the sleeves.
+    o.append(ch.body("outline"))
     for a in data["arms"]:
-        drawn = ch.arm(*a["points"], a["kind"], a["hand_rot"], a["fold"])
-        (front if a["layer"] == "front" else back).extend(drawn)
-    o.append(ch.body())
-    o.extend(back)
+        o.extend(ch.arm(*a["points"], a["kind"], a["hand_rot"]))
+    o.append(ch.body("fill"))
     o.append(ch.collar())
     f = data["face"]
     eye_l, eye_r = f["eyes"]
@@ -155,7 +156,10 @@ def character(ch, pose):
     o.append(ch.eye(ch.EYE_X[1], "R", dx, dy, eye_r))
     o.append(ch.mouth(f["mouth"]))
     o.append("</g>")
-    o.extend(front)
+    # Forearms and hands in front of the head or of their own sleeve.
+    for a in data["arms"]:
+        if a["layer"] == "front" or a["fold"] is not None:
+            o.extend(ch.arm_front(*a["points"], a["kind"], a["hand_rot"], a["fold"] or FRONT_FROM))
     for x, y, k, c in data.get("sparkles", ()):
         o.append(ch.sparkle(x, y, k, c))
     if data.get("marks"):

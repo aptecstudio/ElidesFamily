@@ -31,13 +31,13 @@ DEFS = """<defs>
 <linearGradient id="nose" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A5244"/><stop offset="1" stop-color="#3A2420"/></linearGradient>
 <linearGradient id="earIn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD0C4"/><stop offset="1" stop-color="#E89A8C"/></linearGradient>
 <clipPath id="headC"><path d="M200,72 C276,72 322,120 324,188 C326,238 300,280 252,296 C236,302 218,304 200,304 C182,304 164,302 148,296 C100,280 74,238 76,188 C78,120 124,72 200,72 Z"/></clipPath>
-<clipPath id="torsoC"><path d="M156,300 Q200,292 244,300 C252,330 258,370 261,400 C263,420 262,434 257,442 L212,444 Q200,430 188,444 L143,442 C138,434 137,420 139,400 C142,370 148,330 156,300 Z"/></clipPath>
+<clipPath id="torsoC"><path d="M172,297 Q200,292 228,297 C241,303 250,315 252,330 C255,352 259,378 261,400 C263,420 262,434 257,442 L212,444 Q200,430 188,444 L143,442 C138,434 137,420 139,400 C141,378 145,352 148,330 C150,315 159,303 172,297 Z"/></clipPath>
 <clipPath id="eyeLC"><ellipse cx="150" cy="198" rx="30" ry="31"/></clipPath>
 <clipPath id="eyeRC"><ellipse cx="250" cy="198" rx="30" ry="31"/></clipPath>
 </defs>"""
 
 HEADP = "M200,72 C276,72 322,120 324,188 C326,238 300,280 252,296 C236,302 218,304 200,304 C182,304 164,302 148,296 C100,280 74,238 76,188 C78,120 124,72 200,72 Z"
-TORSOP = "M156,300 Q200,292 244,300 C252,330 258,370 261,400 C263,420 262,434 257,442 L212,444 Q200,430 188,444 L143,442 C138,434 137,420 139,400 C142,370 148,330 156,300 Z"
+TORSOP = "M172,297 Q200,292 228,297 C241,303 250,315 252,330 C255,352 259,378 261,400 C263,420 262,434 257,442 L212,444 Q200,430 188,444 L143,442 C138,434 137,420 139,400 C141,378 145,352 148,330 C150,315 159,303 172,297 Z"
 
 
 def limb(p0, p1, p2, p3, w0, w1, bulge=3, fill="url(#limb)", layer="both"):
@@ -121,8 +121,12 @@ def body_lower():
     return "".join(o)
 
 
-def torso():
-    """Butter-yellow striped T-shirt + sky-blue overalls."""
+def torso(layer="both"):
+    """Butter-yellow striped T-shirt + sky-blue overalls; layer as in Elide's
+    dress(). The outline is yellow like the sleeves at the top (so shoulders
+    and sleeves are one piece) and blue along the overalls."""
+    if layer == "outline":
+        return parts.merged_outline(TORSOP, TLINE)
     o = []
     o.append(f'<path d="{TORSOP}" fill="url(#shirt)"/>')
     o.append('<g clip-path="url(#torsoC)">')
@@ -142,9 +146,17 @@ def torso():
         '<ellipse cx="160" cy="400" rx="12" ry="34" fill="#DDF4FF" opacity="0.5" filter="url(#b6)"/>'
     )
     o.append("</g>")
-    o.append(
-        f'<path d="{TORSOP}" fill="none" stroke="{SLINE}" stroke-width="2.6" stroke-linejoin="round"/>'
-    )
+    if layer == "both":
+        o.append(
+            f'<path d="{TORSOP}" fill="none" stroke="{SLINE}" stroke-width="2.6" stroke-linejoin="round"/>'
+        )
+    else:
+        # blue outline along the overalls only
+        o.append(
+            '<clipPath id="overallsC"><rect x="100" y="362" width="200" height="120"/></clipPath>'
+            f'<path d="{TORSOP}" fill="none" stroke="{SLINE}" stroke-width="2.6" '
+            'stroke-linejoin="round" clip-path="url(#overallsC)"/>'
+        )
     # seams and hems of the shorts
     o.append(
         '<path d="M170,326 Q200,322 230,326 L233,360 Q200,366 167,360 Z" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-dasharray="3 3" opacity="0.8"/>'
@@ -380,14 +392,18 @@ def sparkle(x, y, s, c=poses.SPARKLE):
     return f'<path transform="translate({x},{y}) scale({s})" d="{SPARKLE_D}" fill="{c}"/>'
 
 
-SL, SR = (150, 316), (250, 316)
+SL, SR = (148, 330), (252, 330)
 SLEEVE = dict(
     fill="url(#shirt)", line=TLINE, t1=0.28, w0=42, w1=36, trim="#FFE9A6", trim_line=TLINE
 )
 
 
-def arm(p0, p1, p2, p3, kind="back", hand_rot=None, fold=None):
-    return parts.arm(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, SLEEVE, pad=PAD, fold=fold)
+def arm(p0, p1, p2, p3, kind="back", hand_rot=None):
+    return parts.arm(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, SLEEVE, pad=PAD)
+
+
+def arm_front(p0, p1, p2, p3, kind="back", hand_rot=None, t0=0.5):
+    return parts.arm_front(p0, p1, p2, p3, "url(#limb)", LINE, kind, hand_rot, t0, pad=PAD)
 
 
 # Poses shared with Elide (same body): see poses.py.

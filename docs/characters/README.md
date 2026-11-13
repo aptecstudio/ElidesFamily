@@ -21,6 +21,7 @@ Every sheet in this folder follows these rules: what changes is the character's 
 - Chubby arms and legs, thicker at the root; little hands with a thumb and three fingers, feet with toes.
 - Hands follow their **handedness** (D-051): with the palm shown and the fingers up (wave, cheer, surprised) the thumb points **towards the body**; at rest, arm hanging and back of the hand to the viewer, the thumb is also towards the body; with the back shown and the fingers up it points outwards.
 - Hands and feet are **one piece with the limbs**: no outline at the wrist or ankle, only the outer silhouette is outlined (lines stay only inside: thumb against palm, fingers, toes).
+- **Shoulders** are part of the torso: gently sloping and narrow (delicate, not athletic), and the sleeve continues the torso outline with no break (D-053).
 - In every pose the arms must stay **visible**: raised arms go beside the head, not behind it; a forearm that comes back to the face or the chest crosses in front of its own upper arm and sleeve.
 - Sleeves follow the arm in every pose: the arm comes out of the sleeve with a soft shadow, without a visible joint.
 - Kids (Elide, Rio) and adults (Dad, Mom) have the same head: the body is what changes.

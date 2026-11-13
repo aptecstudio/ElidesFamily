@@ -229,6 +229,47 @@ def merged_outline(d, line, width=2.6):
 # ---------------------------------------------------------------- arms
 
 
+def _hand_args(p0, p1, p2, p3, kind, hand_rot, fill, line, pad):
+    """Position, rotation and look of the hand at the end of an arm."""
+    q = bez(0.92, p0, p1, p2, p3)
+    dx, dy = p3[0] - q[0], p3[1] - q[1]
+    length = math.hypot(dx, dy) or 1
+    dx, dy = dx / length, dy / length
+    rot = math.degrees(math.atan2(dy, dx)) + 90 if hand_rot is None else hand_rot
+    return (p3[0] + dx * 14, p3[1] + dy * 14, rot, kind, fill, line, pad)
+
+
+def arm_front(
+    p0,
+    p1,
+    p2,
+    p3,
+    fur,
+    line,
+    kind="back",
+    hand_rot=None,
+    t0=0.5,
+    hand_fill=None,
+    hand_line=None,
+    pad="#F7B7CB",
+    w=(30, 24),
+):
+    """Forearm (from t0) and hand drawn again over an arm already drawn with
+    arm(): used when the hand goes in front of the head or the forearm comes
+    back over its own sleeve. Only its sides and tip are outlined, so it
+    starts seamlessly from the arm underneath."""
+    side = "L" if p0[0] < CENTER_X else "R"
+    hand = _hand_args(p0, p1, p2, p3, kind, hand_rot, hand_fill or fur, hand_line or line, pad)
+    edge = limb_outline(p0, p1, p2, p3, w[0], w[1], 3, t0=t0, closed=False)
+    piece = limb_outline(p0, p1, p2, p3, w[0], w[1], 3, t0=t0)
+    return [
+        f'<path d="{edge}" fill="none" stroke="{line}" stroke-width="5.2" stroke-linejoin="round"/>',
+        paw(*hand, side=side, layer="outline"),
+        f'<path d="{piece}" fill="{fur}"/>',
+        paw(*hand, side=side, layer="fill"),
+    ]
+
+
 def arm(
     p0,
     p1,
@@ -243,36 +284,21 @@ def arm(
     hand_line=None,
     pad="#F7B7CB",
     w=(30, 24),
-    fold=None,
 ):
     """Chubby arm with a sleeve that follows the arm curve.
 
     sleeve: None, or a dict with fill, line, t1 (where the sleeve ends, 0..1),
             w0/w1 (sleeve width), trim (optional trim color), trim_line,
             long (True for long sleeves: no shadow under the cuff).
-    fold:   for an arm folded onto itself (hand near the shoulder), the point
-            of the curve (0..1) after which the forearm is drawn again in front
-            of the upper arm and of the sleeve.
+    The forearm and the hand can then be drawn again in front of the head or
+    of the upper arm with arm_front().
     """
     _clip_n[0] += 1
     cid = f"armC{_clip_n[0]}"
     o = []
     arm_d = limb_outline(p0, p1, p2, p3, w[0], w[1], 3)
-    q = bez(0.92, p0, p1, p2, p3)
-    dx, dy = p3[0] - q[0], p3[1] - q[1]
-    length = math.hypot(dx, dy) or 1
-    dx, dy = dx / length, dy / length
-    rot = math.degrees(math.atan2(dy, dx)) + 90 if hand_rot is None else hand_rot
     side = "L" if p0[0] < CENTER_X else "R"
-    hand_args = (
-        p3[0] + dx * 14,
-        p3[1] + dy * 14,
-        rot,
-        kind,
-        hand_fill or fur,
-        hand_line or line,
-        pad,
-    )
+    hand_args = _hand_args(p0, p1, p2, p3, kind, hand_rot, hand_fill or fur, hand_line or line, pad)
     # Arm and hand are one piece: both outlines first, then the fills.
     o.append(f'<clipPath id="{cid}"><path d="{arm_d}"/></clipPath>')
     o.append(merged_outline(arm_d, line))
@@ -312,16 +338,6 @@ def arm(
                 f'<path d="M{c[0]:.1f},{c[1] - hw:.1f} a3,{hw:.1f} 0 0 1 0,{2 * hw:.1f}" transform="rotate({ang:.1f} {c[0]:.1f} {c[1]:.1f})" '
                 f'fill="none" stroke="{sleeve["line"]}" stroke-width="2" stroke-linecap="round" opacity="0.6"/>'
             )
-    if fold is not None:
-        # Forearm in front: outline its sides and tip only, so it starts
-        # seamlessly from the arm underneath.
-        edge = limb_outline(p0, p1, p2, p3, w[0], w[1], 3, t0=fold, closed=False)
-        o.append(
-            f'<path d="{edge}" fill="none" stroke="{line}" stroke-width="5.2" stroke-linejoin="round"/>'
-        )
-        o.append(paw(*hand_args, side=side, layer="outline"))
-        piece = limb_outline(p0, p1, p2, p3, w[0], w[1], 3, t0=fold)
-        o.append(f'<path d="{piece}" fill="{fur}"/>')
     o.append(paw(*hand_args, side=side, layer="fill"))
     return o
 
