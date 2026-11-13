@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import '../app/game_colors.dart';
 import '../app/game_route.dart';
+import '../characters/character_view.dart';
 import '../core/bouncy_tap.dart';
 import '../minigames/colors/colors_game_scene.dart';
 
@@ -21,6 +22,20 @@ class HubScene extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         const CustomPaint(painter: _LandscapePainter()),
+        // Elide on the hill: she breathes, blinks and reacts to touches.
+        LayoutBuilder(
+          builder: (context, box) {
+            final height = box.maxHeight * 0.78;
+            return Align(
+              alignment: const Alignment(-0.9, 1),
+              child: SizedBox(
+                width: height * 400 / 540,
+                height: height,
+                child: const CharacterView(character: 'elide'),
+              ),
+            );
+          },
+        ),
         Center(
           child: _FloatingBubble(
             onTap: () => Navigator.of(
