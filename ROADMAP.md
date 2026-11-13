@@ -24,9 +24,9 @@ Last update: 2026-11-13
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** design approval of the updated drafts (Phase 4); menu graphics (Phase 5); `flutter run` on the owner's phone (wireless debugging).
+**Next step (next session):** menu graphics (Phase 5); layered SVG parts of the characters for code animation (Phase 4); `flutter run` on the owner's phone (wireless debugging).
 
-**Previous step:** new PC set up with emulators (D-045); first debug APK, hot reload and Fredoka font verified on the phone emulator.
+**Previous step:** new PC set up with emulators (D-045); first debug APK, hot reload and Fredoka font verified on the phone emulator; character design approved (D-046).
 
 ---
 
@@ -103,13 +103,13 @@ Last update: 2026-11-13
 - [x] **Dad**: sheet, model, 6 poses and expressions (provisionally approved, D-036)
 - [x] **Mom**: sheet, model, 6 poses and expressions (provisionally approved, D-037)
 - [x] Group sheet: the four characters together, kids at 85% (D-038)
-- [~] Final optimization of the drafts
+- [x] Final optimization of the drafts
   - [x] Shared parts module `parts.py` with in-project PNG rendering (D-041)
   - [x] New hands: thumb on the right side, readable palm, fist and thumbs up (all four)
   - [x] Sleeves that follow the arm, with no visible joint (all four)
   - [x] Port Rio, Dad and Mom to `parts.py` (hands and sleeves)
   - [x] Regenerate every model, pose sheet and the group sheet
-- [ ] Design approval by the owner
+- [x] Design approval by the owner: all four characters approved (D-046, 2026-11-13)
 - [ ] Final layered illustrations (head, eyes, mouths, limbs, clothes) exported as SVG parts
 - [ ] Flutter character renderer: layered parts + Bezier limbs recomputed every frame (D-039)
 - [ ] Layered animation controller: body, face, eyes, mouth (D-033)
