@@ -24,7 +24,7 @@ Last update: 2026-11-13
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** try the hub on the emulator and the phone; the parental gate behind the gear; then the remaining animation suite (walking, dances, disapproval, routines, lip sync).
+**Next step (next session):** the parental gate behind the gear; then the remaining animation suite (walking, dances, disapproval, routines, lip sync).
 
 **Previous step:** the approved hub built in Flutter with the animated Elide (D-055) and the surprise gifts (D-056).
 
@@ -76,7 +76,7 @@ Last update: 2026-11-13
 - [x] Flutter SDK, JDK 17 and Android SDK (platform 36, build-tools 36.0.0) installed on the owner's PC (D-044)
 - [x] `flutter pub get` (versions resolved, `pubspec.lock` committed)
 - [x] `flutter analyze` and `flutter test` with no errors
-- [~] Live test: `flutter run` + hot reload works on `ef_phone` (2026-11-13); still to try on the owner's phone (USB or wireless debugging)
+- [~] Live test: `flutter run` + hot reload works on `ef_phone` (2026-11-13); on the owner's Pixel 6a (USB) the debug APK installed with `adb install` works (hub checked by the owner, 2026-11-13), `flutter run` from the agent's shell still exits without output
 - [x] First test APK build (`flutter build apk --debug`): installed on `ef_phone`, starts in landscape and full screen, hub → Colors → home works (2026-11-13)
 - [x] Manifest ready for Android TV: `android.hardware.touchscreen` and `android.software.leanback` with `required="false"`, `LEANBACK_LAUNCHER` intent, temporary TV banner (320×180, `tools/character-drafts/tv_banner.py`)
 - [x] Test emulators: smartphone (`ef_phone`), tablet (`ef_tablet`), Android TV 1080p (`ef_tv`) on the new PC (D-045)
@@ -138,7 +138,7 @@ Last update: 2026-11-13
 - [ ] Animated loading screen with a character
 - [ ] Buttons inside the minigames: back to the games, exit protected by dragging
 - [ ] Item bar inside the minigames (tray to drag from)
-- [x] Hub built in Flutter from the approved draft, with the animated Elide, scrolling cards and the gear (D-055, 2026-11-13); surprise gifts for the games to come (D-056)
+- [x] Hub built in Flutter from the approved draft, with the animated Elide, scrolling cards and the gear (D-055, 2026-11-13); surprise gifts for the games to come (D-056); works on the Pixel 6a
 - [ ] Parental gate behind the gear (the gear only bounces for now)
 - [ ] Transitions between menus and minigames
 - [ ] Android TV variant with remote focus
