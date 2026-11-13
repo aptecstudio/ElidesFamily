@@ -3,6 +3,7 @@
 Usage:
     python3 elide.py elide_poses.svg          # sheet with the 6 poses
     python3 elide.py elide_model.svg single   # idle model sheet
+    python3 elide.py elide_wave.svg single wave  # a single pose
 """
 
 import math
@@ -407,7 +408,8 @@ POSES = [
 ]
 mode = sys.argv[2] if len(sys.argv) > 2 else "sheet"
 if mode == "single":
-    svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1080" viewBox="0 0 400 540">{DEFS}{character("idle")}</svg>'
+    pose = sys.argv[3] if len(sys.argv) > 3 else "idle"
+    svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1080" viewBox="0 0 400 540">{DEFS}{character(pose)}</svg>'
 else:
     cw, ch = 400, 600
     cells = []
