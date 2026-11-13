@@ -24,8 +24,6 @@ sys.path.insert(0, DRAFTS)
 
 import parts  # noqa: E402
 
-OUT = sys.argv[1]
-
 # Phone landscape, 20:9.
 W, H = 1600, 720
 
@@ -389,7 +387,7 @@ def gear(x, y):
     return "".join(o)
 
 
-def main():
+def main(out):
     os.environ["FONTCONFIG_FILE"] = font_config()
     elide = elide_png("wave")
 
@@ -431,8 +429,8 @@ def main():
     path = os.path.join(tmp, "hub.svg")
     with open(path, "w") as fh:
         fh.write(svg)
-    parts.render(path, OUT)
+    parts.render(path, out)
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1])
