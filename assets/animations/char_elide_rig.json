@@ -213,49 +213,94 @@
     115.0
    ]
   },
-  "foot": {
-   "file": "assets/images/characters/elide/char_elide_foot.png",
+  "foot_outline": {
+   "file": "assets/images/characters/elide/char_elide_foot_outline.png",
    "rect": [
-    -29.0,
-    -20.0,
-    58.0,
-    40.0
+    -30.0,
+    -21.0,
+    60.0,
+    42.0
    ]
   },
-  "hand_back": {
-   "file": "assets/images/characters/elide/char_elide_hand_back.png",
+  "hand_back_outline": {
+   "file": "assets/images/characters/elide/char_elide_hand_back_outline.png",
    "rect": [
-    -29.667,
-    -28.667,
-    49.667,
-    53.667
+    -31.667,
+    -30.333,
+    53.333,
+    57.0
    ]
   },
-  "hand_palm": {
-   "file": "assets/images/characters/elide/char_elide_hand_palm.png",
+  "hand_palm_outline": {
+   "file": "assets/images/characters/elide/char_elide_hand_palm_outline.png",
    "rect": [
-    -29.667,
-    -28.667,
-    49.667,
-    53.667
+    -31.667,
+    -30.333,
+    53.333,
+    57.0
    ]
   },
-  "hand_fist": {
-   "file": "assets/images/characters/elide/char_elide_hand_fist.png",
+  "hand_fist_outline": {
+   "file": "assets/images/characters/elide/char_elide_hand_fist_outline.png",
+   "rect": [
+    -21.0,
+    -21.0,
+    42.0,
+    46.333
+   ]
+  },
+  "hand_thumb_outline": {
+   "file": "assets/images/characters/elide/char_elide_hand_thumb_outline.png",
+   "rect": [
+    -21.0,
+    -43.333,
+    42.0,
+    68.667
+   ]
+  },
+  "foot_fill": {
+   "file": "assets/images/characters/elide/char_elide_foot_fill.png",
+   "rect": [
+    -27.333,
+    -18.333,
+    54.667,
+    38.0
+   ]
+  },
+  "hand_back_fill": {
+   "file": "assets/images/characters/elide/char_elide_hand_back_fill.png",
+   "rect": [
+    -28.0,
+    -27.0,
+    46.333,
+    50.333
+   ]
+  },
+  "hand_palm_fill": {
+   "file": "assets/images/characters/elide/char_elide_hand_palm_fill.png",
+   "rect": [
+    -28.0,
+    -27.0,
+    46.333,
+    50.333
+   ]
+  },
+  "hand_fist_fill": {
+   "file": "assets/images/characters/elide/char_elide_hand_fist_fill.png",
    "rect": [
     -19.333,
-    -19.333,
-    38.667,
-    43.0
+    -18.667,
+    37.0,
+    40.333
    ]
   },
-  "hand_thumb": {
-   "file": "assets/images/characters/elide/char_elide_hand_thumb.png",
+  "hand_thumb_fill": {
+   "file": "assets/images/characters/elide/char_elide_hand_thumb_fill.png",
    "rect": [
-    -19.333,
-    -41.667,
-    38.667,
-    65.333
+    -17.667,
+    -40.0,
+    36.333,
+    61.667
    ]
   }
  },
@@ -578,7 +623,8 @@
      ],
      "kind": "back",
      "handRot": null,
-     "layer": "back"
+     "layer": "back",
+     "fold": null
     },
     {
      "side": "R",
@@ -602,7 +648,8 @@
      ],
      "kind": "back",
      "handRot": null,
-     "layer": "back"
+     "layer": "back",
+     "fold": null
     }
    ],
    "face": {
@@ -649,7 +696,8 @@
      ],
      "kind": "back",
      "handRot": null,
-     "layer": "back"
+     "layer": "back",
+     "fold": null
     },
     {
      "side": "R",
@@ -673,7 +721,8 @@
      ],
      "kind": "palm",
      "handRot": null,
-     "layer": "back"
+     "layer": "back",
+     "fold": null
     }
    ],
    "face": {
@@ -706,21 +755,22 @@
        316
       ],
       [
-       118,
-       318
+       110,
+       326
       ],
       [
-       96,
-       300
+       66,
+       304
       ],
       [
-       90,
-       276
+       54,
+       260
       ]
      ],
      "kind": "palm",
      "handRot": null,
-     "layer": "back"
+     "layer": "back",
+     "fold": null
     },
     {
      "side": "R",
@@ -730,21 +780,22 @@
        316
       ],
       [
-       282,
-       318
+       290,
+       326
       ],
       [
-       304,
-       300
+       334,
+       304
       ],
       [
-       310,
-       276
+       346,
+       260
       ]
      ],
      "kind": "palm",
      "handRot": null,
-     "layer": "back"
+     "layer": "back",
+     "fold": null
     }
    ],
    "face": {
@@ -816,7 +867,8 @@
      ],
      "kind": "back",
      "handRot": null,
-     "layer": "back"
+     "layer": "back",
+     "fold": null
     },
     {
      "side": "R",
@@ -826,21 +878,22 @@
        316
       ],
       [
-       298,
-       372
+       312,
+       392
       ],
       [
-       268,
-       376
+       286,
+       412
       ],
       [
-       250,
-       330
+       248,
+       340
       ]
      ],
      "kind": "fist",
      "handRot": -24,
-     "layer": "front"
+     "layer": "front",
+     "fold": 0.5
     }
    ],
    "face": {
@@ -873,21 +926,22 @@
        316
       ],
       [
-       104,
-       334
+       98,
+       350
       ],
       [
-       88,
-       314
+       62,
+       330
       ],
       [
-       92,
-       290
+       78,
+       292
       ]
      ],
      "kind": "palm",
      "handRot": 18,
-     "layer": "front"
+     "layer": "front",
+     "fold": null
     },
     {
      "side": "R",
@@ -897,21 +951,22 @@
        316
       ],
       [
-       296,
-       334
+       302,
+       350
       ],
       [
-       312,
-       314
+       338,
+       330
       ],
       [
-       308,
-       290
+       322,
+       292
       ]
      ],
      "kind": "palm",
      "handRot": -18,
-     "layer": "front"
+     "layer": "front",
+     "fold": null
     }
    ],
    "face": {
@@ -958,7 +1013,8 @@
      ],
      "kind": "back",
      "handRot": null,
-     "layer": "back"
+     "layer": "back",
+     "fold": null
     },
     {
      "side": "R",
@@ -968,21 +1024,22 @@
        316
       ],
       [
-       300,
-       356
+       306,
+       378
       ],
       [
-       318,
-       338
+       346,
+       370
       ],
       [
-       308,
-       312
+       338,
+       324
       ]
      ],
      "kind": "thumb",
      "handRot": 0,
-     "layer": "front"
+     "layer": "front",
+     "fold": null
     }
    ],
    "face": {
@@ -1036,7 +1093,8 @@
      ],
      "kind": "back",
      "handRot": null,
-     "layer": "back"
+     "layer": "back",
+     "fold": null
     },
     {
      "side": "R",
@@ -1060,7 +1118,8 @@
      ],
      "kind": "back",
      "handRot": null,
-     "layer": "back"
+     "layer": "back",
+     "fold": null
     }
    ],
    "face": {

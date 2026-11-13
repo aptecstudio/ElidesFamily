@@ -262,7 +262,8 @@ class ArmPose {
     : points = [for (final p in json['points'] as List) _offset(p)],
       kind = json['kind'] as String,
       handRot = json['handRot'] == null ? null : _d(json['handRot']),
-      front = json['layer'] == 'front';
+      front = json['layer'] == 'front',
+      fold = json['fold'] == null ? null : _d(json['fold']);
 
   /// Cubic Bezier from the shoulder to the wrist.
   final List<Offset> points;
@@ -275,6 +276,10 @@ class ArmPose {
 
   /// Drawn in front of the head.
   final bool front;
+
+  /// For a forearm that crosses in front of the upper arm: the point of the
+  /// curve (0..1) after which it is drawn again over the sleeve.
+  final double? fold;
 }
 
 class SparkleData {

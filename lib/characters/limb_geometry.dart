@@ -21,6 +21,9 @@ Offset bezierTangent(List<Offset> p, double t) {
 /// Closed outline of a chubby limb along the Bezier [p]: the width goes from
 /// [w0] at the root to [w1] at the tip, swelling by [bulge] in the middle.
 ///
+/// With [closed] false the edge across the start is left out, to outline a
+/// piece of limb drawn over the rest of the same limb without a visible cut.
+///
 /// Port of `limb_outline()` in `tools/character-drafts/parts.py`, so arms and
 /// legs look exactly like the drafts, but are recomputed every frame.
 Path limbOutline(
@@ -32,6 +35,7 @@ Path limbOutline(
   double t1 = 1,
   bool capEnd = true,
   bool capStart = false,
+  bool closed = true,
 }) {
   const steps = 40;
   final left = <Offset>[];
@@ -64,7 +68,7 @@ Path limbOutline(
   if (capEnd) points.addAll(cap(left.last, right.last, t1, 1));
   points.addAll(right.reversed);
   if (capStart) points.addAll(cap(right.first, left.first, t0, -1));
-  return Path()..addPolygon(points, true);
+  return Path()..addPolygon(points, closed);
 }
 
 Offset _normal(Offset tangent) {

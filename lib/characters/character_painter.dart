@@ -33,23 +33,34 @@ class CharacterRenderer {
     _rotateAround(canvas, rig.tailRoot, f.tailAngle);
     _part(canvas, 'tail');
     canvas.restore();
-    for (final leg in rig.legs) {
-      _limb(canvas, leg.points, leg.w0, leg.w1, leg.bulge);
+    // Each leg and its foot are one piece: all the outlines, then the fills.
+    final legs = [
+      for (final leg in rig.legs)
+        limbOutline(leg.points, leg.w0, leg.w1, bulge: leg.bulge),
+    ];
+    for (final path in legs) {
+      _outline(canvas, path);
     }
     for (final leg in rig.legs) {
-      _part(canvas, 'foot', at: leg.foot);
+      _part(canvas, 'foot_outline', at: leg.foot);
+    }
+    for (final path in legs) {
+      _fill(canvas, path, rig.limbFill);
+    }
+    for (final leg in rig.legs) {
+      _part(canvas, 'foot_fill', at: leg.foot);
     }
 
     canvas.save();
     _scaleAround(canvas, _waist, 1 - f.breathe * 0.4, 1 + f.breathe);
     _part(canvas, 'dress');
-    for (final arm in f.arms.values.where((a) => !a.front)) {
-      _arm(canvas, arm);
+    for (final MapEntry(key: side, value: arm) in f.arms.entries) {
+      if (!arm.front) _arm(canvas, side, arm);
     }
     _part(canvas, 'collar');
     _head(canvas, f);
-    for (final arm in f.arms.values.where((a) => a.front)) {
-      _arm(canvas, arm);
+    for (final MapEntry(key: side, value: arm) in f.arms.entries) {
+      if (arm.front) _arm(canvas, side, arm);
     }
     canvas.restore();
 
@@ -77,22 +88,32 @@ class CharacterRenderer {
     );
   }
 
-  void _limb(
-    Canvas canvas,
-    List<Offset> p,
-    double w0,
-    double w1,
-    double bulge,
-  ) {
-    final path = limbOutline(p, w0, w1, bulge: bulge);
-    _fillStroke(canvas, path, rig.limbFill, rig.line, rig.limbStroke);
-  }
-
-  void _arm(Canvas canvas, ArmFrame a) {
+  /// An arm with its sleeve and hand. Arm and hand are one piece: their
+  /// outlines are drawn first and the fills on top, so no line shows at the
+  /// wrist (as in `parts.arm()`).
+  void _arm(Canvas canvas, String side, ArmFrame a) {
     final p = a.points;
     final style = rig.arm;
     final armPath = limbOutline(p, style.w0, style.w1, bulge: style.bulge);
-    _fillStroke(canvas, armPath, rig.limbFill, rig.line, rig.limbStroke);
+
+    // Hand, at the end of the arm and turned along it.
+    final q = bezierAt(p, 0.92);
+    var dir = p[3] - q;
+    dir = dir / (dir.distance == 0 ? 1 : dir.distance);
+    final rotDeg = a.handRot ?? math.atan2(dir.dy, dir.dx) * 180 / math.pi + 90;
+    final handPos = p[3] + dir * style.handOffset;
+    void hand(String layer) {
+      canvas.save();
+      canvas.translate(handPos.dx, handPos.dy);
+      canvas.rotate(rad(rotDeg));
+      canvas.scale(thumbMirror(a.kind, side), 1);
+      _part(canvas, 'hand_${a.kind}_$layer');
+      canvas.restore();
+    }
+
+    _outline(canvas, armPath);
+    hand('outline');
+    _fill(canvas, armPath, rig.limbFill);
 
     final sl = rig.sleeve;
     final t1 = sl.t1;
@@ -122,7 +143,8 @@ class CharacterRenderer {
       capEnd: false,
       capStart: true,
     );
-    _fillStroke(canvas, sleevePath, sl.fill, sl.line, 2.6);
+    _fill(canvas, sleevePath, sl.fill);
+    _stroke(canvas, sleevePath, sl.line, 2.6);
 
     // Cuff: perpendicular to the arm, so it follows every pose.
     final c = bezierAt(p, t1);
@@ -159,24 +181,30 @@ class CharacterRenderer {
     }
     canvas.restore();
 
-    // Hand, at the end of the arm and turned along it.
-    final q = bezierAt(p, 0.92);
-    var dir = p[3] - q;
-    dir = dir / (dir.distance == 0 ? 1 : dir.distance);
-    final rotDeg = a.handRot ?? math.atan2(dir.dy, dir.dx) * 180 / math.pi + 90;
-    final pos = p[3] + dir * style.handOffset;
-    // Thumb side (see paw() in parts.py): towards the body, except for an
-    // open palm, where it points outwards.
-    final tx = -math.cos(rad(rotDeg));
-    final towardBody = (rig.centerX - pos.dx) * tx > 0;
-    final wantBody = a.kind != 'palm';
-    final sx = towardBody == wantBody ? 1.0 : -1.0;
-    canvas.save();
-    canvas.translate(pos.dx, pos.dy);
-    canvas.rotate(rad(rotDeg));
-    canvas.scale(sx, 1);
-    _part(canvas, 'hand_${a.kind}');
-    canvas.restore();
+    final fold = a.fold;
+    if (fold != null) {
+      // Forearm crossing in front of the upper arm and of the sleeve: outline
+      // only its sides and tip, so it starts seamlessly from the arm below.
+      final edge = limbOutline(
+        p,
+        style.w0,
+        style.w1,
+        bulge: style.bulge,
+        t0: fold,
+        closed: false,
+      );
+      _stroke(canvas, edge, rig.line, 2 * rig.limbStroke);
+      hand('outline');
+      final piece = limbOutline(
+        p,
+        style.w0,
+        style.w1,
+        bulge: style.bulge,
+        t0: fold,
+      );
+      _fill(canvas, piece, rig.limbFill);
+    }
+    hand('fill');
   }
 
   // ------------------------------------------------------------ head
@@ -310,24 +338,29 @@ class CharacterRenderer {
     );
   }
 
-  void _fillStroke(
-    Canvas canvas,
-    Path path,
-    String gradient,
-    Color line,
-    double width,
-  ) {
+  /// Outline pass of a shape that merges with its neighbours: a stroke twice
+  /// as wide, half of which is then covered by the fill.
+  void _outline(Canvas canvas, Path path) {
+    canvas.drawPath(path, Paint()..color = rig.line);
+    _stroke(canvas, path, rig.line, 2 * rig.limbStroke);
+  }
+
+  void _fill(Canvas canvas, Path path, String gradient) {
     canvas.drawPath(
       path,
       Paint()..shader = rig.gradients[gradient]!.shader(path.getBounds()),
     );
+  }
+
+  void _stroke(Canvas canvas, Path path, Color color, double width) {
     canvas.drawPath(
       path,
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeWidth = width
         ..strokeJoin = StrokeJoin.round
-        ..color = line,
+        ..strokeCap = StrokeCap.round
+        ..color = color,
     );
   }
 
@@ -344,6 +377,15 @@ class CharacterRenderer {
     canvas.scale(sx, sy);
     canvas.translate(-pivot.dx, -pivot.dy);
   }
+}
+
+/// Horizontal flip of a hand so the thumb is on the right side: it only
+/// depends on which hand it is ([side] `L` is the one on the viewer's left)
+/// and on whether the palm side is shown; the hand rotation does the rest.
+/// Same rule as `thumb_mirror()` in `tools/character-drafts/parts.py`.
+double thumbMirror(String kind, String side) {
+  final palmSide = kind != 'back';
+  return (palmSide ? -1.0 : 1.0) * (side == 'L' ? 1.0 : -1.0);
 }
 
 /// [CustomPainter] that fits the 400×540 character scene into the widget,

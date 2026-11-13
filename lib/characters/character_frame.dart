@@ -9,6 +9,7 @@ class ArmFrame {
     required this.kind,
     required this.handRot,
     required this.front,
+    this.fold,
   });
 
   factory ArmFrame.fromPose(ArmPose pose) => ArmFrame(
@@ -16,6 +17,7 @@ class ArmFrame {
     kind: pose.kind,
     handRot: pose.handRot,
     front: pose.front,
+    fold: pose.fold,
   );
 
   final List<Offset> points;
@@ -25,11 +27,15 @@ class ArmFrame {
   final double? handRot;
   final bool front;
 
+  /// See [ArmPose.fold].
+  final double? fold;
+
   ArmFrame copyWith({List<Offset>? points}) => ArmFrame(
     points: points ?? this.points,
     kind: kind,
     handRot: handRot,
     front: front,
+    fold: fold,
   );
 
   /// Smooth blend: the curve moves point by point; the hand shape and the
@@ -45,6 +51,7 @@ class ArmFrame {
       kind: t < 0.5 ? a.kind : b.kind,
       handRot: rot,
       front: t < 0.5 ? a.front : b.front,
+      fold: t < 0.5 ? a.fold : b.fold,
     );
   }
 }
