@@ -35,8 +35,10 @@ def face(eyes, look, brows_kind, mouth_kind, tilt, blush):
     return dict(eyes=eyes, look=look, brows=brows_kind, mouth=mouth_kind, tilt=tilt, blush=blush)
 
 
-def kid_poses(sl, sr, accents):
-    """Pose table of the kids. accents: two colors for the cheer sparkles."""
+def kid_poses(sl, sr, accents, shadow=106):
+    """Pose table shared by all the characters (the head is the same for
+    everyone, so hands reach the face at the same points). accents: two
+    colors for the cheer sparkles; shadow: radius of the ground shadow."""
 
     def left(*a, **k):
         return arm_pose(sl, "L", *a, **k)
@@ -50,14 +52,14 @@ def kid_poses(sl, sr, accents):
         "idle": dict(
             lift=0,
             lean=0,
-            shadow=106,
+            shadow=shadow,
             arms=(arm_l_down, arm_r_down),
             face=face(("open", "open"), (0, 0), "normal", "smile", -3, False),
         ),
         "wave": dict(
             lift=0,
             lean=-2,
-            shadow=106,
+            shadow=shadow,
             arms=(arm_l_down, right((284, 330), (310, 318), (318, 290), "palm")),
             face=face(("smiling", "smiling"), (0, 0), "happy", "open", -6, True),
         ),
@@ -80,7 +82,7 @@ def kid_poses(sl, sr, accents):
         "curious": dict(
             lift=0,
             lean=2,
-            shadow=106,
+            shadow=shadow,
             arms=(
                 arm_l_down,
                 right((312, 392), (286, 412), (248, 340), "fist", -24, "front", 0.5),
@@ -90,7 +92,7 @@ def kid_poses(sl, sr, accents):
         "surprised": dict(
             lift=0,
             lean=0,
-            shadow=106,
+            shadow=shadow,
             arms=(
                 left((98, 350), (62, 330), (78, 292), "palm", 18, "front"),
                 right((302, 350), (338, 330), (322, 292), "palm", -18, "front"),
@@ -101,7 +103,7 @@ def kid_poses(sl, sr, accents):
         "proud": dict(
             lift=0,
             lean=-2,
-            shadow=106,
+            shadow=shadow,
             arms=(arm_l_down, right((306, 378), (346, 370), (338, 324), "thumb", 0, "front")),
             face=face(("happy", "smiling"), (0, 0), "happy", "open", -5, True),
             sparkles=((338, 262, 1.1, SPARKLE),),
@@ -110,7 +112,7 @@ def kid_poses(sl, sr, accents):
         "giggle": dict(
             lift=0,
             lean=0,
-            shadow=106,
+            shadow=shadow,
             arms=(arm_l_down, arm_r_down),
             face=face(("happy", "happy"), (0, 0), "happy", "open", 0, True),
         ),
@@ -132,10 +134,12 @@ def character(ch, pose):
     """SVG of character module ch in pose, in the 400×540 scene."""
     o = []
     data = ch.POSE_DATA[pose]
+    ground = getattr(ch, "GROUND", 520)
+    lx, ly = getattr(ch, "LEAN_PIVOT", (200, 500))
     o.append(
-        f'<ellipse cx="200" cy="520" rx="{data["shadow"]}" ry="11" fill="#1D5A3A" opacity="0.28" filter="url(#b6)"/>'
+        f'<ellipse cx="200" cy="{ground}" rx="{data["shadow"]}" ry="11" fill="#1D5A3A" opacity="0.28" filter="url(#b6)"/>'
     )
-    o.append(f'<g transform="translate(0,{data["lift"]}) rotate({data["lean"]} 200 500)">')
+    o.append(f'<g transform="translate(0,{data["lift"]}) rotate({data["lean"]} {lx} {ly})">')
     o.append(ch.body_lower())
     # Torso, shoulders and sleeves are one piece (D-053): torso outline, all
     # the arms, then the torso fill over the roots of the sleeves.
@@ -143,7 +147,8 @@ def character(ch, pose):
     for a in data["arms"]:
         o.extend(ch.arm(*a["points"], a["kind"], a["hand_rot"]))
     o.append(ch.body("fill"))
-    o.append(ch.collar())
+    if hasattr(ch, "collar"):
+        o.append(ch.collar())
     f = data["face"]
     eye_l, eye_r = f["eyes"]
     dx, dy = f["look"]
@@ -154,6 +159,8 @@ def character(ch, pose):
     o.append(ch.brows(f["brows"]))
     o.append(ch.eye(ch.EYE_X[0], "L", dx, dy, eye_l))
     o.append(ch.eye(ch.EYE_X[1], "R", dx, dy, eye_r))
+    if hasattr(ch, "face_over"):  # e.g. Mom's glasses
+        o.append(ch.face_over())
     o.append(ch.mouth(f["mouth"]))
     o.append("</g>")
     # Forearms and hands in front of the head or of their own sleeve.
@@ -175,18 +182,19 @@ def main(ch, label_color):
     script.py out.svg [single [pose]]"""
     out = sys.argv[1]
     mode = sys.argv[2] if len(sys.argv) > 2 else "sheet"
+    h = getattr(ch, "H", 540)  # scene height: 540 for the kids, 580 for the adults
     if mode == "single":
         pose = sys.argv[3] if len(sys.argv) > 3 else "idle"
-        svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1080" viewBox="0 0 400 540">{ch.DEFS}{character(ch, pose)}</svg>'
+        svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="800" height="{2 * h}" viewBox="0 0 400 {h}">{ch.DEFS}{character(ch, pose)}</svg>'
     else:
-        cw, chh = 400, 600
+        cw, chh = 400, h + 60
         cells = []
         for i, (p, label) in enumerate(SHEET):
             cx = (i % 3) * cw
             cy = (i // 3) * chh
             cells.append(
-                f'<g transform="translate({cx},{cy})">{character(ch, p)}<text x="200" y="572" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-weight="bold" font-size="26" fill="{label_color}">{label}</text></g>'
+                f'<g transform="translate({cx},{cy})">{character(ch, p)}<text x="200" y="{h + 32}" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-weight="bold" font-size="26" fill="{label_color}">{label}</text></g>'
             )
-        svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">{ch.DEFS}{"".join(cells)}</svg>'
+        svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="{2 * chh}" viewBox="0 0 1200 {2 * chh}">{ch.DEFS}{"".join(cells)}</svg>'
     with open(out, "w") as fh:
         fh.write(svg)

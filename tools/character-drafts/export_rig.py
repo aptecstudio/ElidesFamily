@@ -27,7 +27,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..", "..")
 SCALE = 3  # PNG pixels per rig unit
 PAD = 2  # transparent border around each cropped part, in pixels
-SCENE_W, SCENE_H = 400, 540
+SCENE_W = 400
+SCENE_H = 540  # set per character: 540 for the kids, 580 for the adults
 ANCHOR = (200, 270)  # where anchored parts (hands, feet) are drawn for export
 
 BROWS = ("normal", "happy", "up", "curious")
@@ -37,6 +38,7 @@ HAND_KINDS = ("back", "palm", "fist", "thumb")
 
 
 def render_surface(defs, content):
+    h = SCENE_H
     import gi
 
     gi.require_version("Rsvg", "2.0")
@@ -45,13 +47,13 @@ def render_surface(defs, content):
 
     svg = (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{SCENE_W * SCALE}" '
-        f'height="{SCENE_H * SCALE}" viewBox="0 0 {SCENE_W} {SCENE_H}">{defs}{content}</svg>'
+        f'height="{h * SCALE}" viewBox="0 0 {SCENE_W} {h}">{defs}{content}</svg>'
     )
     handle = Rsvg.Handle.new_from_data(svg.encode())
-    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, SCENE_W * SCALE, SCENE_H * SCALE)
+    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, SCENE_W * SCALE, h * SCALE)
     ctx = cairo.Context(surf)
     vp = Rsvg.Rectangle()
-    vp.x, vp.y, vp.width, vp.height = 0, 0, SCENE_W * SCALE, SCENE_H * SCALE
+    vp.x, vp.y, vp.width, vp.height = 0, 0, SCENE_W * SCALE, h * SCALE
     handle.render_document(ctx, vp)
     surf.flush()
     return surf
@@ -160,6 +162,10 @@ def main():
     os.makedirs(anim_dir, exist_ok=True)
     asset_dir = f"assets/images/characters/{name}"
     defs = ch.DEFS
+    global SCENE_H
+    SCENE_H = getattr(ch, "H", 540)
+    hand_fill = getattr(ch, "HAND_FILL", "url(#limb)")
+    hand_line = getattr(ch, "HAND_LINE", ch.LINE)
     pad = getattr(ch, "PAD", "#F7B7CB")
     part_rects = {}
 
@@ -186,28 +192,51 @@ def main():
             part(f"eye_{side.lower()}_{kind}", content)
     part("body_outline", ch.body("outline"))
     part("body_fill", ch.body("fill"))
-    part("collar", ch.collar())
+    if hasattr(ch, "collar"):
+        part("collar", ch.collar())
+    if hasattr(ch, "face_over"):
+        part("face_over", ch.face_over())
     part("tail", ch.tail())
+    if not getattr(ch, "LEGS", ()):
+        # Legs that do not bend (Dad's jeans) stay one layer.
+        part("lower", ch.lower())
     # Hands and feet come in two layers, so the game can merge them with the
     # limbs like the drafts do: all outlines first, then all fills.
     for layer in ("outline", "fill"):
-        part(f"foot_{layer}", ch.foot(*ANCHOR, layer), ANCHOR)
+        if getattr(ch, "LEGS", ()):
+            part(f"foot_{layer}", ch.foot(*ANCHOR, layer), ANCHOR)
         for kind in HAND_KINDS:
-            hand = parts.paw(*ANCHOR, 0, kind, "url(#limb)", ch.LINE, pad, mirror=1, layer=layer)
+            hand = parts.paw(*ANCHOR, 0, kind, hand_fill, hand_line, pad, mirror=1, layer=layer)
             part(f"hand_{kind}_{layer}", hand, ANCHOR)
 
-    sleeve = dict(ch.SLEEVE)
+    arm = getattr(ch, "ARM", dict(fill="limb", line=ch.LINE, w0=30, w1=24, bulge=3, hand_offset=14))
+    cuff = getattr(ch, "CUFF", None)
+    sleeve = getattr(ch, "SLEEVE", None)
     rig = dict(
         name=name,
         size=[SCENE_W, SCENE_H],
+        waist=list(getattr(ch, "WAIST", (200, 450))),
         centerX=parts.CENTER_X,
         parts=part_rects,
         gradients=gradients(defs),
         line=ch.LINE,
         limbStroke=2.6,
         limbFill="limb",
-        arm=dict(w0=30, w1=24, bulge=3, handOffset=14, frontFrom=poses.FRONT_FROM),
-        sleeve=dict(
+        arm=dict(
+            fill=arm["fill"],
+            line=arm["line"],
+            w0=arm["w0"],
+            w1=arm["w1"],
+            bulge=arm["bulge"],
+            handOffset=arm["hand_offset"],
+            frontFrom=poses.FRONT_FROM,
+            cuff=cuff
+            and dict(
+                fill=cuff["fill"], line=cuff["line"], t0=cuff["t0"], w0=cuff["w0"], w1=cuff["w1"]
+            ),
+        ),
+        sleeve=sleeve
+        and dict(
             fill=url_id(sleeve["fill"]),
             line=sleeve["line"],
             t1=sleeve["t1"],
@@ -219,12 +248,12 @@ def main():
         ),
         legs=[
             dict(points=[list(p) for p in pts], w0=w0, w1=w1, bulge=bulge, foot=list(foot))
-            for pts, w0, w1, bulge, foot in ch.LEGS
+            for pts, w0, w1, bulge, foot in getattr(ch, "LEGS", ())
         ],
         tailRoot=list(ch.TAIL_ROOT),
         headPivot=[200, 300],
-        leanPivot=[200, 500],
-        shadow=dict(cx=200, cy=520, ry=11, color="#1D5A3A", opacity=0.28),
+        leanPivot=list(getattr(ch, "LEAN_PIVOT", (200, 500))),
+        shadow=dict(cx=200, cy=getattr(ch, "GROUND", 520), ry=11, color="#1D5A3A", opacity=0.28),
         eyes=dict(
             x=list(ch.EYE_X),
             cy=ch.EYE_CY,
