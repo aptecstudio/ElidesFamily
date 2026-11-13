@@ -26,7 +26,7 @@ Last update: 2026-11-13
 
 **Next step (next session):** try the hub on the emulator and the phone; the parental gate behind the gear; then the remaining animation suite (walking, dances, disapproval, routines, lip sync).
 
-**Previous step:** the approved hub built in Flutter with the animated Elide (D-055).
+**Previous step:** the approved hub built in Flutter with the animated Elide (D-055) and the surprise gifts (D-056).
 
 ---
 
@@ -138,7 +138,7 @@ Last update: 2026-11-13
 - [ ] Animated loading screen with a character
 - [ ] Buttons inside the minigames: back to the games, exit protected by dragging
 - [ ] Item bar inside the minigames (tray to drag from)
-- [x] Hub built in Flutter from the approved draft, with the animated Elide, scrolling cards and the gear (D-055, 2026-11-13)
+- [x] Hub built in Flutter from the approved draft, with the animated Elide, scrolling cards and the gear (D-055, 2026-11-13); surprise gifts for the games to come (D-056)
 - [ ] Parental gate behind the gear (the gear only bounces for now)
 - [ ] Transitions between menus and minigames
 - [ ] Android TV variant with remote focus
