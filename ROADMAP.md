@@ -26,7 +26,7 @@ Last update: 2026-11-13
 
 **Next step (next session):** try the parental gate on the phone; then the remaining animation suite (walking, dances, disapproval, routines, lip sync).
 
-**Previous step:** the approved hub built in Flutter with the animated Elide (D-055) and the surprise gifts (D-056).
+**Previous step:** the approved hub built in Flutter with the animated Elide (D-055) and the surprise gifts (D-056), tried on the Pixel 6a; the parental gate behind the gear (D-057).
 
 ---
 
