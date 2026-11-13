@@ -1,0 +1,1178 @@
+{
+ "name": "mom",
+ "size": [
+  400,
+  580
+ ],
+ "waist": [
+  200,
+  460
+ ],
+ "centerX": 200,
+ "parts": {
+  "head": {
+   "file": "assets/images/characters/mom/char_mom_head.png",
+   "rect": [
+    64.0,
+    47.667,
+    272.0,
+    258.667
+   ]
+  },
+  "blush": {
+   "file": "assets/images/characters/mom/char_mom_blush.png",
+   "rect": [
+    87.0,
+    226.667,
+    226.0,
+    38.667
+   ]
+  },
+  "brows_normal": {
+   "file": "assets/images/characters/mom/char_mom_brows_normal.png",
+   "rect": [
+    125.0,
+    148.0,
+    150.0,
+    11.0
+   ]
+  },
+  "brows_happy": {
+   "file": "assets/images/characters/mom/char_mom_brows_happy.png",
+   "rect": [
+    125.0,
+    142.0,
+    150.0,
+    13.0
+   ]
+  },
+  "brows_up": {
+   "file": "assets/images/characters/mom/char_mom_brows_up.png",
+   "rect": [
+    125.0,
+    131.0,
+    150.0,
+    14.0
+   ]
+  },
+  "brows_curious": {
+   "file": "assets/images/characters/mom/char_mom_brows_curious.png",
+   "rect": [
+    125.0,
+    131.0,
+    152.0,
+    28.0
+   ]
+  },
+  "mouth_smile": {
+   "file": "assets/images/characters/mom/char_mom_mouth_smile.png",
+   "rect": [
+    176.333,
+    258.333,
+    47.333,
+    15.333
+   ]
+  },
+  "mouth_open": {
+   "file": "assets/images/characters/mom/char_mom_mouth_open.png",
+   "rect": [
+    174.0,
+    258.0,
+    52.0,
+    38.0
+   ]
+  },
+  "mouth_o": {
+   "file": "assets/images/characters/mom/char_mom_mouth_o.png",
+   "rect": [
+    189.667,
+    262.0,
+    20.667,
+    24.0
+   ]
+  },
+  "mouth_curious": {
+   "file": "assets/images/characters/mom/char_mom_mouth_curious.png",
+   "rect": [
+    186.0,
+    259.333,
+    31.667,
+    14.0
+   ]
+  },
+  "eye_l_open": {
+   "file": "assets/images/characters/mom/char_mom_eye_l_open.png",
+   "rect": [
+    106.667,
+    166.667,
+    75.0,
+    29.0
+   ]
+  },
+  "eye_l_wide": {
+   "file": "assets/images/characters/mom/char_mom_eye_l_wide.png",
+   "rect": [
+    106.667,
+    161.667,
+    75.0,
+    29.0
+   ]
+  },
+  "eye_l_smiling": {
+   "file": "assets/images/characters/mom/char_mom_eye_l_smiling.png",
+   "rect": [
+    106.667,
+    166.667,
+    75.0,
+    63.0
+   ]
+  },
+  "eye_l_happy": {
+   "file": "assets/images/characters/mom/char_mom_eye_l_happy.png",
+   "rect": [
+    111.0,
+    186.0,
+    67.0,
+    23.0
+   ]
+  },
+  "eye_l_closed": {
+   "file": "assets/images/characters/mom/char_mom_eye_l_closed.png",
+   "rect": [
+    111.0,
+    194.0,
+    68.0,
+    18.0
+   ]
+  },
+  "eye_r_open": {
+   "file": "assets/images/characters/mom/char_mom_eye_r_open.png",
+   "rect": [
+    218.333,
+    166.667,
+    75.0,
+    29.0
+   ]
+  },
+  "eye_r_wide": {
+   "file": "assets/images/characters/mom/char_mom_eye_r_wide.png",
+   "rect": [
+    218.333,
+    161.667,
+    75.0,
+    29.0
+   ]
+  },
+  "eye_r_smiling": {
+   "file": "assets/images/characters/mom/char_mom_eye_r_smiling.png",
+   "rect": [
+    218.333,
+    166.667,
+    75.0,
+    63.0
+   ]
+  },
+  "eye_r_happy": {
+   "file": "assets/images/characters/mom/char_mom_eye_r_happy.png",
+   "rect": [
+    222.0,
+    186.0,
+    67.0,
+    23.0
+   ]
+  },
+  "eye_r_closed": {
+   "file": "assets/images/characters/mom/char_mom_eye_r_closed.png",
+   "rect": [
+    221.0,
+    194.0,
+    68.0,
+    18.0
+   ]
+  },
+  "body_outline": {
+   "file": "assets/images/characters/mom/char_mom_body_outline.png",
+   "rect": [
+    112.667,
+    295.0,
+    174.667,
+    180.333
+   ]
+  },
+  "body_fill": {
+   "file": "assets/images/characters/mom/char_mom_body_fill.png",
+   "rect": [
+    115.333,
+    294.333,
+    169.333,
+    178.333
+   ]
+  },
+  "face_over": {
+   "file": "assets/images/characters/mom/char_mom_face_over.png",
+   "rect": [
+    79.333,
+    156.333,
+    241.333,
+    83.333
+   ]
+  },
+  "tail": {
+   "file": "assets/images/characters/mom/char_mom_tail.png",
+   "rect": [
+    246.333,
+    330.667,
+    90.333,
+    121.333
+   ]
+  },
+  "foot_outline": {
+   "file": "assets/images/characters/mom/char_mom_foot_outline.png",
+   "rect": [
+    -30.0,
+    -21.0,
+    60.0,
+    42.0
+   ]
+  },
+  "hand_back_outline": {
+   "file": "assets/images/characters/mom/char_mom_hand_back_outline.png",
+   "rect": [
+    -31.667,
+    -30.333,
+    53.333,
+    57.0
+   ]
+  },
+  "hand_palm_outline": {
+   "file": "assets/images/characters/mom/char_mom_hand_palm_outline.png",
+   "rect": [
+    -31.667,
+    -30.333,
+    53.333,
+    57.0
+   ]
+  },
+  "hand_fist_outline": {
+   "file": "assets/images/characters/mom/char_mom_hand_fist_outline.png",
+   "rect": [
+    -21.0,
+    -21.0,
+    42.0,
+    46.333
+   ]
+  },
+  "hand_thumb_outline": {
+   "file": "assets/images/characters/mom/char_mom_hand_thumb_outline.png",
+   "rect": [
+    -21.0,
+    -43.333,
+    42.0,
+    68.667
+   ]
+  },
+  "foot_fill": {
+   "file": "assets/images/characters/mom/char_mom_foot_fill.png",
+   "rect": [
+    -27.333,
+    -18.333,
+    54.667,
+    38.0
+   ]
+  },
+  "hand_back_fill": {
+   "file": "assets/images/characters/mom/char_mom_hand_back_fill.png",
+   "rect": [
+    -28.0,
+    -27.0,
+    46.333,
+    50.333
+   ]
+  },
+  "hand_palm_fill": {
+   "file": "assets/images/characters/mom/char_mom_hand_palm_fill.png",
+   "rect": [
+    -28.0,
+    -27.0,
+    46.333,
+    50.333
+   ]
+  },
+  "hand_fist_fill": {
+   "file": "assets/images/characters/mom/char_mom_hand_fist_fill.png",
+   "rect": [
+    -19.333,
+    -18.667,
+    37.0,
+    40.333
+   ]
+  },
+  "hand_thumb_fill": {
+   "file": "assets/images/characters/mom/char_mom_hand_thumb_fill.png",
+   "rect": [
+    -17.667,
+    -40.0,
+    36.333,
+    61.667
+   ]
+  }
+ },
+ "gradients": {
+  "fur": {
+   "type": "radial",
+   "cx": 0.4,
+   "cy": 0.3,
+   "r": 0.75,
+   "stops": [
+    [
+     0.0,
+     "#FFD9A0",
+     1.0
+    ],
+    [
+     0.55,
+     "#E8B060",
+     1.0
+    ],
+    [
+     1.0,
+     "#C98A3E",
+     1.0
+    ]
+   ]
+  },
+  "limb": {
+   "type": "radial",
+   "cx": 0.35,
+   "cy": 0.3,
+   "r": 0.85,
+   "stops": [
+    [
+     0.0,
+     "#FBCB86",
+     1.0
+    ],
+    [
+     1.0,
+     "#CC8E45",
+     1.0
+    ]
+   ]
+  },
+  "white": {
+   "type": "radial",
+   "cx": 0.4,
+   "cy": 0.3,
+   "r": 0.8,
+   "stops": [
+    [
+     0.0,
+     "#FFFFFF",
+     1.0
+    ],
+    [
+     0.6,
+     "#FFF6E8",
+     1.0
+    ],
+    [
+     1.0,
+     "#EAD9C4",
+     1.0
+    ]
+   ]
+  },
+  "dress": {
+   "type": "radial",
+   "cx": 0.38,
+   "cy": 0.25,
+   "r": 0.85,
+   "stops": [
+    [
+     0.0,
+     "#E6DDFB",
+     1.0
+    ],
+    [
+     0.55,
+     "#C7B8F5",
+     1.0
+    ],
+    [
+     1.0,
+     "#9E8BDB",
+     1.0
+    ]
+   ]
+  },
+  "belt": {
+   "type": "radial",
+   "cx": 0.38,
+   "cy": 0.25,
+   "r": 0.85,
+   "stops": [
+    [
+     0.0,
+     "#A897E0",
+     1.0
+    ],
+    [
+     1.0,
+     "#7A64C2",
+     1.0
+    ]
+   ]
+  },
+  "iris": {
+   "type": "linear",
+   "x1": 0.0,
+   "y1": 0.0,
+   "x2": 0.0,
+   "y2": 1.0,
+   "stops": [
+    [
+     0.0,
+     "#0F4A2A",
+     1.0
+    ],
+    [
+     0.5,
+     "#2E9B5A",
+     1.0
+    ],
+    [
+     1.0,
+     "#A8E6A0",
+     1.0
+    ]
+   ]
+  },
+  "nose": {
+   "type": "linear",
+   "x1": 0.0,
+   "y1": 0.0,
+   "x2": 0.0,
+   "y2": 1.0,
+   "stops": [
+    [
+     0.0,
+     "#FF9BB8",
+     1.0
+    ],
+    [
+     1.0,
+     "#D9507A",
+     1.0
+    ]
+   ]
+  },
+  "earIn": {
+   "type": "linear",
+   "x1": 0.0,
+   "y1": 0.0,
+   "x2": 0.0,
+   "y2": 1.0,
+   "stops": [
+    [
+     0.0,
+     "#FFD0DE",
+     1.0
+    ],
+    [
+     1.0,
+     "#F49DB8",
+     1.0
+    ]
+   ]
+  }
+ },
+ "line": "#A8692A",
+ "limbStroke": 2.6,
+ "limbFill": "limb",
+ "arm": {
+  "fill": "limb",
+  "line": "#A8692A",
+  "w0": 30,
+  "w1": 24,
+  "bulge": 3,
+  "handOffset": 14,
+  "frontFrom": 0.5,
+  "cuff": null
+ },
+ "sleeve": {
+  "fill": "dress",
+  "line": "#6E5BB0",
+  "t1": 0.34,
+  "w0": 40,
+  "w1": 34,
+  "trim": null,
+  "trimLine": "#6E5BB0",
+  "long": false
+ },
+ "legs": [
+  {
+   "points": [
+    [
+     174,
+     446
+    ],
+    [
+     173,
+     468
+    ],
+    [
+     173,
+     488
+    ],
+    [
+     174,
+     506
+    ]
+   ],
+   "w0": 44,
+   "w1": 38,
+   "bulge": 2,
+   "foot": [
+    172,
+    520
+   ]
+  },
+  {
+   "points": [
+    [
+     226,
+     446
+    ],
+    [
+     227,
+     468
+    ],
+    [
+     227,
+     488
+    ],
+    [
+     226,
+     506
+    ]
+   ],
+   "w0": 44,
+   "w1": 38,
+   "bulge": 2,
+   "foot": [
+    228,
+    520
+   ]
+  }
+ ],
+ "tailRoot": [
+  258,
+  440
+ ],
+ "headPivot": [
+  200,
+  300
+ ],
+ "leanPivot": [
+  200,
+  530
+ ],
+ "shadow": {
+  "cx": 200,
+  "cy": 544,
+  "ry": 11,
+  "color": "#1D5A3A",
+  "opacity": 0.28
+ },
+ "eyes": {
+  "x": [
+   150,
+   250
+  ],
+  "cy": 198,
+  "rx": 30,
+  "ry": 31,
+  "line": "#3B2C2A",
+  "lineWidth": 2.2,
+  "iris": "iris",
+  "pupil": "#08200F",
+  "open": [
+   "open",
+   "wide",
+   "smiling"
+  ],
+  "geometry": {
+   "open": {
+    "x": 1,
+    "y": 201,
+    "r": 25,
+    "pupil": 11.5
+   },
+   "wide": {
+    "x": 1,
+    "y": 198,
+    "r": 21,
+    "pupil": 8
+   },
+   "smiling": {
+    "x": 1,
+    "y": 201,
+    "r": 25,
+    "pupil": 11.5
+   }
+  }
+ },
+ "sparkle": {
+  "d": "M0,-10 L2.5,-2.5 L10,0 L2.5,2.5 L0,10 L-2.5,2.5 L-10,0 L-2.5,-2.5 Z"
+ },
+ "marks": {
+  "d": "M330,94 L340,78 M344,110 L360,104 M60,94 L50,78",
+  "color": "#3B2C2A",
+  "width": 3.5
+ },
+ "poses": {
+  "idle": {
+   "lift": 0,
+   "lean": 0,
+   "shadow": 104,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       134,
+       340
+      ],
+      [
+       120,
+       372
+      ],
+      [
+       114,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       266,
+       340
+      ],
+      [
+       280,
+       372
+      ],
+      [
+       286,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "open",
+     "open"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "normal",
+    "mouth": "smile",
+    "tilt": -3,
+    "blush": false
+   },
+   "sparkles": [],
+   "marks": false
+  },
+  "wave": {
+   "lift": 0,
+   "lean": -2,
+   "shadow": 104,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       134,
+       340
+      ],
+      [
+       120,
+       372
+      ],
+      [
+       114,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       284,
+       330
+      ],
+      [
+       310,
+       318
+      ],
+      [
+       318,
+       290
+      ]
+     ],
+     "kind": "palm",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "smiling",
+     "smiling"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "happy",
+    "mouth": "open",
+    "tilt": -6,
+    "blush": true
+   },
+   "sparkles": [],
+   "marks": false
+  },
+  "cheer": {
+   "lift": -16,
+   "lean": 0,
+   "shadow": 82,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       110,
+       326
+      ],
+      [
+       66,
+       304
+      ],
+      [
+       54,
+       260
+      ]
+     ],
+     "kind": "palm",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       290,
+       326
+      ],
+      [
+       334,
+       304
+      ],
+      [
+       346,
+       260
+      ]
+     ],
+     "kind": "palm",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "happy",
+     "happy"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "up",
+    "mouth": "open",
+    "tilt": 3,
+    "blush": true
+   },
+   "sparkles": [
+    [
+     52,
+     210,
+     1.5,
+     "#FFD84A"
+    ],
+    [
+     352,
+     186,
+     1.2,
+     "#FFD84A"
+    ],
+    [
+     344,
+     322,
+     1.0,
+     "#8FD3F4"
+    ],
+    [
+     60,
+     334,
+     0.9,
+     "#FFB5A7"
+    ]
+   ],
+   "marks": false
+  },
+  "curious": {
+   "lift": 0,
+   "lean": 2,
+   "shadow": 104,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       134,
+       340
+      ],
+      [
+       120,
+       372
+      ],
+      [
+       114,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       312,
+       392
+      ],
+      [
+       286,
+       412
+      ],
+      [
+       248,
+       340
+      ]
+     ],
+     "kind": "fist",
+     "handRot": -24,
+     "layer": "front",
+     "fold": 0.5
+    }
+   ],
+   "face": {
+    "eyes": [
+     "open",
+     "open"
+    ],
+    "look": [
+     7,
+     -8
+    ],
+    "brows": "curious",
+    "mouth": "curious",
+    "tilt": 8,
+    "blush": false
+   },
+   "sparkles": [],
+   "marks": false
+  },
+  "surprised": {
+   "lift": 0,
+   "lean": 0,
+   "shadow": 104,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       98,
+       350
+      ],
+      [
+       62,
+       330
+      ],
+      [
+       78,
+       292
+      ]
+     ],
+     "kind": "palm",
+     "handRot": 18,
+     "layer": "front",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       302,
+       350
+      ],
+      [
+       338,
+       330
+      ],
+      [
+       322,
+       292
+      ]
+     ],
+     "kind": "palm",
+     "handRot": -18,
+     "layer": "front",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "wide",
+     "wide"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "up",
+    "mouth": "o",
+    "tilt": 0,
+    "blush": false
+   },
+   "sparkles": [],
+   "marks": true
+  },
+  "proud": {
+   "lift": 0,
+   "lean": -2,
+   "shadow": 104,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       134,
+       340
+      ],
+      [
+       120,
+       372
+      ],
+      [
+       114,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       306,
+       378
+      ],
+      [
+       346,
+       370
+      ],
+      [
+       338,
+       324
+      ]
+     ],
+     "kind": "thumb",
+     "handRot": 0,
+     "layer": "front",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "happy",
+     "smiling"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "happy",
+    "mouth": "open",
+    "tilt": -5,
+    "blush": true
+   },
+   "sparkles": [
+    [
+     338,
+     262,
+     1.1,
+     "#FFD84A"
+    ]
+   ],
+   "marks": false
+  },
+  "giggle": {
+   "lift": 0,
+   "lean": 0,
+   "shadow": 104,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       134,
+       340
+      ],
+      [
+       120,
+       372
+      ],
+      [
+       114,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       266,
+       340
+      ],
+      [
+       280,
+       372
+      ],
+      [
+       286,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "happy",
+     "happy"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "happy",
+    "mouth": "open",
+    "tilt": 0,
+    "blush": true
+   },
+   "sparkles": [],
+   "marks": false
+  }
+ }
+}

@@ -16,23 +16,19 @@ class CharacterRenderer {
 
   final CharacterRig rig;
 
-  /// Point of the scene where the body sways and squashes.
-  static const Offset _feet = Offset(200, 510);
-
-  /// Bottom of the dress: the upper body breathes from here.
-  static const Offset _waist = Offset(200, 450);
-
   void paint(Canvas canvas, CharacterFrame f) {
     _shadow(canvas, f);
     canvas.save();
     canvas.translate(0, f.lift);
     _rotateAround(canvas, rig.leanPivot, f.lean);
-    _scaleAround(canvas, _feet, 1 + f.squash, 1 - f.squash);
+    _scaleAround(canvas, rig.leanPivot, 1 + f.squash, 1 - f.squash);
 
     canvas.save();
     _rotateAround(canvas, rig.tailRoot, f.tailAngle);
     _part(canvas, 'tail');
     canvas.restore();
+    // Legs that do not bend (Dad's jeans) are one layer.
+    _part(canvas, 'lower');
     // Each leg and its foot are one piece: all the outlines, then the fills.
     final legs = [
       for (final leg in rig.legs)
@@ -52,7 +48,7 @@ class CharacterRenderer {
     }
 
     canvas.save();
-    _scaleAround(canvas, _waist, 1 - f.breathe * 0.4, 1 + f.breathe);
+    _scaleAround(canvas, rig.waist, 1 - f.breathe * 0.4, 1 + f.breathe);
     // Torso, shoulders and sleeves are one piece (D-053): torso outline,
     // all the arms, then the torso fill over the roots of the sleeves.
     _part(canvas, 'body_outline');
@@ -104,76 +100,79 @@ class CharacterRenderer {
 
     void hand(String layer) => _hand(canvas, side, a, layer);
 
-    _outline(canvas, armPath);
+    _outline(canvas, armPath, style.line);
     hand('outline');
-    _fill(canvas, armPath, rig.limbFill);
+    _fill(canvas, armPath, style.fill);
 
     final sl = rig.sleeve;
-    final t1 = sl.t1;
-    final tan = bezierTangent(p, t1);
-    final angle = math.atan2(tan.dy, tan.dx);
-    if (!sl.long) {
-      // Soft shadow where the arm comes out of the sleeve.
-      final c = bezierAt(p, math.min(t1 + 0.06, 1));
+    if (sl != null) {
+      final t1 = sl.t1;
+      final tan = bezierTangent(p, t1);
+      final angle = math.atan2(tan.dy, tan.dx);
+      if (!sl.long) {
+        // Soft shadow where the arm comes out of the sleeve.
+        final c = bezierAt(p, math.min(t1 + 0.06, 1));
+        canvas.save();
+        canvas.clipPath(armPath);
+        canvas.translate(c.dx, c.dy);
+        canvas.rotate(angle);
+        canvas.drawOval(
+          Rect.fromCenter(center: Offset.zero, width: 18, height: 44),
+          Paint()
+            ..color = const Color(0x21000000)
+            ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3),
+        );
+        canvas.restore();
+      }
+      final sleevePath = limbOutline(
+        p,
+        sl.w0,
+        sl.w1,
+        bulge: 4,
+        t1: t1,
+        capEnd: false,
+        capStart: true,
+      );
+      _fill(canvas, sleevePath, sl.fill);
+      _stroke(canvas, sleevePath, sl.line, 2.6);
+
+      // Cuff: perpendicular to the arm, so it follows every pose.
+      final c = bezierAt(p, t1);
+      final hw =
+          (sl.w0 + (sl.w1 - sl.w0) * t1) / 2 + 4 * math.sin(math.pi * t1);
       canvas.save();
-      canvas.clipPath(armPath);
       canvas.translate(c.dx, c.dy);
       canvas.rotate(angle);
-      canvas.drawOval(
-        Rect.fromCenter(center: Offset.zero, width: 18, height: 44),
-        Paint()
-          ..color = const Color(0x21000000)
-          ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3),
-      );
+      if (sl.trim != null) {
+        final cuff = Rect.fromCenter(
+          center: Offset.zero,
+          width: 10,
+          height: 2 * hw,
+        );
+        canvas.drawOval(cuff, Paint()..color = sl.trim!);
+        canvas.drawOval(
+          cuff,
+          Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 2
+            ..color = sl.trimLine,
+        );
+      } else {
+        canvas.drawArc(
+          Rect.fromCenter(center: Offset.zero, width: 6, height: 2 * hw),
+          -math.pi / 2,
+          math.pi,
+          false,
+          Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 2
+            ..strokeCap = StrokeCap.round
+            ..color = sl.line.withValues(alpha: 0.6),
+        );
+      }
       canvas.restore();
     }
-    final sleevePath = limbOutline(
-      p,
-      sl.w0,
-      sl.w1,
-      bulge: 4,
-      t1: t1,
-      capEnd: false,
-      capStart: true,
-    );
-    _fill(canvas, sleevePath, sl.fill);
-    _stroke(canvas, sleevePath, sl.line, 2.6);
-
-    // Cuff: perpendicular to the arm, so it follows every pose.
-    final c = bezierAt(p, t1);
-    final hw = (sl.w0 + (sl.w1 - sl.w0) * t1) / 2 + 4 * math.sin(math.pi * t1);
-    canvas.save();
-    canvas.translate(c.dx, c.dy);
-    canvas.rotate(angle);
-    if (sl.trim != null) {
-      final cuff = Rect.fromCenter(
-        center: Offset.zero,
-        width: 10,
-        height: 2 * hw,
-      );
-      canvas.drawOval(cuff, Paint()..color = sl.trim!);
-      canvas.drawOval(
-        cuff,
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 2
-          ..color = sl.trimLine,
-      );
-    } else {
-      canvas.drawArc(
-        Rect.fromCenter(center: Offset.zero, width: 6, height: 2 * hw),
-        -math.pi / 2,
-        math.pi,
-        false,
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 2
-          ..strokeCap = StrokeCap.round
-          ..color = sl.line.withValues(alpha: 0.6),
-      );
-    }
-    canvas.restore();
-
+    _cuff(canvas, p);
     hand('fill');
   }
 
@@ -191,7 +190,7 @@ class CharacterRenderer {
       t0: t0,
       closed: false,
     );
-    _stroke(canvas, edge, rig.line, 2 * rig.limbStroke);
+    _stroke(canvas, edge, style.line, 2 * rig.limbStroke);
     _hand(canvas, side, a, 'outline');
     final piece = limbOutline(
       p,
@@ -200,8 +199,24 @@ class CharacterRenderer {
       bulge: style.bulge,
       t0: t0,
     );
-    _fill(canvas, piece, rig.limbFill);
+    _fill(canvas, piece, style.fill);
+    _cuff(canvas, p);
     _hand(canvas, side, a, 'fill');
+  }
+
+  /// Ribbed cuff at the end of a long sleeve, if the character has one.
+  void _cuff(Canvas canvas, List<Offset> p) {
+    final cuff = rig.arm.cuff;
+    if (cuff == null) return;
+    final path = limbOutline(
+      p,
+      cuff.w0,
+      cuff.w1,
+      bulge: rig.arm.bulge,
+      t0: cuff.t0,
+    );
+    _fill(canvas, path, cuff.fill);
+    _stroke(canvas, path, cuff.line, rig.limbStroke);
   }
 
   /// One layer (`outline` or `fill`) of the hand at the end of an arm,
@@ -233,6 +248,7 @@ class CharacterRenderer {
     for (var i = 0; i < 2; i++) {
       _eye(canvas, i, f.eyes[i], f.look);
     }
+    _part(canvas, 'face_over'); // e.g. Mom's glasses
     _crossFade(canvas, 'mouth', f.mouthFrom, f.mouthTo, f.mouthT);
     canvas.restore();
   }
@@ -354,9 +370,10 @@ class CharacterRenderer {
 
   /// Outline pass of a shape that merges with its neighbours: a stroke twice
   /// as wide, half of which is then covered by the fill.
-  void _outline(Canvas canvas, Path path) {
-    canvas.drawPath(path, Paint()..color = rig.line);
-    _stroke(canvas, path, rig.line, 2 * rig.limbStroke);
+  void _outline(Canvas canvas, Path path, [Color? color]) {
+    final line = color ?? rig.line;
+    canvas.drawPath(path, Paint()..color = line);
+    _stroke(canvas, path, line, 2 * rig.limbStroke);
   }
 
   void _fill(Canvas canvas, Path path, String gradient) {

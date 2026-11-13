@@ -1,0 +1,1128 @@
+{
+ "name": "dad",
+ "size": [
+  400,
+  580
+ ],
+ "waist": [
+  200,
+  420
+ ],
+ "centerX": 200,
+ "parts": {
+  "head": {
+   "file": "assets/images/characters/dad/char_dad_head.png",
+   "rect": [
+    46.0,
+    69.667,
+    308.0,
+    238.0
+   ]
+  },
+  "blush": {
+   "file": "assets/images/characters/dad/char_dad_blush.png",
+   "rect": [
+    87.0,
+    228.667,
+    226.0,
+    38.667
+   ]
+  },
+  "brows_normal": {
+   "file": "assets/images/characters/dad/char_dad_brows_normal.png",
+   "rect": [
+    124.667,
+    147.667,
+    150.667,
+    11.667
+   ]
+  },
+  "brows_happy": {
+   "file": "assets/images/characters/dad/char_dad_brows_happy.png",
+   "rect": [
+    124.667,
+    141.333,
+    150.667,
+    14.0
+   ]
+  },
+  "brows_up": {
+   "file": "assets/images/characters/dad/char_dad_brows_up.png",
+   "rect": [
+    124.667,
+    130.667,
+    150.667,
+    14.667
+   ]
+  },
+  "brows_curious": {
+   "file": "assets/images/characters/dad/char_dad_brows_curious.png",
+   "rect": [
+    124.667,
+    130.667,
+    152.667,
+    28.667
+   ]
+  },
+  "mouth_smile": {
+   "file": "assets/images/characters/dad/char_dad_mouth_smile.png",
+   "rect": [
+    176.0,
+    250.0,
+    48.0,
+    31.0
+   ]
+  },
+  "mouth_open": {
+   "file": "assets/images/characters/dad/char_dad_mouth_open.png",
+   "rect": [
+    174.0,
+    250.0,
+    52.0,
+    48.0
+   ]
+  },
+  "mouth_o": {
+   "file": "assets/images/characters/dad/char_dad_mouth_o.png",
+   "rect": [
+    176.0,
+    250.0,
+    48.0,
+    41.0
+   ]
+  },
+  "mouth_curious": {
+   "file": "assets/images/characters/dad/char_dad_mouth_curious.png",
+   "rect": [
+    176.0,
+    250.0,
+    52.667,
+    20.333
+   ]
+  },
+  "eye_l_open": {
+   "file": "assets/images/characters/dad/char_dad_eye_l_open.png",
+   "rect": [
+    118.333,
+    175.333,
+    63.333,
+    20.333
+   ]
+  },
+  "eye_l_wide": {
+   "file": "assets/images/characters/dad/char_dad_eye_l_wide.png",
+   "rect": [
+    118.333,
+    170.333,
+    63.333,
+    20.333
+   ]
+  },
+  "eye_l_smiling": {
+   "file": "assets/images/characters/dad/char_dad_eye_l_smiling.png",
+   "rect": [
+    118.333,
+    175.333,
+    63.333,
+    54.333
+   ]
+  },
+  "eye_l_happy": {
+   "file": "assets/images/characters/dad/char_dad_eye_l_happy.png",
+   "rect": [
+    122.0,
+    191.0,
+    56.0,
+    18.0
+   ]
+  },
+  "eye_l_closed": {
+   "file": "assets/images/characters/dad/char_dad_eye_l_closed.png",
+   "rect": [
+    121.0,
+    199.0,
+    58.0,
+    13.0
+   ]
+  },
+  "eye_r_open": {
+   "file": "assets/images/characters/dad/char_dad_eye_r_open.png",
+   "rect": [
+    218.333,
+    175.333,
+    63.333,
+    20.333
+   ]
+  },
+  "eye_r_wide": {
+   "file": "assets/images/characters/dad/char_dad_eye_r_wide.png",
+   "rect": [
+    218.333,
+    170.333,
+    63.333,
+    20.333
+   ]
+  },
+  "eye_r_smiling": {
+   "file": "assets/images/characters/dad/char_dad_eye_r_smiling.png",
+   "rect": [
+    218.333,
+    175.333,
+    63.333,
+    54.333
+   ]
+  },
+  "eye_r_happy": {
+   "file": "assets/images/characters/dad/char_dad_eye_r_happy.png",
+   "rect": [
+    222.0,
+    191.0,
+    56.0,
+    18.0
+   ]
+  },
+  "eye_r_closed": {
+   "file": "assets/images/characters/dad/char_dad_eye_r_closed.png",
+   "rect": [
+    221.0,
+    199.0,
+    58.0,
+    13.0
+   ]
+  },
+  "body_outline": {
+   "file": "assets/images/characters/dad/char_dad_body_outline.png",
+   "rect": [
+    132.333,
+    295.0,
+    135.333,
+    126.333
+   ]
+  },
+  "body_fill": {
+   "file": "assets/images/characters/dad/char_dad_body_fill.png",
+   "rect": [
+    135.0,
+    297.667,
+    130.0,
+    121.0
+   ]
+  },
+  "collar": {
+   "file": "assets/images/characters/dad/char_dad_collar.png",
+   "rect": [
+    140.667,
+    277.667,
+    118.667,
+    82.667
+   ]
+  },
+  "tail": {
+   "file": "assets/images/characters/dad/char_dad_tail.png",
+   "rect": [
+    240.667,
+    390.333,
+    57.333,
+    70.333
+   ]
+  },
+  "lower": {
+   "file": "assets/images/characters/dad/char_dad_lower.png",
+   "rect": [
+    136.0,
+    396.0,
+    128.0,
+    144.0
+   ]
+  },
+  "hand_back_outline": {
+   "file": "assets/images/characters/dad/char_dad_hand_back_outline.png",
+   "rect": [
+    -31.667,
+    -30.333,
+    53.333,
+    57.0
+   ]
+  },
+  "hand_palm_outline": {
+   "file": "assets/images/characters/dad/char_dad_hand_palm_outline.png",
+   "rect": [
+    -31.667,
+    -30.333,
+    53.333,
+    57.0
+   ]
+  },
+  "hand_fist_outline": {
+   "file": "assets/images/characters/dad/char_dad_hand_fist_outline.png",
+   "rect": [
+    -21.0,
+    -21.0,
+    42.0,
+    46.333
+   ]
+  },
+  "hand_thumb_outline": {
+   "file": "assets/images/characters/dad/char_dad_hand_thumb_outline.png",
+   "rect": [
+    -21.0,
+    -43.333,
+    42.0,
+    68.667
+   ]
+  },
+  "hand_back_fill": {
+   "file": "assets/images/characters/dad/char_dad_hand_back_fill.png",
+   "rect": [
+    -28.0,
+    -27.0,
+    46.333,
+    50.333
+   ]
+  },
+  "hand_palm_fill": {
+   "file": "assets/images/characters/dad/char_dad_hand_palm_fill.png",
+   "rect": [
+    -28.0,
+    -27.0,
+    46.333,
+    50.333
+   ]
+  },
+  "hand_fist_fill": {
+   "file": "assets/images/characters/dad/char_dad_hand_fist_fill.png",
+   "rect": [
+    -19.333,
+    -18.667,
+    37.0,
+    40.333
+   ]
+  },
+  "hand_thumb_fill": {
+   "file": "assets/images/characters/dad/char_dad_hand_thumb_fill.png",
+   "rect": [
+    -17.667,
+    -40.0,
+    36.333,
+    61.667
+   ]
+  }
+ },
+ "gradients": {
+  "fur": {
+   "type": "radial",
+   "cx": 0.4,
+   "cy": 0.3,
+   "r": 0.75,
+   "stops": [
+    [
+     0.0,
+     "#FFFFFF",
+     1.0
+    ],
+    [
+     0.55,
+     "#FFF6E5",
+     1.0
+    ],
+    [
+     1.0,
+     "#E9DCC4",
+     1.0
+    ]
+   ]
+  },
+  "ear": {
+   "type": "radial",
+   "cx": 0.35,
+   "cy": 0.25,
+   "r": 0.85,
+   "stops": [
+    [
+     0.0,
+     "#FFF3DE",
+     1.0
+    ],
+    [
+     1.0,
+     "#E2CCA8",
+     1.0
+    ]
+   ]
+  },
+  "limb": {
+   "type": "radial",
+   "cx": 0.35,
+   "cy": 0.3,
+   "r": 0.85,
+   "stops": [
+    [
+     0.0,
+     "#FFFBF2",
+     1.0
+    ],
+    [
+     1.0,
+     "#E6D6BA",
+     1.0
+    ]
+   ]
+  },
+  "muzzle": {
+   "type": "radial",
+   "cx": 0.4,
+   "cy": 0.3,
+   "r": 0.8,
+   "stops": [
+    [
+     0.0,
+     "#FFFFFF",
+     1.0
+    ],
+    [
+     1.0,
+     "#F6ECDA",
+     1.0
+    ]
+   ]
+  },
+  "sweater": {
+   "type": "radial",
+   "cx": 0.38,
+   "cy": 0.25,
+   "r": 0.85,
+   "stops": [
+    [
+     0.0,
+     "#C4EFA8",
+     1.0
+    ],
+    [
+     0.55,
+     "#9BDB7C",
+     1.0
+    ],
+    [
+     1.0,
+     "#6FB552",
+     1.0
+    ]
+   ]
+  },
+  "rib": {
+   "type": "radial",
+   "cx": 0.38,
+   "cy": 0.25,
+   "r": 0.85,
+   "stops": [
+    [
+     0.0,
+     "#B2E594",
+     1.0
+    ],
+    [
+     1.0,
+     "#7FC262",
+     1.0
+    ]
+   ]
+  },
+  "jeans": {
+   "type": "radial",
+   "cx": 0.38,
+   "cy": 0.25,
+   "r": 0.85,
+   "stops": [
+    [
+     0.0,
+     "#8CB8E8",
+     1.0
+    ],
+    [
+     0.55,
+     "#5A8FD0",
+     1.0
+    ],
+    [
+     1.0,
+     "#3C6CAE",
+     1.0
+    ]
+   ]
+  },
+  "iris": {
+   "type": "linear",
+   "x1": 0.0,
+   "y1": 0.0,
+   "x2": 0.0,
+   "y2": 1.0,
+   "stops": [
+    [
+     0.0,
+     "#24140A",
+     1.0
+    ],
+    [
+     0.5,
+     "#5A3518",
+     1.0
+    ],
+    [
+     1.0,
+     "#A87444",
+     1.0
+    ]
+   ]
+  },
+  "nose": {
+   "type": "linear",
+   "x1": 0.0,
+   "y1": 0.0,
+   "x2": 0.0,
+   "y2": 1.0,
+   "stops": [
+    [
+     0.0,
+     "#6E4E44",
+     1.0
+    ],
+    [
+     1.0,
+     "#33221E",
+     1.0
+    ]
+   ]
+  }
+ },
+ "line": "#B89C78",
+ "limbStroke": 2.6,
+ "limbFill": "limb",
+ "arm": {
+  "fill": "sweater",
+  "line": "#4E8F36",
+  "w0": 31,
+  "w1": 25,
+  "bulge": 2,
+  "handOffset": 16,
+  "frontFrom": 0.5,
+  "cuff": {
+   "fill": "rib",
+   "line": "#4E8F36",
+   "t0": 0.84,
+   "w0": 31,
+   "w1": 27
+  }
+ },
+ "sleeve": null,
+ "legs": [],
+ "tailRoot": [
+  246,
+  404
+ ],
+ "headPivot": [
+  200,
+  300
+ ],
+ "leanPivot": [
+  200,
+  530
+ ],
+ "shadow": {
+  "cx": 200,
+  "cy": 544,
+  "ry": 11,
+  "color": "#1D5A3A",
+  "opacity": 0.28
+ },
+ "eyes": {
+  "x": [
+   150,
+   250
+  ],
+  "cy": 198,
+  "rx": 30,
+  "ry": 31,
+  "line": "#3A2618",
+  "lineWidth": 2.2,
+  "iris": "iris",
+  "pupil": "#140A05",
+  "open": [
+   "open",
+   "wide",
+   "smiling"
+  ],
+  "geometry": {
+   "open": {
+    "x": 1,
+    "y": 201,
+    "r": 25,
+    "pupil": 11.5
+   },
+   "wide": {
+    "x": 1,
+    "y": 198,
+    "r": 21,
+    "pupil": 8
+   },
+   "smiling": {
+    "x": 1,
+    "y": 201,
+    "r": 25,
+    "pupil": 11.5
+   }
+  }
+ },
+ "sparkle": {
+  "d": "M0,-10 L2.5,-2.5 L10,0 L2.5,2.5 L0,10 L-2.5,2.5 L-10,0 L-2.5,-2.5 Z"
+ },
+ "marks": {
+  "d": "M330,94 L340,78 M344,110 L360,104 M60,94 L50,78",
+  "color": "#3A2618",
+  "width": 3.5
+ },
+ "poses": {
+  "idle": {
+   "lift": 0,
+   "lean": 0,
+   "shadow": 100,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       134,
+       340
+      ],
+      [
+       120,
+       372
+      ],
+      [
+       114,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       266,
+       340
+      ],
+      [
+       280,
+       372
+      ],
+      [
+       286,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "open",
+     "open"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "normal",
+    "mouth": "smile",
+    "tilt": -3,
+    "blush": false
+   },
+   "sparkles": [],
+   "marks": false
+  },
+  "wave": {
+   "lift": 0,
+   "lean": -2,
+   "shadow": 100,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       134,
+       340
+      ],
+      [
+       120,
+       372
+      ],
+      [
+       114,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       284,
+       330
+      ],
+      [
+       310,
+       318
+      ],
+      [
+       318,
+       290
+      ]
+     ],
+     "kind": "palm",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "smiling",
+     "smiling"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "happy",
+    "mouth": "open",
+    "tilt": -6,
+    "blush": true
+   },
+   "sparkles": [],
+   "marks": false
+  },
+  "cheer": {
+   "lift": -16,
+   "lean": 0,
+   "shadow": 82,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       110,
+       326
+      ],
+      [
+       66,
+       304
+      ],
+      [
+       54,
+       260
+      ]
+     ],
+     "kind": "palm",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       290,
+       326
+      ],
+      [
+       334,
+       304
+      ],
+      [
+       346,
+       260
+      ]
+     ],
+     "kind": "palm",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "happy",
+     "happy"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "up",
+    "mouth": "open",
+    "tilt": 3,
+    "blush": true
+   },
+   "sparkles": [
+    [
+     52,
+     210,
+     1.5,
+     "#FFD84A"
+    ],
+    [
+     352,
+     186,
+     1.2,
+     "#FFD84A"
+    ],
+    [
+     344,
+     322,
+     1.0,
+     "#8FD3F4"
+    ],
+    [
+     60,
+     334,
+     0.9,
+     "#FFB5A7"
+    ]
+   ],
+   "marks": false
+  },
+  "curious": {
+   "lift": 0,
+   "lean": 2,
+   "shadow": 100,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       134,
+       340
+      ],
+      [
+       120,
+       372
+      ],
+      [
+       114,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       312,
+       392
+      ],
+      [
+       286,
+       412
+      ],
+      [
+       248,
+       340
+      ]
+     ],
+     "kind": "fist",
+     "handRot": -24,
+     "layer": "front",
+     "fold": 0.5
+    }
+   ],
+   "face": {
+    "eyes": [
+     "open",
+     "open"
+    ],
+    "look": [
+     7,
+     -8
+    ],
+    "brows": "curious",
+    "mouth": "curious",
+    "tilt": 8,
+    "blush": false
+   },
+   "sparkles": [],
+   "marks": false
+  },
+  "surprised": {
+   "lift": 0,
+   "lean": 0,
+   "shadow": 100,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       98,
+       350
+      ],
+      [
+       62,
+       330
+      ],
+      [
+       78,
+       292
+      ]
+     ],
+     "kind": "palm",
+     "handRot": 18,
+     "layer": "front",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       302,
+       350
+      ],
+      [
+       338,
+       330
+      ],
+      [
+       322,
+       292
+      ]
+     ],
+     "kind": "palm",
+     "handRot": -18,
+     "layer": "front",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "wide",
+     "wide"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "up",
+    "mouth": "o",
+    "tilt": 0,
+    "blush": false
+   },
+   "sparkles": [],
+   "marks": true
+  },
+  "proud": {
+   "lift": 0,
+   "lean": -2,
+   "shadow": 100,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       134,
+       340
+      ],
+      [
+       120,
+       372
+      ],
+      [
+       114,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       306,
+       378
+      ],
+      [
+       346,
+       370
+      ],
+      [
+       338,
+       324
+      ]
+     ],
+     "kind": "thumb",
+     "handRot": 0,
+     "layer": "front",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "happy",
+     "smiling"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "happy",
+    "mouth": "open",
+    "tilt": -5,
+    "blush": true
+   },
+   "sparkles": [
+    [
+     338,
+     262,
+     1.1,
+     "#FFD84A"
+    ]
+   ],
+   "marks": false
+  },
+  "giggle": {
+   "lift": 0,
+   "lean": 0,
+   "shadow": 100,
+   "arms": [
+    {
+     "side": "L",
+     "points": [
+      [
+       148,
+       336
+      ],
+      [
+       134,
+       340
+      ],
+      [
+       120,
+       372
+      ],
+      [
+       114,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    },
+    {
+     "side": "R",
+     "points": [
+      [
+       252,
+       336
+      ],
+      [
+       266,
+       340
+      ],
+      [
+       280,
+       372
+      ],
+      [
+       286,
+       400
+      ]
+     ],
+     "kind": "back",
+     "handRot": null,
+     "layer": "back",
+     "fold": null
+    }
+   ],
+   "face": {
+    "eyes": [
+     "happy",
+     "happy"
+    ],
+    "look": [
+     0,
+     0
+    ],
+    "brows": "happy",
+    "mouth": "open",
+    "tilt": 0,
+    "blush": true
+   },
+   "sparkles": [],
+   "marks": false
+  }
+ }
+}

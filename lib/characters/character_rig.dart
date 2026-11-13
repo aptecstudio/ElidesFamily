@@ -15,6 +15,7 @@ class CharacterRig {
   CharacterRig._(Map<String, dynamic> json, this.images)
     : name = json['name'] as String,
       size = _size(json['size']),
+      waist = _offset(json['waist']),
       centerX = _d(json['centerX']),
       parts = {
         for (final e in (json['parts'] as Map<String, dynamic>).entries)
@@ -28,7 +29,9 @@ class CharacterRig {
       limbStroke = _d(json['limbStroke']),
       limbFill = json['limbFill'] as String,
       arm = ArmStyle.fromJson(json['arm'] as Map<String, dynamic>),
-      sleeve = SleeveStyle.fromJson(json['sleeve'] as Map<String, dynamic>),
+      sleeve = json['sleeve'] == null
+          ? null
+          : SleeveStyle.fromJson(json['sleeve'] as Map<String, dynamic>),
       legs = [
         for (final l in json['legs'] as List)
           LegData.fromJson(l as Map<String, dynamic>),
@@ -50,6 +53,9 @@ class CharacterRig {
   final String name;
   final Size size;
 
+  /// Point the upper body breathes from (bottom of the torso).
+  final Offset waist;
+
   /// Body axis: decides on which side the thumb of each hand goes.
   final double centerX;
 
@@ -62,7 +68,9 @@ class CharacterRig {
   final double limbStroke;
   final String limbFill;
   final ArmStyle arm;
-  final SleeveStyle sleeve;
+
+  /// Short sleeve at the shoulder; null for long sleeves (Dad).
+  final SleeveStyle? sleeve;
   final List<LegData> legs;
   final Offset tailRoot;
   final Offset headPivot;
@@ -148,12 +156,23 @@ class RigGradient {
 
 class ArmStyle {
   ArmStyle.fromJson(Map<String, dynamic> json)
-    : w0 = _d(json['w0']),
+    : fill = json['fill'] as String,
+      line = parseColor(json['line'] as String),
+      cuff = json['cuff'] == null
+          ? null
+          : CuffStyle.fromJson(json['cuff'] as Map<String, dynamic>),
+      w0 = _d(json['w0']),
       w1 = _d(json['w1']),
       bulge = _d(json['bulge']),
       handOffset = _d(json['handOffset']),
       frontFrom = _d(json['frontFrom']);
 
+  /// Gradient of the arm: fur, or the sleeve for long sleeves.
+  final String fill;
+  final Color line;
+
+  /// Ribbed cuff at the end of a long sleeve.
+  final CuffStyle? cuff;
   final double w0;
   final double w1;
   final double bulge;
@@ -164,6 +183,23 @@ class ArmStyle {
   /// Point of the arm curve (0..1) from which an arm in front of the head is
   /// drawn again over it.
   final double frontFrom;
+}
+
+class CuffStyle {
+  CuffStyle.fromJson(Map<String, dynamic> json)
+    : fill = json['fill'] as String,
+      line = parseColor(json['line'] as String),
+      t0 = _d(json['t0']),
+      w0 = _d(json['w0']),
+      w1 = _d(json['w1']);
+
+  final String fill;
+  final Color line;
+
+  /// Where the cuff starts along the arm curve (0..1).
+  final double t0;
+  final double w0;
+  final double w1;
 }
 
 class SleeveStyle {

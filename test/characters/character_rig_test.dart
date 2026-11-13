@@ -8,16 +8,19 @@ import 'package:elides_family/characters/character_rig.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-/// Renders [frame] to an image of the 400×540 scene at 2x.
+/// Renders [frame] to an image of the character scene at 2x.
 Future<ui.Image> _render(CharacterRig rig, CharacterFrame frame) {
   final recorder = ui.PictureRecorder();
   final canvas = Canvas(recorder)..scale(2);
   canvas.drawRect(
-    const Rect.fromLTWH(0, 0, 400, 540),
+    Offset.zero & rig.size,
     Paint()..color = const Color(0xFFFFF6E5),
   );
   CharacterRenderer(rig).paint(canvas, frame);
-  return recorder.endRecording().toImage(800, 1080);
+  return recorder.endRecording().toImage(
+    (rig.size.width * 2).round(),
+    (rig.size.height * 2).round(),
+  );
 }
 
 /// Number of pixels that differ from the cream background.
@@ -45,7 +48,7 @@ void main() {
     );
   });
 
-  for (final name in ['elide', 'rio']) {
+  for (final name in ['elide', 'rio', 'mom', 'dad']) {
     test('every pose of $name is drawn', () async {
       final rig = await CharacterRig.load(name);
       for (final pose in rig.poses.keys) {

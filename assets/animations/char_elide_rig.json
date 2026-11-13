@@ -4,6 +4,10 @@
   400,
   540
  ],
+ "waist": [
+  200,
+  450
+ ],
  "centerX": 200,
  "parts": {
   "head": {
@@ -468,11 +472,14 @@
  "limbStroke": 2.6,
  "limbFill": "limb",
  "arm": {
+  "fill": "limb",
+  "line": "#9C8DB3",
   "w0": 30,
   "w1": 24,
   "bulge": 3,
   "handOffset": 14,
-  "frontFrom": 0.5
+  "frontFrom": 0.5,
+  "cuff": null
  },
  "sleeve": {
   "fill": "dress",

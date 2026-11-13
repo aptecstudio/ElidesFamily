@@ -31,6 +31,8 @@ flutter:
     - assets/images/
     - assets/images/characters/elide/
     - assets/images/characters/rio/
+    - assets/images/characters/mom/
+    - assets/images/characters/dad/
     - assets/animations/
     - assets/audio/music/
     - assets/audio/sfx/
