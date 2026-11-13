@@ -24,7 +24,7 @@ Last update: 2026-11-13
 | 10 | APK build and release | ⚪ not started |
 | ↔ | Cross-cutting: smartphone, tablet and Android TV | ⚪ not started |
 
-**Next step (next session):** try the parental gate on the phone; then the remaining animation suite (walking, dances, disapproval, routines, lip sync).
+**Next step (next session):** try the parental gate on the Pixel 6a; then the remaining animation suite (walking, dances, disapproval, routines, lip sync).
 
 **Previous step:** the approved hub built in Flutter with the animated Elide (D-055) and the surprise gifts (D-056), tried on the Pixel 6a; the parental gate behind the gear (D-057).
 
@@ -76,7 +76,7 @@ Last update: 2026-11-13
 - [x] Flutter SDK, JDK 17 and Android SDK (platform 36, build-tools 36.0.0) installed on the owner's PC (D-044)
 - [x] `flutter pub get` (versions resolved, `pubspec.lock` committed)
 - [x] `flutter analyze` and `flutter test` with no errors
-- [~] Live test: `flutter run` + hot reload works on `ef_phone` (2026-11-13); on the owner's Pixel 6a (USB) the debug APK installed with `adb install` works (hub checked by the owner, 2026-11-13), `flutter run` from the agent's shell still exits without output
+- [~] Live test: `flutter run` + hot reload works on `ef_phone` (2026-11-13); on the owner's Pixel 6a (USB) the debug APK installed with `adb install` works (hub checked by the owner, 2026-11-13), `flutter run` from the agent's shell still exits without output. On the new PC the emulator is reliable only headless (`-no-window -gpu swiftshader_indirect`) with the app started by `flutter run --no-resident` (a debug APK started by `am start` stops with "Could not prepare isolate"), and it still crashes after a few minutes of play
 - [x] First test APK build (`flutter build apk --debug`): installed on `ef_phone`, starts in landscape and full screen, hub → Colors → home works (2026-11-13)
 - [x] Manifest ready for Android TV: `android.hardware.touchscreen` and `android.software.leanback` with `required="false"`, `LEANBACK_LAUNCHER` intent, temporary TV banner (320×180, `tools/character-drafts/tv_banner.py`)
 - [x] Test emulators: smartphone (`ef_phone`), tablet (`ef_tablet`), Android TV 1080p (`ef_tv`) on the new PC (D-045)
@@ -139,7 +139,7 @@ Last update: 2026-11-13
 - [ ] Buttons inside the minigames: back to the games, exit protected by dragging
 - [ ] Item bar inside the minigames (tray to drag from)
 - [x] Hub built in Flutter from the approved draft, with the animated Elide, scrolling cards and the gear (D-055, 2026-11-13); surprise gifts for the games to come (D-056); works on the Pixel 6a
-- [x] Parental gate behind the gear: multiplication on a drawn number pad, works with the TV remote (D-057, 2026-11-13); still to try on the phone
+- [x] Parental gate behind the gear: multiplication on a drawn number pad, works with the TV remote (D-057, 2026-11-13); verified on `ef_phone`: wrong answer → back to the hub, right answer → parents' area → back
 - [ ] Transitions between menus and minigames
 - [ ] Android TV variant with remote focus
 - [x] Menu design sheet approved and saved in `docs/menu/hub_menu.png` (2026-11-13)
