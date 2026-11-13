@@ -31,6 +31,9 @@ GEAR_BOX = 160
 
 ICONS = {
     "colors": hub.art_colors,
+    # Surprise cards: body and lid apart, so the lid can hop in the game.
+    "gift_box": hub.art_gift_box,
+    "gift_lid": hub.art_gift_lid,
 }
 
 

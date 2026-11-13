@@ -371,6 +371,31 @@ def art_clothes():
     )
 
 
+def art_gift_box():
+    """Body of the surprise gift (cards of the games still to come)."""
+    s = f'stroke="{COCOA}" stroke-width="6" stroke-linejoin="round"'
+    return (
+        f'<rect x="-68" y="-14" width="136" height="96" rx="12" fill="{PURPLE}" {s}/>'
+        f'<rect x="-15" y="-14" width="30" height="96" fill="{YELLOW}" {s}/>'
+    )
+
+
+def art_gift_lid():
+    """Lid and bow of the surprise gift: it hops on its own when touched."""
+    s = f'stroke="{COCOA}" stroke-width="6" stroke-linejoin="round"'
+    return (
+        f'<path d="M-6,-46 C-30,-84 -70,-66 -50,-46 C-40,-38 -18,-40 -6,-46 Z" fill="{YELLOW}" {s}/>'
+        f'<path d="M6,-46 C30,-84 70,-66 50,-46 C40,-38 18,-40 6,-46 Z" fill="{YELLOW}" {s}/>'
+        f'<rect x="-80" y="-48" width="160" height="38" rx="12" fill="{PURPLE}" {s}/>'
+        f'<rect x="-15" y="-48" width="30" height="38" fill="{YELLOW}" {s}/>'
+        f'<circle cx="0" cy="-50" r="13" fill="{YELLOW}" {s}/>'
+    )
+
+
+def art_gift():
+    return art_gift_box() + art_gift_lid()
+
+
 def gear(x, y):
     """Small, low-contrast gear for the parents (D-048): it must not attract the child."""
     o = [f'<g transform="translate({x},{y})" opacity="0.9">']
