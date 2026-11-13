@@ -29,6 +29,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/characters/elide/
     - assets/animations/
     - assets/audio/music/
     - assets/audio/sfx/
